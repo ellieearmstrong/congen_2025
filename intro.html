@@ -56,30 +56,44 @@
       background: #1f2937;
     }
 
-    /* Layout: 2 columns */
-    .container {
-      max-width: 1100px;
+    /* Main content wrapper */
+    .page {
+      max-width: 900px;
       margin: 2rem auto;
       padding: 0 1rem;
-
-      display: grid;
-      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
-      gap: 2rem;
     }
 
-    @media (max-width: 850px) {
-      .container {
-        grid-template-columns: 1fr;
-      }
+    .page-header {
+      margin-bottom: 2rem;
     }
 
-    /* Side panels */
+    .page-header h1 {
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+      font-size: clamp(1.8rem, 3vw, 2.2rem);
+    }
+
+    .page-header p {
+      color: var(--muted);
+      margin: 0.25rem 0;
+    }
+
+    /* Centered panels under header */
+    .panel-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
     .panel {
       background: var(--panel);
       padding: 1.25rem 1.5rem;
       border-radius: 12px;
       border: 1px solid #243044;
     }
+
     .panel h2 {
       margin-top: 0;
       font-size: 0.95rem;
@@ -87,6 +101,41 @@
       letter-spacing: 0.08em;
       color: var(--muted);
       margin-bottom: 0.75rem;
+    }
+
+    /* Instructor layout with image */
+    .instructor-content {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 1rem 1.25rem;
+      align-items: flex-start;
+    }
+
+    .instructor-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 2px solid #334155;
+      flex-shrink: 0;
+    }
+
+    .instructor-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    @media (max-width: 640px) {
+      .instructor-content {
+        grid-template-columns: 1fr;
+        text-align: left;
+      }
+
+      .instructor-photo {
+        margin: 0 auto;
+      }
     }
 
     a {
@@ -111,88 +160,117 @@
   </nav>
 
   <!-- PAGE CONTENT -->
-  <div class="container">
+  <main class="page">
 
-    <!-- LEFT MAIN CONTENT -->
-    <div>
+    <!-- Header section -->
+    <header class="page-header">
       <h1>Welcome to the ConGen2025 Assembly Workshop</h1>
 
       <p>
         This page introduces the structure and flow of the genome assembly module
         for ConGen2025. Use the navigation tabs above to move between modules.
       </p>
-
       <p>
         Below you'll find information about your instructor and details on how to
         navigate this workshop website.
       </p>
-    </div>
+    </header>
 
-    <!-- RIGHT COLUMN: INSTRUCTOR + NAVIGATION -->
-    <div>
+    <!-- Centered panels -->
+    <section class="panel-stack">
 
       <!-- Instructor Panel -->
-      <div class="panel">
+      <section class="panel">
         <h2>Instructor</h2>
-        <p>
-          Ellie Armstrong is an Assistant Professor of Evolutionary Genomics at the 
-          <a href="https://www.armstrong-lab.com/" target="_blank">
-            University of California, Riverside
-          </a>.
-          She previously was a Washington Research Foundation postdoctoral fellow 
-          in the lab of 
-          <a href="https://evogenomes.sites.ucsc.edu/" target="_blank">
-            Joanna Kelley (UCSC)
-          </a>.
-        </p>
+        <div class="instructor-content">
+          <div class="instructor-photo">
+            <img
+              src="https://images.squarespace-cdn.com/content/v1/657138b70c0f120424f69a9a/45b7c1a5-e667-42b8-bba3-4baa35243c2d/ellie_congen.jpg?format=750w"
+              alt="Photo of Ellie Armstrong"
+            />
+          </div>
+          <div>
+            <p>
+              Ellie Armstrong is an Assistant Professor of Evolutionary Genomics at the
+              <a href="https://www.armstrong-lab.com/" target="_blank">
+                University of California, Riverside
+              </a>.
+              She previously was a Washington Research Foundation postdoctoral fellow in
+              the lab of
+              <a href="https://evogenomes.sites.ucsc.edu/" target="_blank">
+                Joanna Kelley (UCSC)
+              </a>.
+            </p>
 
-        <p>
-          She received her PhD at Stanford University with 
-          <a href="https://petrovlab-stanford.squarespace.com/" target="_blank">
-            Dmitri Petrov
-          </a> 
-          and 
-          <a href="https://hadlylab.stanford.edu/" target="_blank">
-            Liz Hadly
-          </a>, 
-          where she worked on the genomics of large carnivores.
-        </p>
+            <p>
+              She received her PhD at Stanford University with
+              <a href="https://petrovlab-stanford.squarespace.com/" target="_blank">
+                Dmitri Petrov
+              </a>
+              and
+              <a href="https://hadlylab.stanford.edu/" target="_blank">
+                Liz Hadly
+              </a>,
+              where she worked on the genomics of large carnivores.
+            </p>
 
-        <p>
-          Ellie has assembled genomes from many species across the tree of life 
-          including the lion, the African wild dog, Hawaiian spiders, birds, 
-          lichens, foxes, macaques, flies, and several other big cats. Her 
-          research spans from detecting recent population bottlenecks to 
-          uncovering ancient admixture events, with the ultimate goal of 
-          understanding how evolutionary processes influence the resilience, 
-          adaptation, and long-term viability of species.
-        </p>
+            <p>
+              Ellie has assembled genomes from many species across the tree of life
+              including the
+              <a href="https://doi.org/10.1093/gigascience/giy124" target="_blank">
+                African wild dog
+              </a>,
+              <a href="https://doi.org/10.1186/s12915-019-0734-5" target="_blank">
+                lion
+              </a>,
+              <a href="https://doi.org/10.1093/gbe/evac125" target="_blank">
+                brown bear
+              </a>,
+              <a href="https://doi.org/10.1093/gbe/evab262" target="_blank">
+                spiders
+              </a>,
+              <a href="https://doi.org/10.1128/genomea.00281-18" target="_blank">
+                lichens
+              </a>,
+              <a href="https://doi.org/10.1093/gigascience/giz003" target="_blank">
+                birds
+              </a>,
+              <a href="https://doi.org/10.1093/g3journal/jkae034" target="_blank">
+                foxes
+              </a>
+              and more.
+            </p>
 
-        <p>
-          Supported previously by the 
-          <a href="https://www.wrfseattle.org/" target="_blank">
-            Washington Research Foundation
-          </a>.
-        </p>
-      </div>
+            <p>
+              Her research spans from detecting recent population bottlenecks to uncovering
+              ancient admixture events, with the ultimate goal of understanding how
+              evolutionary processes influence the resilience, adaptation, and long-term
+              viability of species. She has been supported by the
+              <a href="https://www.wrfseattle.org/" target="_blank">
+                Washington Research Foundation
+              </a>.
+            </p>
+          </div>
+        </div>
+      </section>
 
       <!-- Navigation Panel -->
-      <div class="panel" style="margin-top: 1.25rem;">
+      <section class="panel">
         <h2>Navigation</h2>
         <p>
-          Use the tabs at the top of this page to move between the 
-          <strong>Intro</strong>, <strong>Workshop</strong> steps, 
-          <strong>Terminology</strong> reference, <strong>Programs</strong> 
+          Use the tabs at the top of this page to move between the
+          <strong>Intro</strong>, <strong>Workshop</strong> steps,
+          <strong>Terminology</strong> reference, <strong>Programs</strong>
           overview, and additional <strong>Links</strong>.
         </p>
 
         <p>
           You can always return to this page by clicking <strong>Intro</strong>.
         </p>
-      </div>
+      </section>
 
-    </div>
-  </div>
+    </section>
+  </main>
 
 </body>
 </html>
