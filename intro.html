@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ConGen2025 Assembly Workshop – Intro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #0b1120;
+      --surface: #111827;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.15);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 3rem;
+    }
+
+    /* Top nav */
+    .navbar {
+      width: 100%;
+      background: var(--surface);
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      border-bottom: 1px solid #1f2937;
+    }
+    .navbar a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: 0.2s;
+    }
+    .navbar a.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .navbar a:hover {
+      background: #1f2937;
+    }
+
+    /* Main content */
+    .container {
+      max-width: 850px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    h1 { margin-top: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation bar -->
+  <nav class="navbar">
+    <a href="intro.html" class="active">Intro</a>
+    <a href="workshop.html">Workshop</a>
+    <a href="terminology.html">Terminology</a>
+    <a href="programs.html">Programs</a>
+    <a href="links.html">Links</a>
+  </nav>
+
+  <!-- Page content -->
+  <div class="container">
+    <h1>Welcome to the ConGen2025 Assembly Workshop</h1>
+
+    <p>
+      This is the main entry point for all genome assembly content in ConGen2025.
+      Use the navigation bar above to explore the different modules.
+    </p>
+
+    <p>
+      You can copy/paste your workshop description, goals, or overview here.
+    </p>
+  </div>
+
+</body>
+</html>
