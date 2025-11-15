@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ConGen2025 Assembly Workshop – Main</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-surface: #0b1220;
+      --bg-card: #020617;
+      --border-subtle: #1f2937;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.12);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --radius-lg: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background:
+        radial-gradient(circle at top, #0f172a 0, #020617 55%, #000000 100%);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page-shell {
+      width: 100%;
+      max-width: 960px;
+      margin: 1.5rem auto 2rem;
+      padding: 0 1rem;
+    }
+
+    /* Top bar */
+
+    .topbar {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 999px;
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      border: 1px solid rgba(55, 65, 81, 0.8);
+      box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.7),
+        0 0 0 1px rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(12px);
+    }
+
+    .topbar-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .topbar-title span {
+      color: var(--accent);
+    }
+
+    .topbar-back {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .topbar-back a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .topbar-back a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 700px) {
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* Tabs bar */
+
+    .tabs-shell {
+      margin-top: 1.25rem;
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.85),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+      overflow: hidden;
+    }
+
+    .tabs-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      padding: 0.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      background: radial-gradient(circle at top, #111827, #020617);
+    }
+
+    .tab-button {
+      flex: 1 1 auto;
+      min-width: 80px;
+      border: none;
+      border-radius: 999px;
+      padding: 0.6rem 0.9rem;
+      font-size: 0.9rem;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      transition:
+        background 0.12s ease,
+        color 0.12s ease,
+        transform 0.08s ease;
+    }
+
+    .tab-button span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #4b5563;
+    }
+
+    .tab-button.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 600;
+      transform: translateY(-1px);
+    }
+
+    .tab-button.active span.dot {
+      background: var(--accent);
+    }
+
+    .tab-button:hover:not(.active) {
+      background: rgba(31, 41, 55, 0.9);
+      color: #d1d5db;
+    }
+
+    /* Tab content */
+
+    .tabs-content {
+      padding: 1.5rem 1.75rem 1.75rem;
+      background: radial-gradient(circle at top left, #020617, #020617);
+    }
+
+    @media (max-width: 700px) {
+      .tabs-content {
+        padding: 1.25rem 1.25rem 1.5rem;
+      }
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .lead {
+      margin: 0 0 1rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #d1d5db;
+    }
+
+    ol, ul {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #d1d5db;
+    }
+
+    a {
+      color: #60a5fa;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .pill .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.2fr);
+      gap: 1.75rem;
+      margin-top: 1.25rem;
+    }
+
+    @media (max-width: 800px) {
+      .two-col {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .side-card {
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+      background: #020617;
+      padding: 0.9rem 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .side-card h3 {
+      margin: 0 0 0.4rem;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #9ca3af;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-top: 0.5rem;
+    }
+
+    .tag {
+      border-radius: 999px;
+      padding: 0.15rem 0.5rem;
+      border: 1px solid #1f2937;
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
+    .footer {
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <!-- Top bar -->
+    <header class="topbar">
+      <div class="topbar-title">
+        ConGen<span>2025</span> &middot; Assembly Workshop
+      </div>
+      <div class="topbar-back">
+        <a href="index.html">← Back to landing page</a>
+      </div>
+    </header>
+
+    <!-- Tabs + content -->
+    <main class="tabs-shell" aria-label="ConGen2025 workshop sections">
+      <div class="tabs-header" role="tablist">
+        <button class="tab-button active" data-tab="intro" role="tab" aria-selected="true">
+          <span class="dot"></span> Intro
+        </button>
+        <button class="tab-button" data-tab="workshop" role="tab" aria-selected="false">
+          <span class="dot"></span> Workshop
+        </button>
+        <button class="tab-button" data-tab="terminology" role="tab" aria-selected="false">
+          <span class="dot"></span> Terminology
+        </button>
+        <button class="tab-button" data-tab="programs" role="tab" aria-selected="false">
+          <span class="dot"></span> Programs
+        </button>
+        <button class="tab-button" data-tab="links" role="tab" aria-selected="false">
+          <span class="dot"></span> Links
+        </button>
+      </div>
+
+      <div class="tabs-content">
+        <!-- Intro tab -->
+        <section id="tab-intro" class="tab-panel active" role="tabpanel">
+          <div class="pill">
+            <span class="status-dot"></span>
+            Start here
+          </div>
+          <h2>Welcome to the ConGen2025 Assembly Workshop</h2>
+          <p class="lead">
+            This page is your home base for all genome assembly–related activities
+            during the ConGen2025 course. Use the tabs above to move between the
+            overview, hands-on steps, terminology, and supporting materials.
+          </p>
+          <p>
+            The workshop will walk you through different read types, basic quality
+            control, running an assembly, and mapping reads back to your assembly
+            to evaluate completeness and potential issues. We’ll focus on concepts
+            and interpretation rather than pushing a specific software stack.
+          </p>
+
+          <div class="two-col">
+            <div>
+              <h3>How to use this page</h3>
+              <ol>
+                <li>
+                  Start on the <strong>Workshop</strong> tab to follow the step-by-step
+                  instructions.
+                </li>
+                <li>
+                  Use <strong>Terminology</strong> as a quick reference if unfamiliar
+                  terms pop up.
+                </li>
+                <li>
+                  Check <strong>Programs</strong> to see what tools we’re using and
+                  what they do.
+                </li>
+                <li>
+                  Visit <strong>Links</strong> for additional documentation, papers,
+                  and previous workshop material.
+                </li>
+              </ol>
+            </div>
+            <aside class="side-card">
+              <h3>Instructors</h3>
+              <p>
+                You can customize this box with instructor names, emails, and any
+                logistics (Slack channel, Zoom link, etc.).
+              </p>
+              <div class="tag-list">
+                <div class="tag">Genome assembly</div>
+                <div class="tag">Read mapping</div>
+                <div class="tag">QC</div>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <!-- Workshop tab -->
+        <section id="tab-workshop" class="tab-panel" role="tabpanel">
+          <h2>Workshop flow</h2>
+          <p class="lead">
+            Below is a suggested flow for the assembly portion of ConGen2025. Adapt
+            the commands and details to your specific dataset and compute
+            environment.
+          </p>
+          <ol>
+            <li>
+              <strong>Explore the reads</strong>  
+              Inspect file names, formats, and coverage estimates. Run quick QC
+              (e.g. FastQC, summary stats) to get a sense of read length and quality.
+            </li>
+            <li>
+              <strong>Run an assembly</strong>  
+              Choose a basic assembler appropriate for the read type (short-read,
+              long-read, hybrid). Record the parameters you use.
+            </li>
+            <li>
+              <strong>Evaluate the assembly</strong>  
+              Look at summary stats (N50, total size, number of scaffolds/contigs)
+              and compare to expectations for your species.
+            </li>
+            <li>
+              <strong>Map reads back</strong>  
+              Align reads to the new assembly to evaluate coverage, potential
+              misassemblies, and regions of poor support.
+            </li>
+            <li>
+              <strong>Interpret and discuss</strong>  
+              Consider how read type, coverage, and assembler choice affect the
+              outcome, and what this means for downstream conservation genomics
+              analyses.
+            </li>
+          </ol>
+          <p>
+            In your real version of this page, you can paste in specific commands,
+            example SLURM scripts, and expected outputs for participants to compare
+            against.
+          </p>
+        </section>
+
+        <!-- Terminology tab -->
+        <section id="tab-terminology" class="tab-panel" role="tabpanel">
+          <h2>Terminology</h2>
+          <p class="lead">
+            A quick glossary for common assembly and mapping terms used throughout
+            the workshop.
+          </p>
+          <ul>
+            <li>
+              <strong>Coverage (depth)</strong>: The average number of reads covering
+              each base in the genome.
+            </li>
+            <li>
+              <strong>Contig</strong>: A contiguous sequence assembled without gaps.
+            </li>
+            <li>
+              <strong>Scaffold</strong>: An ordered and oriented set of contigs,
+              often with gaps (Ns) where the precise sequence is unknown.
+            </li>
+            <li>
+              <strong>N50</strong>: The contig or scaffold length at which 50% of
+              the total assembly length is contained in contigs/scaffolds that
+              length or longer.
+            </li>
+            <li>
+              <strong>BUSCO</strong>: A method for assessing genome completeness
+              using sets of single-copy orthologs.
+            </li>
+          </ul>
+          <p>
+            Replace or expand this list with the exact terms you’ll emphasize in
+            ConGen2025.
+          </p>
+        </section>
+
+        <!-- Programs tab -->
+        <section id="tab-programs" class="tab-panel" role="tabpanel">
+          <h2>Programs & tools</h2>
+          <p class="lead">
+            This tab summarizes the main software tools you’ll encounter in the
+            assembly module. Tailor it to match your actual workshop stack.
+          </p>
+          <ul>
+            <li>
+              <strong>QC tools</strong> – e.g. FastQC, seqtk, custom scripts for
+              read summaries.
+            </li>
+            <li>
+              <strong>Assemblers</strong> – placeholders for whatever you’re using
+              (SPAdes, Flye, HiFi assemblers, etc.).
+            </li>
+            <li>
+              <strong>Mappers</strong> – e.g. bwa, minimap2, or others depending on
+              read type.
+            </li>
+            <li>
+              <strong>Assessment</strong> – stats scripts, BUSCO, k-mer tools,
+              etc.
+            </li>
+          </ul>
+          <p>
+            For each program, you can add version numbers, links to documentation,
+            and the exact commands used in the exercises.
+          </p>
+        </section>
+
+        <!-- Links tab -->
+        <section id="tab-links" class="tab-panel" role="tabpanel">
+          <h2>Links & further resources</h2>
+          <p class="lead">
+            Use this tab to centralize external resources you want participants
+            to have at their fingertips.
+          </p>
+          <ul>
+            <li>
+              Official ConGen website and schedule.
+            </li>
+            <li>
+              GitHub repositories with example data, scripts, and solutions.
+            </li>
+            <li>
+              Recommended reading (review papers, methods papers).
+            </li>
+            <li>
+              Documentation for key programs used in the workshop.
+            </li>
+          </ul>
+          <p>
+            You can also include links to previous years’ workshops or any
+            follow-up materials for participants who want to go deeper.
+          </p>
+        </section>
+      </div>
+    </main>
+
+    <div class="footer">
+      ConGen2025 Assembly Workshop &middot; Customize this text and the tab content for your course.
+    </div>
+  </div>
+
+  <script>
+    // Simple tabs logic
+    const buttons = document.querySelectorAll(".tab-button");
+    const panels = document.querySelectorAll(".tab-panel");
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const tab = btn.getAttribute("data-tab");
+
+        // update buttons
+        buttons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        // update panels
+        panels.forEach((panel) => {
+          if (panel.id === "tab-" + tab) {
+            panel.classList.add("active");
+          } else {
+            panel.classList.remove("active");
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
