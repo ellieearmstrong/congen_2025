@@ -8,35 +8,48 @@
     :root {
       --accent: #2563eb;
       --accent-dark: #1d4ed8;
-      --bg: #020617;
-      --text: #e5e7eb;
-      --card-bg: rgba(15, 23, 42, 0.9);
+      --text: #ffffff;
+      --overlay: rgba(0, 0, 0, 0.45);
     }
+
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       min-height: 100vh;
       font-family: system-ui, sans-serif;
-      background: radial-gradient(circle at top, #0f172a 0, #020617 55%);
-      color: var(--text);
+
+      /* Background image + dark overlay */
+      background:
+        linear-gradient(var(--overlay), var(--overlay)),
+        url("https://upload.wikimedia.org/wikipedia/commons/6/66/Hornbill_Zazu_Chitwa_South_Africa_Luca_Galuzzi_2004.JPG")
+        no-repeat center center fixed;
+      background-size: cover;
+
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 1rem;
+      color: var(--text);
+      position: relative;
     }
+
     .shell {
       max-width: 640px;
       width: 100%;
-      background: var(--card-bg);
+      background: rgba(0, 0, 0, 0.55);
       border-radius: 18px;
       padding: 2.25rem 2rem;
       text-align: center;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.7);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
     }
+
     h1 {
       margin: 0 0 1rem;
       font-size: clamp(2rem, 4vw, 2.7rem);
     }
+
     .btn-primary {
       display: inline-block;
       padding: 0.8rem 1.6rem;
@@ -48,18 +61,46 @@
       font-size: 1rem;
       transition: background 0.15s ease, transform 0.1s ease;
     }
+
     .btn-primary:hover {
       background: var(--accent-dark);
       transform: translateY(-2px);
     }
+
+    /* Photo credit */
+    .credit {
+      position: absolute;
+      bottom: 12px;
+      right: 16px;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.75);
+      background: rgba(0, 0, 0, 0.4);
+      padding: 4px 8px;
+      border-radius: 6px;
+      backdrop-filter: blur(4px);
+    }
+
+    .credit a {
+      color: #dbeafe;
+      text-decoration: none;
+    }
+
+    .credit a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
+
 <body>
 
   <main class="shell">
     <h1>ConGen2025 Assembly Workshop</h1>
     <a href="intro.html" class="btn-primary">Get Started →</a>
   </main>
+
+  <div class="credit">
+    Photo: <a href="https://commons.wikimedia.org/wiki/File:Hornbill_Zazu_Chitwa_South_Africa_Luca_Galuzzi_2004.JPG" target="_blank">Luca Galuzzi / Wikimedia Commons</a>
+  </div>
 
 </body>
 </html>
