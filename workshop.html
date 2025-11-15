@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>ConGen2025 Assembly Workshop – Workshop</title>
+  <title>ConGen2025 Assembly Workshop – Start</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
@@ -37,23 +37,74 @@
       position: sticky;
       top: 0;
       border-bottom: 1px solid #1f2937;
-      z-index: 10;
+      z-index: 20;
     }
-    .navbar a {
+
+    .nav-link,
+    .nav-dropdown > a {
       color: var(--muted);
       text-decoration: none;
       padding: 0.5rem 1rem;
       border-radius: 8px;
       transition: 0.2s;
       font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
     }
-    .navbar a.active {
+
+    .nav-link.active,
+    .nav-dropdown > a.active {
       background: var(--accent-soft);
       color: var(--accent);
       font-weight: 600;
     }
-    .navbar a:hover {
+
+    .nav-link:hover,
+    .nav-dropdown > a:hover {
       background: #1f2937;
+    }
+
+    /* Dropdown under Workshop */
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .dropdown-caret {
+      font-size: 0.75rem;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin-top: 0.25rem;
+      background: #020617;
+      border-radius: 10px;
+      border: 1px solid #1f2937;
+      min-width: 150px;
+      padding: 0.25rem 0;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+      display: none;
+      z-index: 30;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .dropdown-menu a:hover {
+      background: #111827;
+      color: var(--text);
+    }
+
+    .nav-dropdown:hover .dropdown-menu {
+      display: block;
     }
 
     /* Main wrapper */
@@ -65,85 +116,102 @@
 
     .page-header h1 {
       margin-top: 0;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
       font-size: clamp(1.8rem, 3vw, 2.2rem);
     }
 
     .page-header p {
       color: var(--muted);
+      margin: 0.25rem 0;
     }
 
-    /* Accordion / dropdown styling */
-    .accordion-stack {
+    /* Page contents list */
+    .page-contents {
+      margin: 1.75rem auto 1.5rem;
       max-width: 800px;
-      margin: 2rem auto 0;
+      background: #020617;
+      border-radius: 12px;
+      border: 1px solid #1f2937;
+      padding: 1rem 1.25rem;
+      font-size: 0.9rem;
+    }
+
+    .page-contents-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .page-contents ul {
+      list-style: none;
+      margin: 0;
+      padding-left: 0;
+    }
+
+    .page-contents li {
+      margin: 0.1rem 0;
+    }
+
+    .page-contents a {
+      color: #93c5fd;
+      text-decoration: none;
+    }
+
+    .page-contents a:hover {
+      text-decoration: underline;
+    }
+
+    /* Panels (sections) */
+    .panel-stack {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 1.5rem;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
-    details {
+    .panel {
       background: var(--panel);
+      padding: 1.25rem 1.5rem;
       border-radius: 12px;
       border: 1px solid #243044;
-      overflow: hidden;
     }
 
-    summary {
-      list-style: none;
-      cursor: pointer;
-      padding: 0.9rem 1.25rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-weight: 600;
-      font-size: 0.98rem;
-      background: linear-gradient(to right, #111827, #020617);
+    .panel h2 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
     }
 
-    summary::-webkit-details-marker {
-      display: none;
+    .panel h3 {
+      margin-top: 1rem;
+      margin-bottom: 0.4rem;
+      font-size: 1rem;
     }
 
-    .summary-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-    }
-
-    .pill-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
-    }
-
-    .summary-chevron {
+    .tip {
+      margin-top: 0.75rem;
+      padding: 0.75rem 0.9rem;
+      border-radius: 8px;
+      background: #020617;
+      border: 1px solid #1f2937;
       font-size: 0.9rem;
       color: var(--muted);
     }
 
-    details[open] .summary-chevron {
-      transform: rotate(90deg);
-    }
-
-    .accordion-body {
-      padding: 1rem 1.25rem 1.25rem;
-      font-size: 0.95rem;
-    }
-
-    .accordion-body p {
-      margin: 0.35rem 0;
-    }
-
-    .accordion-body ol {
-      margin: 0.5rem 0 0.75rem 1.25rem;
-      padding: 0;
+    .tip-title {
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.8rem;
+      margin-bottom: 0.25rem;
+      color: #e5e7eb;
     }
 
     .code-block {
-      margin-top: 0.5rem;
+      margin-top: 0.6rem;
       padding: 0.75rem 0.9rem;
       border-radius: 8px;
       background: #020617;
@@ -158,8 +226,15 @@
       color: #93c5fd;
       text-decoration: none;
     }
+
     a:hover {
       text-decoration: underline;
+    }
+
+    ul, ol {
+      margin-top: 0.25rem;
+      margin-bottom: 0.75rem;
+      padding-left: 1.25rem;
     }
   </style>
 </head>
@@ -167,145 +242,249 @@
 
   <!-- NAVBAR -->
   <nav class="navbar">
-    <a href="intro.html">Intro</a>
-    <a href="workshop.html" class="active">Workshop</a>
-    <a href="terminology.html">Terminology</a>
-    <a href="programs.html">Programs</a>
-    <a href="links.html">Links</a>
+    <a href="intro.html" class="nav-link">Intro</a>
+
+    <div class="nav-dropdown">
+      <a href="workshop.html" class="active">
+        Workshop <span class="dropdown-caret">▾</span>
+      </a>
+      <div class="dropdown-menu">
+        <a href="workshop.html#start">Start</a>
+        <a href="reads.html">Reads</a>
+        <a href="assembly.html">Assembly</a>
+      </div>
+    </div>
+
+    <a href="terminology.html" class="nav-link">Terminology</a>
+    <a href="programs.html" class="nav-link">Programs</a>
+    <a href="links.html" class="nav-link">Links</a>
   </nav>
 
   <!-- MAIN CONTENT -->
-  <main class="page">
-
+  <main class="page" id="start">
     <header class="page-header">
-      <h1>Workshop</h1>
+      <h1>Workshop – Start</h1>
       <p>
-        This page walks you through the hands-on assembly module for ConGen2025.
-        The sections below expand to show more detail for each stage of the exercise.
+        On this page you’ll get oriented for the assembly module: how to connect, where the
+        files live, and how to set up your working directories.
       </p>
       <p>
-        Use these as a reference while you work through the activities during the course.
-        You can paste in the exact commands and SLURM scripts you want participants to use.
+        Use the <strong>Workshop</strong> menu in the navigation bar to switch between
+        <strong>Start</strong>, <strong>Reads</strong>, and <strong>Assembly</strong>.
       </p>
     </header>
 
-    <!-- DROPDOWNS -->
-    <section class="accordion-stack">
+    <!-- Page contents (like the ConGen page) -->
+    <section class="page-contents">
+      <div class="page-contents-title">Page contents</div>
+      <ul>
+        <li><a href="#getting-started">Getting started</a></li>
+        <li><a href="#hornbill-data">Hornbill data</a></li>
+        <li><a href="#input-files">Input files &amp; output prep</a></li>
+      </ul>
+    </section>
 
-      <!-- Start -->
-      <details open>
-        <summary>
-          <span class="summary-label">
-            <span class="pill-dot"></span>
-            Start
-          </span>
-          <span class="summary-chevron">▶</span>
-        </summary>
-        <div class="accordion-body">
+    <!-- Panels -->
+    <section class="panel-stack">
+
+      <!-- Getting started -->
+      <section class="panel" id="getting-started">
+        <h2>Getting started</h2>
+
+        <p>
+          In this module we’ll walk through hands-on steps for genome assembly and basic
+          quality checks. We’ll work inside the ConGen environment (for example, via
+          an RStudio Server session) and most of what you do will be through a
+          <strong>Terminal</strong> tab.
+        </p>
+
+        <p>
+          If you haven’t already, connect to the ConGen server and open RStudio in your
+          browser. Make sure you can see the Console and the Terminal; if your interface
+          looks very different from what the instructors are showing, please ask for help.
+        </p>
+
+        <p>
+          Throughout the workshop, shell commands will be presented in fixed-width blocks
+          like this:
+        </p>
+
+        <div class="code-block">
+this_is_an_example_command --with-some-options
+        </div>
+
+        <p>
+          After some commands, we may break down important flags or arguments so you can see
+          what each piece does, rather than treating the command line as a black box.
+          Those explanations are there to help; if they feel like too much detail,
+          you can skim past them and focus on the commands and outputs.
+        </p>
+
+        <div class="tip">
+          <div class="tip-title">Tip — Help menus</div>
           <p>
-            This section covers logging in, finding your data, and orienting yourself to the
-            directory structure you will use during the workshop.
+            Most command-line tools provide a built-in help menu. You can usually view it with:
           </p>
-          <ol>
-            <li>Log into the cluster or environment specified by your instructors.</li>
-            <li>Navigate to the working directory for the assembly exercises.</li>
-            <li>List the contents and identify the read files and any reference materials.</li>
-          </ol>
-
           <div class="code-block">
-# Example: connect to the cluster and move to your working directory
-ssh your_user@your_cluster
+&lt;program&gt; -h
+# or
+&lt;program&gt; &lt;sub-command&gt; -h
+          </div>
+          <p>
+            For many standard Linux commands, you can also use the manual pages:
+          </p>
+          <div class="code-block">
+man &lt;command&gt;
+          </div>
+          <p>
+            The <code>man</code> viewer can be navigated with the arrow keys, and you can quit
+            by pressing <code>q</code>. If you’re ever unsure about what a command or option
+            does, try the help menu or manual page first.
+          </p>
+        </div>
 
-cd /path/to/congen2025/assembly/
+        <div class="tip">
+          <div class="tip-title">Tip — Looking at your data</div>
+          <p>
+            A crucial part of bioinformatics is simply <em>looking</em> at your data and
+            intermediate outputs. We’ll pause at several points to inspect what a command
+            produced, often showing a short snippet of the output so you can compare what
+            you see on your screen with the walkthrough.
+          </p>
+        </div>
+      </section>
+
+      <!-- Hornbill data (placeholder for you to fill) -->
+      <section class="panel" id="hornbill-data">
+        <h2>Hornbill data</h2>
+
+        <p>
+          This section will describe the hornbill dataset used in the ConGen2025 assembly
+          exercises (replacing the Drosophila example from previous years).
+        </p>
+
+        <p>
+          You can fill in this section with background on the species, genome size,
+          particular chromosomes or regions you’ll focus on, and the specific questions
+          you want participants to think about while they run the assembly and mapping
+          steps.
+        </p>
+      </section>
+
+      <!-- Input files & output prep -->
+      <section class="panel" id="input-files">
+        <h2>Input files &amp; output prep</h2>
+
+        <h3>Copying input data</h3>
+
+        <p>
+          For this workshop we’ll primarily work with sequence data in FASTA and FASTQ
+          formats. The instructor has placed a set of input files on the server in a
+          shared directory (adjust this path to match your actual setup). We’ll begin
+          by copying that directory into our own home directory so we can work on an
+          independent copy.
+        </p>
+
+        <p>First, move to your home directory:</p>
+
+        <div class="code-block">
+cd ~
+        </div>
+
+        <p>
+          Here <code>cd</code> is the “change directory” command, and <code>~</code> is a
+          shortcut that means “my home directory”.
+        </p>
+
+        <p>Now copy the workshop data directory into your home directory:</p>
+
+        <div class="code-block">
+cp -r instructor_materials/Gregg_Thomas/congen-assembly/ .
+        </div>
+
+        <p>
+          In this command, <code>cp</code> is the copy command, <code>-r</code> tells it to
+          copy directories recursively, the long path indicates the folder you’re copying
+          from, and <code>.</code> means “copy it here, keeping the same name”.
+        </p>
+
+        <p>Change into the new directory:</p>
+
+        <div class="code-block">
+cd congen-assembly
+        </div>
+
+        <p>Then check what’s inside:</p>
+
+        <div class="code-block">
 ls
-          </div>
+        </div>
 
+        <p>
+          You should see several subdirectories, for example:
+        </p>
+
+        <ul>
+          <li>
+            <code>dmel-3R-reference/</code> – a reference sequence and indices for one
+            chromosome from a comparison species.
+          </li>
+          <li>
+            <code>dpse-chr2-reads/</code> – example short-read data for the assembly exercise.
+          </li>
+          <li>
+            <code>expected-outputs/</code> – pre-computed outputs for each step, in case
+            something fails or takes too long on the fly.
+          </li>
+          <li>
+            <code>scripts/</code> – helper scripts used in some of the analyses.
+          </li>
+        </ul>
+
+        <div class="tip">
+          <div class="tip-title">Tip — Pre-generated outputs</div>
           <p>
-            You can customize this area with your exact paths, project structure, and any
-            environment setup steps (modules, conda environments, etc.).
+            If you get stuck on a command or your job is taking too long, you can often
+            continue to the next step by using the corresponding file from
+            <code>expected-outputs/</code> instead of the file you were supposed to create.
+            When in doubt, ask an instructor which file to use.
           </p>
         </div>
-      </details>
 
-      <!-- Reads -->
-      <details>
-        <summary>
-          <span class="summary-label">
-            <span class="pill-dot"></span>
-            Reads
-          </span>
-          <span class="summary-chevron">▶</span>
-        </summary>
-        <div class="accordion-body">
-          <p>
-            In this section, you will explore the read data you’ll be assembling:
-            file formats, coverage, and basic quality control.
-          </p>
-          <ol>
-            <li>Identify read types (short vs. long reads, paired-end vs. single).</li>
-            <li>Check the number of reads and approximate coverage for the target genome.</li>
-            <li>Run quick QC (e.g. FastQC or summary statistics) to assess read quality.</li>
-          </ol>
+        <h3>Preparing output directories</h3>
 
-          <div class="code-block">
-# Example: inspect read files
-ls data/
+        <p>
+          It’s useful to plan ahead for where your outputs will go so that your working
+          directory stays organized. For this module we’ll generate assemblies, read
+          mappings, and alignments, so we’ll create a separate directory for each.
+        </p>
 
-# Example: run a basic read summary (replace with your real commands)
-zcat data/sample_R1.fastq.gz | head -n 8
-
-# Example: placeholder for FastQC or similar
-# fastqc data/sample_R1.fastq.gz data/sample_R2.fastq.gz -o qc/
-          </div>
-
-          <p>
-            Replace the example commands above with the tools and parameters you want to highlight
-            (e.g. FastQC, seqtk, custom scripts, or coverage calculators).
-          </p>
+        <div class="code-block">
+mkdir alignments
+mkdir assemblies
+mkdir mapped-reads
         </div>
-      </details>
 
-      <!-- Assembly -->
-      <details>
-        <summary>
-          <span class="summary-label">
-            <span class="pill-dot"></span>
-            Assembly
-          </span>
-          <span class="summary-chevron">▶</span>
-        </summary>
-        <div class="accordion-body">
-          <p>
-            Here you will run a genome assembler, inspect the resulting assembly, and (optionally)
-            map reads back to the assembly to evaluate its quality.
-          </p>
-          <ol>
-            <li>Choose an assembler appropriate for your read type.</li>
-            <li>Run the assembler with a small set of core parameters.</li>
-            <li>Summarize the resulting assembly (N50, total size, number of contigs/scaffolds).</li>
-            <li>Optionally map reads back to the assembly and examine coverage and potential issues.</li>
-          </ol>
+        <p>
+          Here <code>mkdir</code> creates a new directory with the specified name. We’ll use
+          these folders to store alignments, assemblies, and mapped reads, respectively.
+        </p>
 
-          <div class="code-block">
-# Example: run an assembler (replace with your actual tool and parameters)
-# spades.py -1 data/sample_R1.fastq.gz -2 data/sample_R2.fastq.gz -o assembly/
+        <p>
+          Some tools require that you create an output directory ahead of time. For
+          example, FastQC expects a directory where it can place its reports:
+        </p>
 
-# Example: summarize assembly
-# python scripts/assembly_stats.py assembly/contigs.fasta
-
-# Example: map reads back (placeholder)
-# bwa index assembly/contigs.fasta
-# bwa mem assembly/contigs.fasta data/sample_R1.fastq.gz data/sample_R2.fastq.gz | samtools sort -o mapped.bam
-# samtools index mapped.bam
-          </div>
-
-          <p>
-            In your final version, you can tailor this section with the exact assembler(s)
-            you want to demonstrate (e.g. SPAdes, Flye, HiFi-specific tools), plus links
-            to documentation or expected outputs for participants to compare to.
-          </p>
+        <div class="code-block">
+mkdir fastqc-output
         </div>
-      </details>
+
+        <p>
+          Other programs will create their own subdirectories automatically. At this
+          point you should have a clean structure ready to hold the results of each
+          step of the assembly and mapping workflow.
+        </p>
+      </section>
 
     </section>
   </main>
