@@ -8,22 +8,25 @@
     :root {
       --bg: #0b1120;
       --surface: #111827;
-      --accent: #2563eb;
-      --accent-soft: rgba(37, 99, 235, 0.15);
+      --panel: #1e293b;
       --text: #e5e7eb;
       --muted: #9ca3af;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.15);
     }
+
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      padding-bottom: 3rem;
+      padding-bottom: 4rem;
     }
 
-    /* Top nav */
+    /* Top navbar */
     .navbar {
       width: 100%;
       background: var(--surface);
@@ -34,6 +37,7 @@
       position: sticky;
       top: 0;
       border-bottom: 1px solid #1f2937;
+      z-index: 10;
     }
     .navbar a {
       color: var(--muted);
@@ -41,6 +45,7 @@
       padding: 0.5rem 1rem;
       border-radius: 8px;
       transition: 0.2s;
+      font-size: 0.95rem;
     }
     .navbar a.active {
       background: var(--accent-soft);
@@ -51,18 +56,52 @@
       background: #1f2937;
     }
 
-    /* Main content */
+    /* Layout: 2 columns */
     .container {
-      max-width: 850px;
+      max-width: 1100px;
       margin: 2rem auto;
       padding: 0 1rem;
+
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+      gap: 2rem;
     }
-    h1 { margin-top: 0; }
+
+    @media (max-width: 850px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Side panels */
+    .panel {
+      background: var(--panel);
+      padding: 1.25rem 1.5rem;
+      border-radius: 12px;
+      border: 1px solid #243044;
+    }
+    .panel h2 {
+      margin-top: 0;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    a {
+      color: #93c5fd;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
+
 <body>
 
-  <!-- Navigation bar -->
+  <!-- NAVBAR -->
   <nav class="navbar">
     <a href="intro.html" class="active">Intro</a>
     <a href="workshop.html">Workshop</a>
@@ -71,19 +110,88 @@
     <a href="links.html">Links</a>
   </nav>
 
-  <!-- Page content -->
+  <!-- PAGE CONTENT -->
   <div class="container">
-    <h1>Welcome to the ConGen2025 Assembly Workshop</h1>
 
-    <p>
-      This is the main entry point for all genome assembly content in ConGen2025.
-      Use the navigation bar above to explore the different modules.
-    </p>
+    <!-- LEFT MAIN CONTENT -->
+    <div>
+      <h1>Welcome to the ConGen2025 Assembly Workshop</h1>
 
-    <p>
-      You can now begin adding content to this page — an overview of the workshop,
-      goals, outline, or whatever you want participants to see first.
-    </p>
+      <p>
+        This page introduces the structure and flow of the genome assembly module
+        for ConGen2025. Use the navigation tabs above to move between modules.
+      </p>
+
+      <p>
+        Below you'll find information about your instructor and details on how to
+        navigate this workshop website.
+      </p>
+    </div>
+
+    <!-- RIGHT COLUMN: INSTRUCTOR + NAVIGATION -->
+    <div>
+
+      <!-- Instructor Panel -->
+      <div class="panel">
+        <h2>Instructor</h2>
+        <p>
+          Ellie Armstrong is an Assistant Professor of Evolutionary Genomics at the 
+          <a href="https://www.armstrong-lab.com/" target="_blank">
+            University of California, Riverside
+          </a>.
+          She previously was a Washington Research Foundation postdoctoral fellow 
+          in the lab of 
+          <a href="https://evogenomes.sites.ucsc.edu/" target="_blank">
+            Joanna Kelley (UCSC)
+          </a>.
+        </p>
+
+        <p>
+          She received her PhD at Stanford University with 
+          <a href="https://petrovlab-stanford.squarespace.com/" target="_blank">
+            Dmitri Petrov
+          </a> 
+          and 
+          <a href="https://hadlylab.stanford.edu/" target="_blank">
+            Liz Hadly
+          </a>, 
+          where she worked on the genomics of large carnivores.
+        </p>
+
+        <p>
+          Ellie has assembled genomes from many species across the tree of life 
+          including the lion, the African wild dog, Hawaiian spiders, birds, 
+          lichens, foxes, macaques, flies, and several other big cats. Her 
+          research spans from detecting recent population bottlenecks to 
+          uncovering ancient admixture events, with the ultimate goal of 
+          understanding how evolutionary processes influence the resilience, 
+          adaptation, and long-term viability of species.
+        </p>
+
+        <p>
+          Supported previously by the 
+          <a href="https://www.wrfseattle.org/" target="_blank">
+            Washington Research Foundation
+          </a>.
+        </p>
+      </div>
+
+      <!-- Navigation Panel -->
+      <div class="panel" style="margin-top: 1.25rem;">
+        <h2>Navigation</h2>
+        <p>
+          Use the tabs at the top of this page to move between the 
+          <strong>Intro</strong>, <strong>Workshop</strong> steps, 
+          <strong>Terminology</strong> reference, <strong>Programs</strong> 
+          overview, and additional <strong>Links</strong>.
+        </p>
+
+        <p>
+          You can always return to this page by clicking <strong>Intro</strong>.
+        </p>
+      </div>
+
+    </div>
   </div>
 
 </body>
