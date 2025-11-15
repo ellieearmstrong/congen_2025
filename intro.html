@@ -20,7 +20,8 @@
     body {
       margin: 0;
       font-family: system-ui, sans-serif;
-      background: var(--bg);
+      background: --bg;
+      background: #0b1120;
       color: var(--text);
       line-height: 1.6;
       padding-bottom: 4rem;
@@ -55,24 +56,7 @@
     .navbar a:hover {
       background: #1f2937;
     }
-    
-    /* Funding logo below panel */
-    .funding-logo {
-      margin: 0 auto 1.5rem;
-      max-width: 800px;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid #243044;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
-      background: #0b1120;
-    }
 
-    .funding-logo img {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-    
     /* Main content wrapper */
     .page {
       max-width: 900px;
@@ -148,6 +132,23 @@
       }
     }
 
+    /* Funding logo below panels */
+    .funding-logo {
+      margin: 0.5rem auto 1.5rem;
+      max-width: 800px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #243044;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+      background: #0b1120;
+    }
+
+    .funding-logo img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
     a {
       color: #93c5fd;
       text-decoration: none;
@@ -173,11 +174,15 @@
   <main class="page">
 
     <header class="page-header">
-      <h1>Welcome to the ConGen2025 Genome Assembly Workshop!</h1>
+      <h1>Welcome to the ConGen2025 Assembly Workshop</h1>
 
       <p>
-        Below you'll find information about your instructor and details on how to
-        navigate the website.
+        This page introduces the structure and flow of the genome assembly module
+        for ConGen2025. Use the navigation tabs above to move between modules.
+      </p>
+      <p>
+        Below you'll find information about your instructor, navigation tips, and
+        funding support for this workshop.
       </p>
     </header>
 
@@ -205,7 +210,7 @@
             </p>
 
             <p>
-              She received her PhD at Stanford University with
+              She received her PhD at Stanford University in the labs of
               <a href="https://petrovlab-stanford.squarespace.com/" target="_blank">Dmitri Petrov</a>
               and
               <a href="https://hadlylab.stanford.edu/" target="_blank">Liz Hadly</a>,
@@ -213,22 +218,22 @@
             </p>
 
             <p>
-              Ellie has assembled many reference genomes including the
+              Ellie has assembled genomes from many species across the tree of life including the
               <a href="https://doi.org/10.1093/gigascience/giy124" target="_blank">African wild dog</a>,
               <a href="https://doi.org/10.1186/s12915-019-0734-5" target="_blank">lion</a>,
               <a href="https://doi.org/10.1093/gbe/evac125" target="_blank">brown bear</a>,
-              <a href="https://doi.org/10.1093/gbe/evab262" target="_blank">Hawaiian tetragnatha</a>,
+              <a href="https://doi.org/10.1093/gbe/evab262" target="_blank">spiders</a>,
               <a href="https://doi.org/10.1128/genomea.00281-18" target="_blank">lichens</a>,
-              <a href="https://doi.org/10.1093/gigascience/giz003" target="_blank">birds of paradise</a>,
-              <a href="https://doi.org/10.1093/g3journal/jkae034" target="_blank">gray fox</a>
+              <a href="https://doi.org/10.1093/gigascience/giz003" target="_blank">birds</a>,
+              <a href="https://doi.org/10.1093/g3journal/jkae034" target="_blank">foxes</a>
               and more.
             </p>
 
             <p>
-              The Armstrong Lab focuses on a variety of topics spanning from the detection of recent population 
-              bottlenecks to uncovering ancient admixture events, with the ultimate goal of understanding how
-              evolutionary processes influence the resilience, adaptation, and long-term
-              viability of species. 
+              The Armstrong Lab focuses on a variety of topics spanning from the detection of recent 
+              population bottlenecks to uncovering ancient admixture events, with the ultimate goal of 
+              understanding how evolutionary processes influence the resilience, adaptation, and long-term 
+              viability of species..
             </p>
           </div>
         </div>
@@ -249,21 +254,28 @@
         </p>
       </section>
 
-       <!-- Funding Panel -->
+      <!-- Funding Panel -->
       <section class="panel" id="funding">
-        <h2>Funding & Sponsorship</h2>
+        <h2>Funding &amp; Sponsorship</h2>
         <p>
           This workshop was generously supported by the
           <a href="https://www.hudsonalpha.org/actg/" target="_blank">
             American Campus Tree Genomes Project
           </a>, who sponsored the sequencing of the hornbill used in these
-          assembly modules. We are deeply grateful for their support in making
-          this workshop possible.
+          assembly modules. We are very grateful for their support.
         </p>
       </section>
 
-      
     </section>
+
+    <!-- Funding Logo Below Panels -->
+    <figure class="funding-logo">
+      <img
+        src="https://www.hudsonalpha.org/wp-content/uploads/2024/06/RES_ACTGheader-1920.png"
+        alt="American Campus Tree Genomes Project logo"
+      />
+    </figure>
+
   </main>
 
 </body>
