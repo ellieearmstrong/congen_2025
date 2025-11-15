@@ -63,10 +63,6 @@
       padding: 0 1rem;
     }
 
-    .page-header {
-      margin-bottom: 2rem;
-    }
-
     .page-header h1 {
       margin-top: 0;
       margin-bottom: 0.75rem;
@@ -75,10 +71,9 @@
 
     .page-header p {
       color: var(--muted);
-      margin: 0.25rem 0;
     }
 
-    /* Centered panels under header */
+    /* Centered panels */
     .panel-stack {
       display: flex;
       flex-direction: column;
@@ -103,7 +98,7 @@
       margin-bottom: 0.75rem;
     }
 
-    /* Instructor layout with image */
+    /* Instructor layout with larger image */
     .instructor-content {
       display: grid;
       grid-template-columns: auto minmax(0, 1fr);
@@ -112,8 +107,8 @@
     }
 
     .instructor-photo {
-      width: 120px;
-      height: 120px;
+      width: 160px;
+      height: 160px;
       border-radius: 999px;
       overflow: hidden;
       border: 2px solid #334155;
@@ -130,9 +125,7 @@
     @media (max-width: 640px) {
       .instructor-content {
         grid-template-columns: 1fr;
-        text-align: left;
       }
-
       .instructor-photo {
         margin: 0 auto;
       }
@@ -159,29 +152,29 @@
     <a href="links.html">Links</a>
   </nav>
 
-  <!-- PAGE CONTENT -->
+  <!-- MAIN CONTENT -->
   <main class="page">
 
-    <!-- Header section -->
     <header class="page-header">
       <h1>Welcome to the ConGen2025 Assembly Workshop</h1>
 
       <p>
-        This page introduces the structure and flow of the genome assembly module
+        This page introduces the genome assembly module
         for ConGen2025. Use the navigation tabs above to move between modules.
       </p>
       <p>
         Below you'll find information about your instructor and details on how to
-        navigate this workshop website.
+        navigate the website.
       </p>
     </header>
 
-    <!-- Centered panels -->
+    <!-- PANELS -->
     <section class="panel-stack">
 
       <!-- Instructor Panel -->
       <section class="panel">
         <h2>Instructor</h2>
+
         <div class="instructor-content">
           <div class="instructor-photo">
             <img
@@ -189,88 +182,35 @@
               alt="Photo of Ellie Armstrong"
             />
           </div>
+
           <div>
             <p>
               Ellie Armstrong is an Assistant Professor of Evolutionary Genomics at the
-              <a href="https://www.armstrong-lab.com/" target="_blank">
-                University of California, Riverside
-              </a>.
-              She previously was a Washington Research Foundation postdoctoral fellow in
-              the lab of
-              <a href="https://evogenomes.sites.ucsc.edu/" target="_blank">
-                Joanna Kelley (UCSC)
-              </a>.
+              <a href="https://www.armstrong-lab.com/" target="_blank">University of California, Riverside</a>.
+              She previously was a Washington Research Foundation postdoctoral fellow in the lab of
+              <a href="https://evogenomes.sites.ucsc.edu/" target="_blank">Joanna Kelley (UCSC)</a>.
             </p>
 
             <p>
               She received her PhD at Stanford University with
-              <a href="https://petrovlab-stanford.squarespace.com/" target="_blank">
-                Dmitri Petrov
-              </a>
+              <a href="https://petrovlab-stanford.squarespace.com/" target="_blank">Dmitri Petrov</a>
               and
-              <a href="https://hadlylab.stanford.edu/" target="_blank">
-                Liz Hadly
-              </a>,
+              <a href="https://hadlylab.stanford.edu/" target="_blank">Liz Hadly</a>,
               where she worked on the genomics of large carnivores.
             </p>
 
             <p>
-              Ellie has assembled genomes from many species across the tree of life
-              including the
-              <a href="https://doi.org/10.1093/gigascience/giy124" target="_blank">
-                African wild dog
-              </a>,
-              <a href="https://doi.org/10.1186/s12915-019-0734-5" target="_blank">
-                lion
-              </a>,
-              <a href="https://doi.org/10.1093/gbe/evac125" target="_blank">
-                brown bear
-              </a>,
-              <a href="https://doi.org/10.1093/gbe/evab262" target="_blank">
-                spiders
-              </a>,
-              <a href="https://doi.org/10.1128/genomea.00281-18" target="_blank">
-                lichens
-              </a>,
-              <a href="https://doi.org/10.1093/gigascience/giz003" target="_blank">
-                birds
-              </a>,
-              <a href="https://doi.org/10.1093/g3journal/jkae034" target="_blank">
-                foxes
-              </a>
+              Ellie has assembled genomes from many species across the tree of life including the
+              <a href="https://doi.org/10.1093/gigascience/giy124" target="_blank">African wild dog</a>,
+              <a href="https://doi.org/10.1186/s12915-019-0734-5" target="_blank">lion</a>,
+              <a href="https://doi.org/10.1093/gbe/evac125" target="_blank">brown bear</a>,
+              <a href="https://doi.org/10.1093/gbe/evab262" target="_blank">spiders</a>,
+              <a href="https://doi.org/10.1128/genomea.00281-18" target="_blank">lichens</a>,
+              <a href="https://doi.org/10.1093/gigascience/giz003" target="_blank">birds</a>,
+              <a href="https://doi.org/10.1093/g3journal/jkae034" target="_blank">foxes</a>
               and more.
             </p>
 
             <p>
               Her research spans from detecting recent population bottlenecks to uncovering
               ancient admixture events, with the ultimate goal of understanding how
-              evolutionary processes influence the resilience, adaptation, and long-term
-              viability of species. She has been supported by the
-              <a href="https://www.wrfseattle.org/" target="_blank">
-                Washington Research Foundation
-              </a>.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Navigation Panel -->
-      <section class="panel">
-        <h2>Navigation</h2>
-        <p>
-          Use the tabs at the top of this page to move between the
-          <strong>Intro</strong>, <strong>Workshop</strong> steps,
-          <strong>Terminology</strong> reference, <strong>Programs</strong>
-          overview, and additional <strong>Links</strong>.
-        </p>
-
-        <p>
-          You can always return to this page by clicking <strong>Intro</strong>.
-        </p>
-      </section>
-
-    </section>
-  </main>
-
-</body>
-</html>
