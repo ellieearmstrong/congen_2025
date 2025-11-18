@@ -1,1 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ConGen2025 Assembly Workshop – Terminology</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #0b1120;
+      --surface: #111827;
+      --panel: #020617;
+      --panel-alt: #020617;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #22c55e;
+      --accent-soft: rgba(34, 197, 94, 0.15);
+      --border-subtle: #1f2937;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 48%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 3rem;
+    }
+
+    /* Top navbar */
+    .navbar {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.96);
+      backdrop-filter: blur(12px);
+      padding: 0.85rem 1.2rem;
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      border-bottom: 1px solid rgba(31, 41, 55, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .navbar a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .navbar a:hover {
+      background: #020617;
+      color: #f9fafb;
+      transform: translateY(-1px);
+    }
+
+    .navbar a.active {
+      background: var(--accent-soft);
+      color: #bbf7d0;
+      font-weight: 600;
+      border: 1px solid rgba(34, 197, 94, 0.45);
+    }
+
+    /* Main content wrapper */
+    .page {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1.2rem;
+    }
+
+    .page-header {
+      padding: 1.1rem 1.2rem 1.25rem;
+      border-radius: 18px;
+      background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.12), transparent 55%),
+                  linear-gradient(to bottom right, #020617, #020617);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.7);
+    }
+
+    .page-header h1 {
+      margin: 0 0 0.4rem;
+      font-size: clamp(1.8rem, 3vw, 2.15rem);
+    }
+
+    .page-header p {
+      margin: 0.2rem 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 60rem;
+    }
+
+    /* Page contents box */
+    .page-contents {
+      margin: 1.5rem 0 1.75rem;
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 14px;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 0.85rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    .page-contents-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #6b7280;
+      margin-bottom: 0.35rem;
+    }
+
+    .page-contents ul {
+      list-style: none;
+      margin: 0;
+      padding-left: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1.5rem;
+    }
+
+    .page-contents a {
+      color: #bfdbfe;
+      text-decoration: none;
+    }
+
+    .page-contents a:hover {
+      text-decoration: underline;
+    }
+
+    /* Sections */
+    .section {
+      margin-top: 1.5rem;
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: 16px;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      padding: 1.3rem 1.4rem 1.4rem;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.65);
+    }
+
+    .section h2 {
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+      font-size: 1.25rem;
+    }
+
+    .section p {
+      margin: 0.3rem 0 0.8rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* Tables */
+    .table-wrapper {
+      margin-top: 0.75rem;
+      border-radius: 12px;
+      border: 1px solid #1f2937;
+      overflow: hidden;
+      background: #020617;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    thead {
+      background: #020617;
+    }
+
+    thead th {
+      text-align: left;
+      padding: 0.6rem 0.9rem;
+      font-weight: 600;
+      border-bottom: 1px solid #111827;
+      color: #e5e7eb;
+      font-size: 0.9rem;
+    }
+
+    tbody tr:nth-child(odd) {
+      background: #020617;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #020617;
+    }
+
+    tbody td {
+      padding: 0.5rem 0.9rem;
+      vertical-align: top;
+      border-top: 1px solid #111827;
+      color: #d1d5db;
+    }
+
+    tbody tr:first-child td {
+      border-top: none;
+    }
+
+    td.term-col {
+      white-space: nowrap;
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+
+    td.format-col {
+      white-space: nowrap;
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+
+    td.link-col a {
+      display: inline-block;
+      margin-right: 0.35rem;
+      margin-bottom: 0.15rem;
+    }
+
+    a {
+      color: #93c5fd;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+      font-size: 0.88em;
+      padding: 0.08rem 0.3rem;
+      border-radius: 999px;
+      background: #020617;
+      border: 1px solid #1f2937;
+      color: #e5e7eb;
+    }
+
+    /* Mobile tweaks */
+    @media (max-width: 640px) {
+      .section {
+        padding: 1.1rem 1.1rem 1.25rem;
+      }
+      thead {
+        display: none;
+      }
+      table,
+      tbody,
+      tr,
+      td {
+        display: block;
+        width: 100%;
+      }
+      tbody tr {
+        border-bottom: 1px solid #111827;
+      }
+      tbody td {
+        border-top: none;
+        padding: 0.35rem 0.9rem;
+      }
+      tbody td::before {
+        display: block;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: #6b7280;
+        margin-bottom: 0.05rem;
+      }
+      /* Labels for mobile */
+      tbody td.term-col::before {
+        content: "Term";
+      }
+      tbody td.def-col::before {
+        content: "Definition";
+      }
+      tbody td.format-col::before {
+        content: "Format";
+      }
+      tbody td.use-col::before {
+        content: "Use";
+      }
+      tbody td.link-col::before {
+        content: "Links";
+      }
+      tbody td.specs-col::before {
+        content: "Specs";
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="intro.html">Intro</a>
+    <a href="workshop.html">Workshop</a>
+    <a href="terminology.html" class="active">Terminology</a>
+    <a href="programs.html">Programs</a>
+    <a href="links.html">Links</a>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="page">
+    <header class="page-header">
+      <h1>Terminology &amp; File Formats</h1>
+      <p>
+        A quick reference for common assembly and read-mapping terms, plus links to
+        specifications and documentation for the file formats you’ll encounter in the
+        ConGen2025 assembly module.
+      </p>
+    </header>
+
+    <!-- Page contents -->
+    <section class="page-contents">
+      <div class="page-contents-title">Page contents</div>
+      <ul>
+        <li><a href="#term-defs">Term definitions</a></li>
+        <li><a href="#file-formats">Common file formats</a></li>
+      </ul>
+    </section>
+
+    <!-- Term definitions -->
+    <section class="section" id="term-defs">
+      <h2>Definitions of frequently used terms</h2>
+      <p>
+        These are terms you’ll see throughout the workshop handouts, on the command
+        line, and in software documentation.
+      </p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Term</th>
+              <th>Definition</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="term-col">Sequence libraries</td>
+              <td class="def-col">
+                A sample of DNA that has been processed to be sequenced.
+              </td>
+            </tr>
+            <tr>
+              <td class="term-col">Reads</td>
+              <td class="def-col">
+                Fragmented and overlapping pieces of a DNA strand that are sequenced.
+              </td>
+            </tr>
+            <tr>
+              <td class="term-col">Phred quality scores</td>
+              <td class="def-col">
+                A scaled probability that a given inference (usually a called base) is
+                incorrect. The probability of error, <code>P(e)</code>, scaled by
+                <code>-10&nbsp;log<sub>10</sub>P(e)</code>.
+              </td>
+            </tr>
+            <tr>
+              <td class="term-col">Short reads</td>
+              <td class="def-col">
+                Reads from first and second generation sequencing such as Sanger,
+                Illumina, IonTorrent, etc. Short reads can range from ~30–1000&nbsp;bp
+                long.
+              </td>
+            </tr>
+            <tr>
+              <td class="term-col">Read pair</td>
+              <td class="def-col">
+                Many short read sequencing technologies sequence from both ends of a DNA
+                fragment, resulting in a pair of sequenced reads that come from that
+                fragment.
+              </td>
+            </tr>
+            <tr>
+              <td class="term-col">Adapter</td>
+              <td class="def-col">
+                A short piece of DNA that is ligated to the short fragment to be
+                sequenced. The adapter allows the fragment to be affixed to a physical
+                medium (such as a flow cell) to facilitate amplification and
+                sequencing.
+              </td>
+            </tr>
+            <tr>
+              <td class="term-col">Insert size</td>
+              <td class="def-col">
+                The size of the DNA fragment between the adapter sequences.
+              </td>
+            </tr>
+            <tr>
+              <td class="term-col">Mate pairs</td>
+              <td class="def-col">
+                Long-insert paired-end reads prepared by circularizing longer DNA
+                fragments.
+              </td>
+            </tr>
+            <tr>
+              <td class="term-col">Jumping libraries</td>
+              <td class="def-col">
+                Junction-fragment libraries; another term for mate pair libraries.
+              </td>
+            </tr>
+            <tr>
+              <td class="term-col">Long reads</td>
+              <td class="def-col">
+                Reads from single-molecule sequencing technologies such as PacBio SMRT
+                and Oxford Nanopore. Long reads can range from ~1&nbsp;kb to
+                &gt;100&nbsp;kb.
+              </td>
+            </tr>
+            <tr>
+              <td class="term-col">Genome assembly / Assembly / de novo assembly</td>
+              <td class="def-col">
+                (1) The process by which small overlapping parts of the genome are
+                reconstructed into longer contiguous sequences. (2) A sequence that has
+                undergone the assembly process.
+              </td>
+            </tr>
+            <tr>
+              <td class="term-col">Contigs</td>
+              <td class="def-col">
+                Assembled reads. Contig assembly is usually done with a graph-based
+                representation (for example, de&nbsp;Bruijn graphs) of overlapping
+                sequence reads.
+              </td>
+            </tr>
+            <tr>
+              <td class="term-col">Scaffolds</td>
+              <td class="def-col">
+                Contigs that have been joined together to form longer sequences.
+                Scaffolding is usually done using read-pair information or long reads.
+              </td>
+            </tr>
+            <tr>
+              <td class="term-col">Reference genome</td>
+              <td class="def-col">
+                An already assembled genome to which you can compare newly sequenced
+                reads or genomes.
+              </td>
+            </tr>
+            <tr>
+              <td class="term-col">Read mapping</td>
+              <td class="def-col">
+                The process of aligning reads from a newly sequenced genome to a
+                reference genome.
+              </td>
+            </tr>
+            <tr>
+              <td class="term-col">Mapping quality</td>
+              <td class="def-col">
+                A usually Phred-scaled probability that a given read has mapped
+                incorrectly.
+              </td>
+            </tr>
+            <tr>
+              <td class="term-col">Reference-guided assembly</td>
+              <td class="def-col">
+                (1) The process of using read mapping to reconstruct the genome from a
+                set of reads. (2) A sequence that has undergone the reference-guided
+                assembly process.
+              </td>
+            </tr>
+            <tr>
+              <td class="term-col">Reference bias</td>
+              <td class="def-col">
+                The phenomenon of a set of mapped reads appearing to resemble (through
+                lower divergence) the reference genome more closely than they actually
+                do because reads containing the most variation were not mapped.
+              </td>
+            </tr>
+            <tr>
+              <td class="term-col">Iterative mapping</td>
+              <td class="def-col">
+                The process of mapping reads to a reference genome, generating a
+                reference-guided assembly, and then repeating the process using the new
+                reference-guided assembly as the mapping target. Done to reduce
+                reference bias.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- File formats -->
+    <section class="section" id="file-formats">
+      <h2>Common file formats</h2>
+      <p>
+        These are the core formats we’ll use for sequences, alignments, and variant data.
+        Links point to general documentation and, where available, the formal
+        specifications.
+      </p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Format</th>
+              <th>Use</th>
+              <th>Links</th>
+              <th>Specs</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="format-col">FASTA</td>
+              <td class="use-col">
+                Stores sequence data.
+              </td>
+              <td class="link-col">
+                <a href="https://en.wikipedia.org/wiki/FASTA_format" target="_blank">Wikipedia</a>
+              </td>
+              <td class="specs-col">
+                NA
+              </td>
+            </tr>
+
+            <tr>
+              <td class="format-col">FASTQ</td>
+              <td class="use-col">
+                Stores sequence data and per-base quality scores.
+              </td>
+              <td class="link-col">
+                <a href="https://en.wikipedia.org/wiki/FASTQ_format" target="_blank">Wikipedia</a>
+              </td>
+              <td class="specs-col">
+                <a href="https://doi.org/10.1093/nar/gkp1137" target="_blank">doi:10.1093/nar/gkp1137</a>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="format-col">SAM</td>
+              <td class="use-col">
+                Sequence Alignment/Map format. Stores information about reads mapped to
+                a reference genome.
+              </td>
+              <td class="link-col">
+                <a href="https://en.wikipedia.org/wiki/SAM_%28file_format%29" target="_blank">Wikipedia</a>
+              </td>
+              <td class="specs-col">
+                <a href="https://samtools.github.io/hts-specs/SAMv1.pdf" target="_blank">SAMv1 PDF</a>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="format-col">BAM</td>
+              <td class="use-col">
+                Binary Alignment/Map format. Compressed binary version of SAM.
+              </td>
+              <td class="link-col">
+                <a href="https://en.wikipedia.org/wiki/SAM_%28file_format%29" target="_blank">Wikipedia</a>
+              </td>
+              <td class="specs-col">
+                <a href="https://samtools.github.io/hts-specs/SAMv1.pdf" target="_blank">SAMv1 PDF</a>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="format-col">CRAM</td>
+              <td class="use-col">
+                Compressed format for storing read-mapping information, often with
+                additional reference-based compression.
+              </td>
+              <td class="link-col">
+                <a href="https://en.wikipedia.org/wiki/CRAM_%28file_format%29" target="_blank">Wikipedia</a>
+              </td>
+              <td class="specs-col">
+                <a href="https://samtools.github.io/hts-specs/CRAMv3.pdf" target="_blank">CRAMv3 PDF</a>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="format-col">VCF</td>
+              <td class="use-col">
+                Variant Call Format. Stores information about variants inferred for one
+                or more samples.
+              </td>
+              <td class="link-col">
+                <a href="https://en.wikipedia.org/wiki/Variant_Call_Format" target="_blank">Wikipedia</a>
+              </td>
+              <td class="specs-col">
+                <a href="https://samtools.github.io/hts-specs/VCFv4.2.pdf" target="_blank">VCFv4.2 PDF</a>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="format-col">BCF</td>
+              <td class="use-col">
+                Binary variant Call Format. Compressed binary version of VCF.
+              </td>
+              <td class="link-col">
+                <a href="https://en.wikipedia.org/wiki/Variant_Call_Format" target="_blank">Wikipedia</a>
+              </td>
+              <td class="specs-col">
+                <a href="https://samtools.github.io/hts-specs/VCFv4.2.pdf" target="_blank">VCFv4.2 PDF</a>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="format-col">BED</td>
+              <td class="use-col">
+                Stores coordinates of regions of interest (for example, exons, ROH
+                intervals, capture targets).
+              </td>
+              <td class="link-col">
+                <a href="https://en.wikipedia.org/wiki/BED_%28file_format%29" target="_blank">Wikipedia</a>
+              </td>
+              <td class="specs-col">
+                <a href="https://bedtools.readthedocs.io/en/latest/content/general-usage.html" target="_blank">bedtools docs</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
 
