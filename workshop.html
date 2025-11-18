@@ -246,11 +246,13 @@
       color: #1d4ed8;
     }
 
+    /* Centering wrapper for code blocks */
     .code-block-wrapper {
-      text-align: center;       /* centers inline/inline-block children */
+      text-align: center;
       margin: 1.25rem 0;
-}
-    
+    }
+
+    /* Green ConGen-style command block */
     .code-block-green {
       background: #dcfce7;
       border: 1px solid #86efac;
@@ -263,26 +265,23 @@
       color: #065f46;
       white-space: pre-wrap;
       box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-}
+    }
 
+    /* Red variant available if you need warnings later */
     .code-block-red {
-      background: #fee2e2;               /* light red */
-      border: 1px solid #fca5a5;         /* red border */
+      background: #fee2e2;
+      border: 1px solid #fca5a5;
       border-radius: 12px;
-      padding: 1rem 1.25rem;
-      margin: 1.25rem auto;     
-      display: block;           
-      width: fit-content;        /* shrink to text width */
+      padding: 1rem 1.5rem;
+      display: inline-block;
       max-width: 100%;
       font-family: ui-monospace, Menlo, Monaco, Consolas, "Courier New", monospace;
-      font-size: 1rem;
-      color: #991b1b;                    /* dark red text */
-      text-align: center;
-      max-width: 90%;
+      font-size: 1.1rem;
+      color: #991b1b;
       white-space: pre-wrap;
       box-shadow: 0 3px 8px rgba(0,0,0,0.08);
     }
-    
+
     /* Figure styling */
     figure {
       margin: 1rem 0;
@@ -375,7 +374,7 @@
             The first thing you should do if you haven't done so is connect to the ConGen 
             server. We'll be working exclusively in the RStudio browser interface that you 
             should be familiar with by now, but if you have questions or problems at any 
-            point please feel free to ask! Just in case, here's a annotated picture of roughly 
+            point please feel free to ask! Just in case, here's an annotated picture of roughly 
             what you should be seeing right now. If you are seeing something drastically 
             different or something that you don't understand, let us know.
           </p>
@@ -396,8 +395,10 @@
             Throughout this walkthrough, commands will be presented as follows:
           </p>
 
-          <div class="code-block-green">
-          This is an example command
+          <div class="code-block-wrapper">
+            <div class="code-block-green">
+This is an example command
+            </div>
           </div>
 
           <p>
@@ -411,17 +412,21 @@
               Most command-line programs provide a built-in help menu listing common
               options. You can usually view it with:
             </p>
-            <div class="code-block">
+            <div class="code-block-wrapper">
+              <div class="code-block-green">
 &lt;program&gt; -h
 # or
 &lt;program&gt; &lt;sub-program&gt; -h
+              </div>
             </div>
             <p>
               For many Linux commands, additional documentation is available via the
               manual pages:
             </p>
-            <div class="code-block">
+            <div class="code-block-wrapper">
+              <div class="code-block-green">
 man &lt;command&gt;
+              </div>
             </div>
             <p>
               The manual viewer can be navigated with the arrow keys and exited with
@@ -479,8 +484,10 @@ man &lt;command&gt;
 
           <p>First, move to your home directory:</p>
 
-          <div class="code-block">
+          <div class="code-block-wrapper">
+            <div class="code-block-green">
 cd ~
+            </div>
           </div>
 
           <p>
@@ -490,8 +497,10 @@ cd ~
 
           <p>Now copy the workshop data directory into your home directory:</p>
 
-          <div class="code-block">
+          <div class="code-block-wrapper">
+            <div class="code-block-green">
 cp -r instructor_materials/Gregg_Thomas/congen-assembly/ .
+            </div>
           </div>
 
           <p>
@@ -503,14 +512,18 @@ cp -r instructor_materials/Gregg_Thomas/congen-assembly/ .
 
           <p>Change into the new directory:</p>
 
-          <div class="code-block">
+          <div class="code-block-wrapper">
+            <div class="code-block-green">
 cd congen-assembly
+            </div>
           </div>
 
           <p>Then check what’s inside:</p>
 
-          <div class="code-block">
+          <div class="code-block-wrapper">
+            <div class="code-block-green">
 ls
+            </div>
           </div>
 
           <p>You should see several subdirectories, for example:</p>
@@ -538,7 +551,7 @@ ls
             <p>
               If you get stuck on a command or your job is taking too long, you can
               often continue to the next step by using the corresponding file from
-              <code>expected-outputs/</code> instead of the file you were supposed to
+              <code>expected-outputs</code> instead of the file you were supposed to
               create. When in doubt, ask an instructor which file to use.
             </p>
           </div>
@@ -552,10 +565,12 @@ ls
             directory for each.
           </p>
 
-          <div class="code-block">
+          <div class="code-block-wrapper">
+            <div class="code-block-green">
 mkdir alignments
 mkdir assemblies
 mkdir mapped-reads
+            </div>
           </div>
 
           <p>
@@ -569,8 +584,10 @@ mkdir mapped-reads
             example, FastQC expects a directory where it can place its reports:
           </p>
 
-          <div class="code-block">
+          <div class="code-block-wrapper">
+            <div class="code-block-green">
 mkdir fastqc-output
+            </div>
           </div>
 
           <p>
@@ -584,3 +601,4 @@ mkdir fastqc-output
   </main>
 </body>
 </html>
+
