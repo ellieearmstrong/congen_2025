@@ -246,20 +246,36 @@
       color: #1d4ed8;
     }
 
-    .code-block {
-      margin-top: 0.6rem;
-      padding: 0.75rem 0.9rem;
-      border-radius: 8px;
-      background: #111827;
-      border: 1px solid #1f2937;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-        "Liberation Mono", "Courier New", monospace;
-      font-size: 0.85rem;
-      color: #e5e7eb;
-      overflow-x: auto;
-      white-space: pre;
+    .code-block-green {
+      background: #dcfce7;               /* light green */
+      border: 1px solid #86efac;         /* green border */
+      border-radius: 12px;               /* rounded corners */
+      padding: 1rem 1.25rem;             /* more padding */
+      margin: 1rem auto;                 /* centers the block */
+      font-family: ui-monospace, Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 1rem;                   /* larger text */
+      color: #065f46;                    /* dark green text */
+      text-align: center;                /* center the text inside */
+      max-width: 90%;                    /* prevents overflowing on mobile */
+      white-space: pre-wrap;             /* wraps long code safely */
+      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
     }
 
+    .code-block-red {
+      background: #fee2e2;               /* light red */
+      border: 1px solid #fca5a5;         /* red border */
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin: 1rem auto;
+      font-family: ui-monospace, Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 1rem;
+      color: #991b1b;                    /* dark red text */
+      text-align: center;
+      max-width: 90%;
+      white-space: pre-wrap;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+    }
+    
     /* Figure styling */
     figure {
       margin: 1rem 0;
@@ -321,15 +337,10 @@
     <div class="page-inner">
       <section class="card">
         <header class="page-header">
-          <h1>Genome assembly workshop – Start</h1>
+          <h1>Genome Assembly Workshop</h1>
           <p>
-            On this page you’ll get oriented for the assembly module: how to connect,
-            what interface we’re using, and how to set up your input and output
-            directories.
-          </p>
-          <p>
-            Use the <strong>Workshop</strong> menu in the navigation bar to switch
-            between <strong>Start</strong>, <strong>Reads</strong>, and
+            Use the <strong>Workshop</strong> dropdown menu in the navigation bar to switch
+            between the module sections <strong>Start</strong>, <strong>Reads</strong>, and
             <strong>Assembly</strong>.
           </p>
         </header>
@@ -349,17 +360,17 @@
           <h2>Getting started</h2>
 
           <p>
-            In this module we’ll walk through hands-on steps for genome assembly and
-            basic quality assessment. We’ll work within the ConGen environment
-            using the RStudio browser interface. Most of what you do will happen
-            in a <strong>Terminal</strong> tab.
+            Hello! Today we'll be going through some hands-on activities to help you get 
+            familiar with the steps involved in genome assembly and quality assessment.
           </p>
 
           <p>
-            If you haven’t already, connect to the ConGen server and open RStudio in
-            your browser. Make sure you can see both the Terminal and the file browser.
-            If your screen looks very different from the image below—or you’re unsure
-            what you’re seeing—please ask for help.
+            The first thing you should do if you haven't done so is connect to the ConGen 
+            server. We'll be working exclusively in the RStudio browser interface that you 
+            should be familiar with by now, but if you have questions or problems at any 
+            point please feel free to ask! Just in case, here's a annotated picture of roughly 
+            what you should be seeing right now. If you are seeing something drastically 
+            different or something that you don't understand, let us know.
           </p>
 
           <figure>
@@ -374,19 +385,17 @@
           </figure>
 
           <p>
-            Throughout this walkthrough, commands you should type will be shown in
-            blocks like this:
+            Most of our work will be done as bash commands typed in the Terminal provided by RStudio. 
+            Throughout this walkthrough, commands will be presented as follows:
           </p>
 
-          <div class="code-block">
-this_is_an_example_command --with-some-options
+          <div class="code-block-green">
+          This is an example command
           </div>
 
           <p>
-            We’ll often follow commands with a brief explanation of the key parts so you
-            can see what each flag or argument does, rather than treating the command
-            line as a black box. If those explanations feel too detailed, you can skim
-            them and focus on the commands and outputs.
+            Following each command will be a table that goes through and explains each part of the 
+            command explicitly:
           </p>
 
           <div class="tip">
