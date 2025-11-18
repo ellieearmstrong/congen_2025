@@ -246,14 +246,18 @@
       color: #1d4ed8;
     }
 
+    .code-block-wrapper {
+      text-align: center;       /* centers inline/inline-block children */
+      margin: 1.25rem 0;
+}
+    
     .code-block-green {
       background: #dcfce7;
       border: 1px solid #86efac;
       border-radius: 12px;
       padding: 1rem 1.25rem;
       margin: 1.25rem auto;     
-      display: block;           
-      width: fit-content;        /* shrink to text width */
+      display: inline-block;           
       max-width: 100%;           /* prevent overflow */
       font-family: ui-monospace, Menlo, Monaco, Consolas, "Courier New", monospace;
       font-size: 1.1rem;
