@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ConGen2025 Assembly Workshop – Links</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #0b1120;
+      --surface: #111827;
+      --panel: #020617;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #22c55e;
+      --accent-soft: rgba(34, 197, 94, 0.15);
+      --border-subtle: #1f2937;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 48%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 3rem;
+    }
+
+    /* Top navbar */
+    .navbar {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.96);
+      backdrop-filter: blur(12px);
+      padding: 0.85rem 1.2rem;
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      border-bottom: 1px solid rgba(31, 41, 55, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .navbar a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .navbar a:hover {
+      background: #020617;
+      color: #f9fafb;
+      transform: translateY(-1px);
+    }
+
+    .navbar a.active {
+      background: var(--accent-soft);
+      color: #bbf7d0;
+      font-weight: 600;
+      border: 1px solid rgba(34, 197, 94, 0.45);
+    }
+
+    /* Main content wrapper */
+    .page {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1.2rem;
+    }
+
+    .page-header {
+      padding: 1.1rem 1.2rem 1.25rem;
+      border-radius: 18px;
+      background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.12), transparent 55%),
+                  linear-gradient(to bottom right, #020617, #020617);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.7);
+    }
+
+    .page-header h1 {
+      margin: 0 0 0.4rem;
+      font-size: clamp(1.8rem, 3vw, 2.15rem);
+    }
+
+    .page-header p {
+      margin: 0.2rem 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 60rem;
+    }
+
+    /* Sections */
+    .section {
+      margin-top: 1.5rem;
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: 16px;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      padding: 1.3rem 1.4rem 1.4rem;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.65);
+    }
+
+    .section h2 {
+      margin-top: 0;
+      margin-bottom: 0.6rem;
+      font-size: 1.2rem;
+    }
+
+    .section p {
+      margin: 0.25rem 0 0.8rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .section ul {
+      margin: 0.3rem 0 0;
+      padding-left: 1.2rem;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    .section li {
+      margin: 0.2rem 0;
+    }
+
+    a {
+      color: #93c5fd;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .footer {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="intro.html">Intro</a>
+    <a href="workshop.html">Workshop</a>
+    <a href="terminology.html">Terminology</a>
+    <a href="programs.html">Programs</a>
+    <a href="links.html" class="active">Links</a>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="page">
+    <header class="page-header">
+      <h1>Links &amp; resources</h1>
+      <p>
+        Find here a list of links to relevant resources connected to the ConGen2025
+        assembly workshop and previous versions of this module.
+      </p>
+    </header>
+
+    <!-- Previous workshops -->
+    <section class="section" id="previous">
+      <h2>Previous workshops</h2>
+      <p>
+        Earlier versions of the genome assembly workshop are archived here:
+      </p>
+      <ul>
+        <li>
+          <a href="https://gwct.bio/congen/2022/assembly/" target="_blank">
+            ConGen2022 – Genome Assembly
+          </a>
+        </li>
+        <li>
+          <a href="https://gwct.bio/congen/2021/assembly/" target="_blank">
+            ConGen2021 – Genome Assembly
+          </a>
+        </li>
+        <li>
+          <a href="https://gwct.bio/congen/2020/" target="_blank">
+            ConGen2020 – Genome Assembly
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Slides -->
+    <section class="section" id="slides">
+      <h2>Slides</h2>
+      <p>
+        Workshop lecture slides will be available here once they are uploaded to this site.
+      </p>
+      <ul>
+        <li>
+          <!-- Placeholder: update the href once the PDF is uploaded -->
+          <a href="ConGen2025_Assembly_Lecture_Slides.pdf" target="_blank">
+            ConGen2025 Assembly lecture slides (PDF – coming soon)
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Instructors -->
+    <section class="section" id="instructors">
+      <h2>Instructors</h2>
+      <ul>
+        <li>
+          <a href="intro.html#instructor">
+            Ellie Armstrong
+          </a>
+          – Assistant Professor of Evolutionary Genomics at the University of
+          California, Riverside.
+        </li>
+      </ul>
+    </section>
+
+    <div class="footer">
+      Site assembled for ConGen2025 by Ellie Armstrong.
+    </div>
+  </main>
+</body>
+</html>
