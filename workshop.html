@@ -449,26 +449,62 @@ man &lt;command&gt;
 
         <!-- Hornbill data (placeholder for you to fill) -->
         <section class="section" id="hornbill-data">
-          <h2>Hornbill data</h2>
+  <h2>Hornbill data</h2>
 
-          <p>
-            This section will describe the hornbill dataset used in the ConGen2025
-            assembly exercises (replacing the Drosophila example from previous years).
-          </p>
+  <p>
+    For this workshop we will focus on hornbills (family <em>Bucerotidae</em>), a clade of large,
+    charismatic frugivores found across the forests and savannas of Africa and Asia. Hornbills
+    are key seed dispersers and cavity nesters, and many species are of significant conservation
+    concern due to habitat loss and hunting.
+  </p>
 
-          <p>
-            You can fill in this section with background on the species, approximate
-            genome size, which chromosomes or regions you’ll focus on, and any specific
-            questions you want participants to keep in mind while they run the assembly
-            and mapping steps.
-          </p>
+  <p>
+    Gonzalez et al. (2013) generated the first complete molecular phylogeny for all 61 extant
+    hornbill species, combining mitochondrial and nuclear loci to resolve relationships across
+    the family. Their results reveal six major hornbill clades, show that several traditional
+    genera (e.g. <em>Tockus</em>, <em>Aceros</em>, <em>Penelopides</em>) are not monophyletic, and
+    highlight deep splits between African and Asian lineages. The phylogeny also emphasizes that
+    a large fraction of hornbill species, particularly in Southeast Asia, are globally threatened,
+    underscoring the importance of genomic data for conservation planning. :contentReference[oaicite:1]{index=1}
+  </p>
 
-          <p>
-            You may also want to add a figure here (for example, a phylogeny, genome
-            schematic, or sampling map) to give participants more biological context
-            for the hornbill data.
-          </p>
-        </section>
+  <p>
+    In this module, we will use a subset of hornbill genomic data as a worked example for genome
+    assembly and read mapping. You can treat the broader hornbill phylogeny as a scaffold for
+    thinking about where your focal individual or species sits in the family tree, and how genome
+    assemblies might ultimately connect to questions about diversification, biogeography, and
+    extinction risk.
+  </p>
+
+  <figure>
+    <!-- Save the phylogeny from Gonzalez et al. 2013 into your repo and adjust the path/name if needed -->
+    <img
+      src="img/hornbill_phylogeny_gonzalez2013.png"
+      alt="Summary phylogeny of hornbills from Gonzalez et al. (2013), showing relationships among the major hornbill clades."
+    />
+    <figcaption>
+      Figure 1.2 – Summary molecular phylogeny of hornbills (family Bucerotidae), redrawn from
+      Gonzalez et al. (2013). Major Asian and African clades are indicated, and several traditional
+      genera are shown to be non-monophyletic.
+    </figcaption>
+  </figure>
+
+  <p>
+    Using these data, we will:
+  </p>
+  <ul>
+    <li>
+      Learn how to assess read quality.
+    </li>
+    <li>
+      Assemble a hornbill chromosome and assess basic assembly quality metrics (e.g. contiguity,
+      completeness) of several preassembled versions of the hornbill genome.
+    </li>
+      <li>
+      Understand how to read Hi-C heatmaps and identify some of the common issues in assemblies.
+    </li>
+  </ul>
+</section>
 
         <!-- Input files & output prep -->
         <section class="section" id="input-files">
