@@ -96,7 +96,7 @@
       position: absolute;
       top: 100%;
       left: 0;
-      margin-top: 0;
+      margin-top: 0; /* important so there is no hover gap */
       background: #f9fafb;
       border-radius: 14px;
       border: 1px solid #e5e7eb;
@@ -211,6 +211,12 @@
       font-size: 1.2rem;
     }
 
+    .section h3 {
+      margin-top: 1rem;
+      margin-bottom: 0.4rem;
+      font-size: 1.05rem;
+    }
+
     .section p {
       margin: 0.35rem 0;
       color: var(--text-muted);
@@ -246,40 +252,51 @@
       color: #1d4ed8;
     }
 
-    /* Centering wrapper for code blocks */
     .code-block-wrapper {
       text-align: center;
       margin: 1.25rem 0;
     }
 
-    /* Green ConGen-style command block */
     .code-block-green {
       background: #dcfce7;
       border: 1px solid #86efac;
-      border-radius: 12px;
-      padding: 1rem 1.5rem;
-      display: inline-block;    /* shrink to fit content so centering works */
-      max-width: 100%;
-      font-family: ui-monospace, Menlo, Monaco, Consolas, "Courier New", monospace;
-      font-size: 1.1rem;
-      color: #065f46;
-      white-space: pre-wrap;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-    }
-
-    /* Red variant available if you need warnings later */
-    .code-block-red {
-      background: #fee2e2;
-      border: 1px solid #fca5a5;
       border-radius: 12px;
       padding: 1rem 1.5rem;
       display: inline-block;
       max-width: 100%;
       font-family: ui-monospace, Menlo, Monaco, Consolas, "Courier New", monospace;
       font-size: 1.1rem;
-      color: #991b1b;
+      color: #065f46;
       white-space: pre-wrap;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .code-block-red {
+      background: #fee2e2;
+      border: 1px solid #fca5a5;
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin: 1.25rem auto;
+      display: block;
+      width: fit-content;
+      max-width: 100%;
+      font-family: ui-monospace, Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 1rem;
+      color: #991b1b;
+      text-align: center;
+      white-space: pre-wrap;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .code-block {
+      background: #111827;
+      border-radius: 10px;
+      padding: 0.6rem 0.9rem;
+      margin: 0.7rem 0;
+      font-family: ui-monospace, Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 0.9rem;
+      color: #f9fafb;
+      white-space: pre-wrap;
     }
 
     /* Figure styling */
@@ -302,6 +319,26 @@
       font-size: 0.85rem;
       color: #4b5563;
       background: #f9fafb;
+    }
+
+    /* Tables for command explanations */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0 1rem;
+      font-size: 0.9rem;
+    }
+
+    th,
+    td {
+      border: 1px solid #e5e7eb;
+      padding: 0.4rem 0.55rem;
+      text-align: left;
+    }
+
+    th {
+      background: #f3f4f6;
+      font-weight: 600;
     }
 
     a {
@@ -343,7 +380,7 @@
     <div class="page-inner">
       <section class="card">
         <header class="page-header">
-          <h1>Genome Assembly Workshop</h1>
+          <h1>Genome assembly workshop</h1>
           <p>
             Use the <strong>Workshop</strong> dropdown menu in the navigation bar to switch
             between the module sections <strong>Start</strong>, <strong>Reads</strong>, and
@@ -366,17 +403,16 @@
           <h2>Getting started</h2>
 
           <p>
-            Hello! Today we'll be going through some hands-on activities to help you get 
+            Hello! Today we'll be going through some hands-on activities to help you get
             familiar with the steps involved in genome assembly and quality assessment.
           </p>
+
           <p>
-          <p>
-          <p>
-            The first thing you should do if you haven't done so is connect to the ConGen 
-            server. We'll be working exclusively in the RStudio browser interface that you 
-            should be familiar with by now, but if you have questions or problems at any 
-            point please feel free to ask! Just in case, here's an annotated picture of roughly 
-            what you should be seeing right now. If you are seeing something drastically 
+            The first thing you should do if you haven't done so is connect to the ConGen
+            server. We'll be working exclusively in the RStudio browser interface that you
+            should be familiar with by now, but if you have questions or problems at any
+            point please feel free to ask! Just in case, here's an annotated picture of what
+            you should roughly be seeing right now. If you are seeing something drastically
             different or something that you don't understand, let us know.
           </p>
 
@@ -392,119 +428,174 @@
           </figure>
 
           <p>
-            Most of our work will be done as bash commands typed in the Terminal provided by RStudio. 
-            Throughout this walkthrough, commands will be presented as follows:
+            Most of our work will be done as bash commands typed in the Terminal provided
+            by RStudio. Throughout this walkthrough, commands will be presented as follows:
           </p>
 
           <div class="code-block-wrapper">
             <div class="code-block-green">
-This is an example command
+this is an example command
             </div>
           </div>
 
           <p>
-            Following each command will be a table that goes through and explains each part of the 
-            command explicitly:
+            Under each command, we’ll include a small table that breaks down each part of
+            the command so you can see what every argument is doing:
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Command line parameter</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>this</code></td>
+                <td>Example program being called on the command line.</td>
+              </tr>
+              <tr>
+                <td><code>is</code></td>
+                <td>Example option used in this demonstration command.</td>
+              </tr>
+              <tr>
+                <td><code>an</code></td>
+                <td>Another example option used by the example program.</td>
+              </tr>
+              <tr>
+                <td><code>example</code></td>
+                <td>Yet another illustrative option for the example.</td>
+              </tr>
+              <tr>
+                <td><code>command</code></td>
+                <td>The final token completing the example command.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>
+            The goal of providing these tables is to chip away at the “black box” feeling
+            that command-line tools can sometimes have. If you already feel comfortable with
+            the syntax, you can skim or skip these tables; if not, they’re there to help.
           </p>
 
           <div class="tip">
             <div class="tip-title">Tip — Help menus</div>
             <p>
-              Most command-line programs provide a built-in help menu listing common
-              options. You can usually view it with:
+              A general convention among command-line software is to provide a help menu
+              listing common options. You can usually view it with:
             </p>
-            <div class="code-block-wrapper">
-              <div class="code-block-green">
+            <div class="code-block">
 &lt;program&gt; -h
 # or
 &lt;program&gt; &lt;sub-program&gt; -h
-              </div>
             </div>
             <p>
-              For many Linux commands, additional documentation is available via the
-              manual pages:
+              For many Linux commands, longer documentation is available with the
+              <code>man</code> (manual) system:
             </p>
-            <div class="code-block-wrapper">
-              <div class="code-block-green">
+            <div class="code-block">
 man &lt;command&gt;
-              </div>
             </div>
             <p>
               The manual viewer can be navigated with the arrow keys and exited with
-              <code>q</code>. If you’re ever unsure what a command or option does,
-              try these first.
+              <code>q</code>. If you’re ever unsure what a command or option does, these
+              are great first places to look.
             </p>
+          </div>
+
+          <p>
+            Commands that you should actually run during the workshop will have a
+            <strong>green</strong> background. Commands that are just for illustration
+            (or that you don’t need to run yourself) will have a <strong>red</strong>
+            background, like this:
+          </p>
+
+          <div class="code-block-red">
+this is an example command that won't be run
+          </div>
+
+          <p>
+            At several points, we’ll pause and look at the output of a program together.
+            When we do, we’ll usually show a short snippet of the output so that you can
+            compare what you see on your screen with the walkthrough:
+          </p>
+
+          <div class="code-block">
+Here is some made up output.
+Looking at your data is very important!
+You can catch problems before you use the data in later analyses.
           </div>
 
           <div class="tip">
             <div class="tip-title">Tip — Looking at your data</div>
             <p>
-              A crucial part of bioinformatics is simply <em>looking</em> at your data
-              and intermediate outputs. We’ll pause at several points to inspect what a
-              command produced, often showing a short snippet of the output so you can
-              compare what you see on your screen with the walkthrough.
+              A crucial part of bioinformatics is simply <em>looking</em> at your data and
+              intermediate outputs. We’ll pause at several points to inspect what a
+              command produced so that you can catch problems early.
             </p>
           </div>
         </section>
 
-        <!-- Hornbill data (placeholder for you to fill) -->
+        <!-- Hornbill data -->
         <section class="section" id="hornbill-data">
-  <h2>Hornbill data</h2>
+          <h2>Hornbill data</h2>
 
-  <p>
-    For this workshop we will focus on hornbills (family <em>Bucerotidae</em>), a clade of large,
-    charismatic frugivores found across the forests and savannas of Africa and Asia. Hornbills
-    are key seed dispersers and cavity nesters, and many species are of significant conservation
-    concern due to habitat loss and hunting.
-  </p>
+          <p>
+            For this workshop we will focus on hornbills (family <em>Bucerotidae</em>), a clade
+            of large, charismatic frugivores found across the forests and savannas of Africa
+            and Asia. Hornbills are key seed dispersers and cavity nesters, and many species
+            are of significant conservation concern due to habitat loss and hunting.
+          </p>
 
-  <p>
-    Gonzalez et al. (2013) generated the first complete molecular phylogeny for all 61 extant
-    hornbill species, combining mitochondrial and nuclear loci to resolve relationships across
-    the family. Their results reveal six major hornbill clades, show that several traditional
-    genera (e.g. <em>Tockus</em>, <em>Aceros</em>, <em>Penelopides</em>) are not monophyletic, and
-    highlight deep splits between African and Asian lineages. The phylogeny also emphasizes that
-    a large fraction of hornbill species, particularly in Southeast Asia, are globally threatened,
-    underscoring the importance of genomic data for conservation planning. :contentReference[oaicite:1]{index=1}
-  </p>
+          <p>
+            Gonzalez et al. (2013) generated a comprehensive molecular phylogeny for all
+            extant hornbill species, combining mitochondrial and nuclear loci to resolve
+            relationships across the family. Their results reveal several deep clades,
+            show that some traditional genera are not monophyletic, and highlight strong
+            splits between African and Asian lineages. Many hornbill species, particularly
+            in Southeast Asia, are globally threatened, underscoring the importance of
+            genomic data for conservation planning.
+          </p>
 
-  <p>
-    In this module, we will use a subset of hornbill genomic data as a worked example for genome
-    assembly and read mapping. You can treat the broader hornbill phylogeny as a scaffold for
-    thinking about where your focal individual or species sits in the family tree, and how genome
-    assemblies might ultimately connect to questions about diversification, biogeography, and
-    extinction risk.
-  </p>
+          <p>
+            In this module, we will use a subset of hornbill genomic data as a worked
+            example for genome assembly and read mapping. You can think about where your
+            focal individual or species might sit on the hornbill tree, and how genome
+            assemblies ultimately tie into questions about diversification, biogeography,
+            and extinction risk.
+          </p>
 
-  <figure>
-    <!-- Save the phylogeny from Gonzalez et al. 2013 into your repo and adjust the path/name if needed -->
-    <img
-      src="hornbill_phylogeny_gonzalez2013.png"
-      alt="Summary phylogeny of hornbills from Gonzalez et al. (2013), showing relationships among the major hornbill clades."
-    />
-    <figcaption>
-      Figure 1.2 – Summary molecular phylogeny of hornbills (family Bucerotidae), redrawn from
-      Gonzalez et al. (2013). Major Asian and African clades are indicated, and several traditional
-      genera are shown to be non-monophyletic.
-    </figcaption>
-  </figure>
+          <figure>
+            <img
+              src="hornbill_phylogeny_gonzalez2013.png"
+              alt="Summary phylogeny of hornbills, showing relationships among the major hornbill clades."
+            />
+            <figcaption>
+              Figure 1.2 – Example hornbill phylogeny, adapted from Gonzalez et al. (2013),
+              illustrating relationships among major clades.
+            </figcaption>
+          </figure>
 
-  <p>
-    Using these data, we will:
-  </p>
-  <ul>
-    <li>
-      Learn how to assess read quality.
-    </li>
-    <li>
-      Assemble a hornbill chromosome and assess basic assembly quality metrics (e.g. contiguity,
-      completeness) of several preassembled versions of the hornbill genome.
-    </li>
-      <li>
-      Understand how to read Hi-C heatmaps and identify some of the common issues in assemblies.
-    </li>
-  </ul>
-</section>
+          <p>
+            Using these data, we will:
+          </p>
+          <ul>
+            <li>
+              Assemble a hornbill genome and evaluate basic assembly statistics
+              (contiguity, completeness).
+            </li>
+            <li>
+              Map reads back to the assembly (and to alternative references) and compare
+              mapping and depth profiles.
+            </li>
+            <li>
+              Discuss how assembly and mapping choices influence downstream phylogenetic
+              and conservation inferences for hornbills and other taxa.
+            </li>
+          </ul>
+        </section>
 
         <!-- Input files & output prep -->
         <section class="section" id="input-files">
@@ -513,82 +604,176 @@ man &lt;command&gt;
           <h3>Copying input data</h3>
 
           <p>
-            For this workshop we’ll primarily work with sequence data in FASTA and
-            FASTQ formats. The instructor has placed a set of input files on the server
-            in a shared directory. We’ll start by copying that directory into our home
-            directory so we can work on our own independent copy.
+            For this workshop we’ll primarily work with sequence data in FASTA and FASTQ
+            formats. The instructor has placed a set of input files on the server in a
+            shared directory. We’ll start by copying that directory into our home directory
+            so we can work on our own independent copy.
           </p>
 
           <p>First, move to your home directory:</p>
 
-          <div class="code-block-wrapper">
-            <div class="code-block-green">
+          <div class="code-block">
 cd ~
-            </div>
           </div>
 
-          <p>
-            Here <code>cd</code> is the “change directory” command, and
-            <code>~</code> is a shortcut that means “my home directory”.
-          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>Command line parameter</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>cd</code></td>
+                <td>The Linux “change directory” command.</td>
+              </tr>
+              <tr>
+                <td><code>~</code></td>
+                <td>
+                  Shortcut that means “my home directory” for the current user.
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
           <p>Now copy the workshop data directory into your home directory:</p>
 
-          <div class="code-block-wrapper">
-            <div class="code-block-green">
+          <div class="code-block">
 cp -r instructor_materials/Gregg_Thomas/congen-assembly/ .
-            </div>
           </div>
 
-          <p>
-            In this command, <code>cp</code> is the copy command, <code>-r</code>
-            tells it to copy directories recursively, the long path indicates the
-            folder you’re copying from, and <code>.</code> means “copy it here,
-            keeping the same name”.
-          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>Command line parameter</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>cp</code></td>
+                <td>The Linux copy command.</td>
+              </tr>
+              <tr>
+                <td><code>-r</code></td>
+                <td>
+                  Copy directories <em>recursively</em>, including all files and
+                  subdirectories.
+                </td>
+              </tr>
+              <tr>
+                <td><code>instructor_materials/Gregg_Thomas/congen-assembly/</code></td>
+                <td>
+                  Path to the directory we’re copying from on the shared server.
+                </td>
+              </tr>
+              <tr>
+                <td><code>.</code></td>
+                <td>
+                  Destination path; here <code>.</code> means “copy it here, keeping
+                  the same name”.
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
           <p>Change into the new directory:</p>
 
-          <div class="code-block-wrapper">
-            <div class="code-block-green">
+          <div class="code-block">
 cd congen-assembly
-            </div>
           </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Command line parameter</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>cd</code></td>
+                <td>The change-directory command again.</td>
+              </tr>
+              <tr>
+                <td><code>congen-assembly</code></td>
+                <td>
+                  The name of the folder we just copied; we’ll do most of the workshop
+                  inside this directory.
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
           <p>Then check what’s inside:</p>
 
-          <div class="code-block-wrapper">
-            <div class="code-block-green">
+          <div class="code-block">
 ls
-            </div>
           </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Command line parameter</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>ls</code></td>
+                <td>
+                  List the contents of the current directory (files and folders).
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
           <p>You should see several subdirectories, for example:</p>
 
-          <ul>
-            <li>
-              <code>dmel-3R-reference/</code> – reference sequence and indices for a
-              comparison genome.
-            </li>
-            <li>
-              <code>dpse-chr2-reads/</code> – example short-read data for the assembly
-              exercise.
-            </li>
-            <li>
-              <code>expected-outputs/</code> – pre-computed outputs for each step, in
-              case something fails or takes too long.
-            </li>
-            <li>
-              <code>scripts/</code> – helper scripts for some of the analyses.
-            </li>
-          </ul>
+          <table>
+            <thead>
+              <tr>
+                <th>Folder</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>dmel-3R-reference/</code></td>
+                <td>
+                  Reference sequence and indices for a comparison genome (used later
+                  for mapping exercises).
+                </td>
+              </tr>
+              <tr>
+                <td><code>dpse-chr2-reads/</code></td>
+                <td>
+                  Example short-read data for the assembly and mapping exercises.
+                </td>
+              </tr>
+              <tr>
+                <td><code>expected-outputs/</code></td>
+                <td>
+                  Pre-computed outputs for each step, in case something fails or
+                  takes too long.
+                </td>
+              </tr>
+              <tr>
+                <td><code>scripts/</code></td>
+                <td>
+                  Helper scripts for some parts of the analyses.
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
           <div class="tip">
             <div class="tip-title">Tip — Pre-generated outputs</div>
             <p>
-              If you get stuck on a command or your job is taking too long, you can
-              often continue to the next step by using the corresponding file from
-              <code>expected-outputs</code> instead of the file you were supposed to
+              If you get stuck on a command or your job is taking too long, you can often
+              continue to the next step by using the corresponding file from
+              <code>expected-outputs/</code> instead of the file you were supposed to
               create. When in doubt, ask an instructor which file to use.
             </p>
           </div>
@@ -596,36 +781,118 @@ ls
           <h3>Preparing output directories</h3>
 
           <p>
-            It’s helpful to plan ahead for where your outputs will go so that your
-            working directory stays organized. For this module we’ll generate
-            assemblies, read mappings, and alignments, so we’ll create a separate
-            directory for each.
+            It’s helpful to plan ahead for where your outputs will go so that your working
+            directory stays organized. For this module we’ll generate assemblies, read
+            mappings, and alignments, so we’ll create a separate directory for each.
           </p>
 
-          <div class="code-block-wrapper">
-            <div class="code-block-green">
+          <div class="code-block">
 mkdir alignments
-mkdir assemblies
-mkdir mapped-reads
-            </div>
           </div>
 
-          <p>
-            Here <code>mkdir</code> creates a new directory with the specified name.
-            We’ll use these folders to store alignments, assemblies, and mapped reads,
-            respectively.
-          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>Command line parameter</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>mkdir</code></td>
+                <td>Create a new directory (folder).</td>
+              </tr>
+              <tr>
+                <td><code>alignments</code></td>
+                <td>
+                  Directory that will hold alignment files when we compare assemblies
+                  and mapped reads.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="code-block">
+mkdir assemblies
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Command line parameter</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>mkdir</code></td>
+                <td>Make another new directory.</td>
+              </tr>
+              <tr>
+                <td><code>assemblies</code></td>
+                <td>
+                  Directory where we’ll store genome assemblies generated during the
+                  workshop.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="code-block">
+mkdir mapped-reads
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Command line parameter</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>mkdir</code></td>
+                <td>Make a third directory.</td>
+              </tr>
+              <tr>
+                <td><code>mapped-reads</code></td>
+                <td>
+                  Directory that will hold BAM or SAM files from read mapping steps.
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
           <p>
             Some tools require that you create an output directory ahead of time. For
             example, FastQC expects a directory where it can place its reports:
           </p>
 
-          <div class="code-block-wrapper">
-            <div class="code-block-green">
+          <div class="code-block">
 mkdir fastqc-output
-            </div>
           </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Command line parameter</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>mkdir</code></td>
+                <td>Create a new folder.</td>
+              </tr>
+              <tr>
+                <td><code>fastqc-output</code></td>
+                <td>
+                  Destination folder for FastQC reports generated during quality
+                  checking.
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
           <p>
             Other programs will create their own subdirectories automatically. At this
@@ -638,4 +905,3 @@ mkdir fastqc-output
   </main>
 </body>
 </html>
-
