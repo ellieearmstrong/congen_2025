@@ -583,8 +583,8 @@ You can catch problems before you use the data in later analyses.
           </p>
           <ul>
             <li>
-              Assemble a hornbill genome and evaluate basic assembly statistics
-              (contiguity, completeness).
+              Assemble a hornbill chromosome and evaluate basic assembly statistics
+              (contiguity, completeness) from some pre-completed assemblies.
             </li>
             <li>
               Map reads back to the assembly (and to alternative references) and compare
@@ -640,7 +640,7 @@ cd ~
           <p>Now copy the workshop data directory into your home directory:</p>
 
           <div class="code-block">
-cp -r instructor_materials/Gregg_Thomas/congen-assembly/ .
+cp -r instructor_materials/Ellie_Armstrong/congen-assembly-2025/ .
           </div>
 
           <table>
@@ -663,7 +663,7 @@ cp -r instructor_materials/Gregg_Thomas/congen-assembly/ .
                 </td>
               </tr>
               <tr>
-                <td><code>instructor_materials/Gregg_Thomas/congen-assembly/</code></td>
+                <td><code>instructor_materials/Ellie_Armstrong/congen-assembly-2025/</code></td>
                 <td>
                   Path to the directory we’re copying from on the shared server.
                 </td>
@@ -681,7 +681,7 @@ cp -r instructor_materials/Gregg_Thomas/congen-assembly/ .
           <p>Change into the new directory:</p>
 
           <div class="code-block">
-cd congen-assembly
+cd congen-assembly-2025
           </div>
 
           <table>
@@ -697,7 +697,7 @@ cd congen-assembly
                 <td>The change-directory command again.</td>
               </tr>
               <tr>
-                <td><code>congen-assembly</code></td>
+                <td><code>congen-assembly-2025</code></td>
                 <td>
                   The name of the folder we just copied; we’ll do most of the workshop
                   inside this directory.
@@ -740,14 +740,14 @@ ls
             </thead>
             <tbody>
               <tr>
-                <td><code>dmel-3R-reference/</code></td>
+                <td><code>T_deckeni_reference/</code></td>
                 <td>
                   Reference sequence and indices for a comparison genome (used later
                   for mapping exercises).
                 </td>
               </tr>
               <tr>
-                <td><code>dpse-chr2-reads/</code></td>
+                <td><code>T_deckeni_reads/</code></td>
                 <td>
                   Example short-read data for the assembly and mapping exercises.
                 </td>
@@ -757,12 +757,6 @@ ls
                 <td>
                   Pre-computed outputs for each step, in case something fails or
                   takes too long.
-                </td>
-              </tr>
-              <tr>
-                <td><code>scripts/</code></td>
-                <td>
-                  Helper scripts for some parts of the analyses.
                 </td>
               </tr>
             </tbody>
@@ -787,7 +781,7 @@ ls
           </p>
 
           <div class="code-block">
-mkdir alignments
+mkdir assemblies
           </div>
 
           <table>
@@ -803,17 +797,17 @@ mkdir alignments
                 <td>Create a new directory (folder).</td>
               </tr>
               <tr>
-                <td><code>alignments</code></td>
+                <td><code>assemblies</code></td>
                 <td>
-                  Directory that will hold alignment files when we compare assemblies
-                  and mapped reads.
+                  Directory where we’ll store genome assemblies generated during the
+                  workshop.
                 </td>
               </tr>
             </tbody>
           </table>
 
           <div class="code-block">
-mkdir assemblies
+mkdir quality-control
           </div>
 
           <table>
@@ -829,10 +823,9 @@ mkdir assemblies
                 <td>Make another new directory.</td>
               </tr>
               <tr>
-                <td><code>assemblies</code></td>
+                <td><code>quality-control</code></td>
                 <td>
-                  Directory where we’ll store genome assemblies generated during the
-                  workshop.
+                  Directory where we’ll store quality assessment summaries.
                 </td>
               </tr>
             </tbody>
@@ -863,11 +856,6 @@ mkdir mapped-reads
             </tbody>
           </table>
 
-          <p>
-            Some tools require that you create an output directory ahead of time. For
-            example, FastQC expects a directory where it can place its reports:
-          </p>
-
           <div class="code-block">
 mkdir fastqc-output
           </div>
@@ -894,11 +882,6 @@ mkdir fastqc-output
             </tbody>
           </table>
 
-          <p>
-            Other programs will create their own subdirectories automatically. At this
-            point you should have a clean structure ready to hold the results of each
-            step in the assembly and mapping workflow.
-          </p>
         </section>
       </section>
     </div>
