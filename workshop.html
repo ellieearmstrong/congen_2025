@@ -598,307 +598,154 @@ You can catch problems before you use the data in later analyses.
         </section>
 
         <!-- Input files & output prep -->
-        <section class="section" id="input-files">
-          <h2>Input files &amp; output prep</h2>
+<!-- Input files & output prep -->
+<section class="section" id="input-files">
+  <h2>Input files &amp; output prep</h2>
 
-          <h3>Copying input data</h3>
+  <h3>Copying input data</h3>
 
-          <p>
-            For this workshop we’ll primarily work with sequence data in FASTA and FASTQ
-            formats. The instructor has placed a set of input files on the server in a
-            shared directory. We’ll start by copying that directory into our home directory
-            so we can work on our own independent copy.
-          </p>
+  <p>
+    For this workshop we’ll primarily work with sequence data in FASTA and FASTQ
+    formats. The instructor has placed a set of input files on the server in a
+    shared directory. We’ll start by copying that directory into our home directory
+    so we can work on our own independent copy.
+  </p>
 
-          <p>First, move to your home directory:</p>
+  <p>First, move to your home directory:</p>
 
-          <div class="code-block">
-            <div class="code-block-green">
-cd ~
-            </div>
-          </div>
+  <div class="code-block-green">cd ~</div>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Command line parameter</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>cd</code></td>
-                <td>The Linux “change directory” command.</td>
-              </tr>
-              <tr>
-                <td><code>~</code></td>
-                <td>
-                  Shortcut that means “my home directory” for the current user.
-                </td>
-              </tr>
-            </tbody>
-          </table>
+  <table>
+    <thead>
+      <tr><th>Command line parameter</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>cd</code></td><td>The Linux “change directory” command.</td></tr>
+      <tr><td><code>~</code></td><td>Your home directory.</td></tr>
+    </tbody>
+  </table>
 
-          <p>Now copy the workshop data directory into your home directory:</p>
+  <p>Now copy the workshop data directory into your home directory:</p>
 
-          <div class="code-block">
-            <div class="code-block-green">
-cp -r instructor_materials/Ellie_Armstrong/congen-assembly-2025/ .
-            </div>
-          </div>
+  <div class="code-block-green">cp -r instructor_materials/Gregg_Thomas/congen-assembly/ .</div>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Command line parameter</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>cp</code></td>
-                <td>The Linux copy command.</td>
-              </tr>
-              <tr>
-                <td><code>-r</code></td>
-                <td>
-                  Copy directories <em>recursively</em>, including all files and
-                  subdirectories.
-                </td>
-              </tr>
-              <tr>
-                <td><code>instructor_materials/Ellie_Armstrong/congen-assembly-2025/</code></td>
-                <td>
-                  Path to the directory we’re copying from on the shared server.
-                </td>
-              </tr>
-              <tr>
-                <td><code>.</code></td>
-                <td>
-                  Destination path; here <code>.</code> means “copy it here, keeping
-                  the same name”.
-                </td>
-              </tr>
-            </tbody>
-          </table>
+  <table>
+    <thead>
+      <tr><th>Command line parameter</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>cp</code></td><td>The “copy” command.</td></tr>
+      <tr><td><code>-r</code></td><td>Copy directories recursively.</td></tr>
+      <tr><td><code>instructor_materials/...</code></td><td>Source directory.</td></tr>
+      <tr><td><code>.</code></td><td>Destination (current directory).</td></tr>
+    </tbody>
+  </table>
 
-          <p>Change into the new directory:</p>
+  <p>Change into the new directory:</p>
 
-          <div class="code-block">
-            <div class="code-block-green">
-cd congen-assembly-2025
-            </div>
-          </div>
+  <div class="code-block-green">cd congen-assembly</div>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Command line parameter</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>cd</code></td>
-                <td>The change-directory command again.</td>
-              </tr>
-              <tr>
-                <td><code>congen-assembly-2025</code></td>
-                <td>
-                  The name of the folder we just copied; we’ll do most of the workshop
-                  inside this directory.
-                </td>
-              </tr>
-            </tbody>
-          </table>
+  <table>
+    <thead>
+      <tr><th>Command line parameter</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>cd</code></td><td>Change directory.</td></tr>
+      <tr><td><code>congen-assembly</code></td><td>Workshop directory.</td></tr>
+    </tbody>
+  </table>
 
-          <p>Then check what’s inside:</p>
+  <p>Then check what’s inside:</p>
 
-          <div class="code-block">
-ls
-          </div>
+  <div class="code-block-green">ls</div>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Command line parameter</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>ls</code></td>
-                <td>
-                  List the contents of the current directory (files and folders).
-                </td>
-              </tr>
-            </tbody>
-          </table>
+  <table>
+    <thead>
+      <tr><th>Command</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>ls</code></td><td>List directory contents.</td></tr>
+    </tbody>
+  </table>
 
-          <p>You should see several subdirectories, for example:</p>
+  <p>You should see several subdirectories, for example:</p>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Folder</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>T_deckeni_reference/</code></td>
-                <td>
-                  Reference sequence and indices for a comparison genome (used later
-                  for mapping exercises).
-                </td>
-              </tr>
-              <tr>
-                <td><code>T_deckeni_reads/</code></td>
-                <td>
-                  Example short-read data for the assembly and mapping exercises.
-                </td>
-              </tr>
-              <tr>
-                <td><code>expected-outputs/</code></td>
-                <td>
-                  Pre-computed outputs for each step, in case something fails or
-                  takes too long.
-                </td>
-              </tr>
-            </tbody>
-          </table>
+  <table>
+    <thead>
+      <tr><th>Folder</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>dmel-3R-reference/</code></td><td>Reference sequence for comparison.</td></tr>
+      <tr><td><code>dpse-chr2-reads/</code></td><td>Example short-read data.</td></tr>
+      <tr><td><code>expected-outputs/</code></td><td>Precomputed workshop outputs.</td></tr>
+      <tr><td><code>scripts/</code></td><td>Helper scripts.</td></tr>
+    </tbody>
+  </table>
 
-          <div class="tip">
-            <div class="tip-title">Tip — Pre-generated outputs</div>
-            <p>
-              If you get stuck on a command or your job is taking too long, you can often
-              continue to the next step by using the corresponding file from
-              <code>expected-outputs/</code> instead of the file you were supposed to
-              create. When in doubt, ask an instructor which file to use.
-            </p>
-          </div>
+  <div class="tip">
+    <div class="tip-title">Tip — Pre-generated outputs</div>
+    <p>If you get stuck, you may use files in <code>expected-outputs/</code> to continue.</p>
+  </div>
 
-          <h3>Preparing output directories</h3>
+  <h3>Preparing output directories</h3>
 
-          <p>
-            It’s helpful to plan ahead for where your outputs will go so that your working
-            directory stays organized. For this module we’ll generate assemblies, read
-            mappings, and alignments, so we’ll create a separate directory for each.
-          </p>
+  <p>
+    It’s helpful to create separate directories for each type of output so that your work
+    stays organized during the assembly and mapping workflow.
+  </p>
 
-          <div class="code-block">
-            <div class="code-block-green">
-mkdir assemblies
-            </div>
-          </div>
+  <div class="code-block-green">mkdir alignments</div>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Command line parameter</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>mkdir</code></td>
-                <td>Create a new directory (folder).</td>
-              </tr>
-              <tr>
-                <td><code>assemblies</code></td>
-                <td>
-                  Directory where we’ll store genome assemblies generated during the
-                  workshop.
-                </td>
-              </tr>
-            </tbody>
-          </table>
+  <table>
+    <thead>
+      <tr><th>Command</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>mkdir</code></td><td>Create a new directory.</td></tr>
+      <tr><td><code>alignments</code></td><td>Where alignment files will go.</td></tr>
+    </tbody>
+  </table>
 
-          <div class="code-block">
-            <div class="code-block-green">
-mkdir quality-control
-            </div>
-          </div>
+  <div class="code-block-green">mkdir assemblies</div>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Command line parameter</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>mkdir</code></td>
-                <td>Make another new directory.</td>
-              </tr>
-              <tr>
-                <td><code>quality-control</code></td>
-                <td>
-                  Directory where we’ll store quality assessment summaries.
-                </td>
-              </tr>
-            </tbody>
-          </table>
+  <table>
+    <thead>
+      <tr><th>Command</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>mkdir</code></td><td>Create a new directory.</td></tr>
+      <tr><td><code>assemblies</code></td><td>Where assembly outputs will go.</td></tr>
+    </tbody>
+  </table>
 
-          <div class="code-block">
-            <div class="code-block-green">
-mkdir mapped-reads
-            </div>
-          </div>
+  <div class="code-block-green">mkdir mapped-reads</div>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Command line parameter</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>mkdir</code></td>
-                <td>Make a third directory.</td>
-              </tr>
-              <tr>
-                <td><code>mapped-reads</code></td>
-                <td>
-                  Directory that will hold BAM or SAM files from read mapping steps.
-                </td>
-              </tr>
-            </tbody>
-          </table>
+  <table>
+    <thead>
+      <tr><th>Command</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>mkdir</code></td><td>Create a new directory.</td></tr>
+      <tr><td><code>mapped-reads</code></td><td>Where mapped read files will go.</td></tr>
+    </tbody>
+  </table>
 
-          <div class="code-block">
-            <div class="code-block-green">
-mkdir fastqc-output
-            </div>
-          </div>
+  <p>Some tools require output directories to exist beforehand, such as FastQC:</p>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Command line parameter</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>mkdir</code></td>
-                <td>Create a new folder.</td>
-              </tr>
-              <tr>
-                <td><code>fastqc-output</code></td>
-                <td>
-                  Destination folder for FastQC reports generated during quality
-                  checking.
-                </td>
-              </tr>
-            </tbody>
-          </table>
+  <div class="code-block-green">mkdir fastqc-output</div>
 
-        </section>
-      </section>
-    </div>
-  </main>
-</body>
-</html>
+  <table>
+    <thead>
+      <tr><th>Command</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>mkdir</code></td><td>Create a directory.</td></tr>
+      <tr><td><code>fastqc-output</code></td><td>Folder for FastQC reports.</td></tr>
+    </tbody>
+  </table>
+
+  <p>
+    You should now have a clean directory structure ready for the assembly and mapping
+    workflow.
+  </p>
+</section>
