@@ -449,8 +449,8 @@ less -S T_deckeni_reference/GCA_009769605.1_bBucAby1.pri_genomic_chr1.fna
 
           <div class="code-block">
 &gt;CM020024.1 Bucorvus abyssinicus isolate bBucAby1 chromosome 1
-ACAGCAAGATGGGGAAATCCctaaaggaagaagaatgaggAGCCCTGCAGGGCCTGGGCTGAGTA
-ACAATATGATCACAGAGCAGGACaagagcaaaagagagagaaaaagaggagcagaaggtgggggggg
+ACAGCAAGATGGGGAAATCCctaaaggaagaagaatgaggAGCCCTGCAGGGCCTGGGCTGAGTAA
+CAATATGATCACAGAGCAGGACaagagcaaaagagagagaaaaagaggagcagaaggtgggggggg
 
           </div>
 
@@ -531,7 +531,6 @@ I#-IIIIIIIIIII9IIIIIIIIIIIIIIIIIIIIIII9IIIIIIIIIIIIIII-
 ANTGATTTTAAAAAGCAGTCCAATGACACCAATATCTACGGATGCTTGTAGAACA
 +
 9#IIIIIIIIIIIII9IIIIIIIIIIIIII9IIIIIIIIIIIIIIIIIIIIIIII
-
           </div>
 
           <p>
@@ -595,18 +594,18 @@ ANTGATTTTAAAAAGCAGTCCAATGACACCAATATCTACGGATGCTTGTAGAACA
             <img src="ascii-table.png" alt="ASCII table with decimal codes and characters." />
             <figcaption>
               Figure 2.1 – ASCII table. FASTQ quality characters are built by taking the Phred
-              score, adding 33, and using that as the ASCII code.
+              score, adding 33, and translating that number to an ASCII code.
             </figcaption>
           </figure>
 
           <p>
             As a quick example, the first quality character in the first read above is
-            <code>A</code>. In the ASCII table, <code>A</code> has decimal code 65. The
+            <code>I</code>. In the ASCII table, <code>A</code> has decimal code 65. The
             corresponding Phred score is:
           </p>
 
           <div class="code-block">
-Q = 65 - 33 = 32
+                                              Q = 89 - 33 = 56
           </div>
 
           <p>
@@ -618,9 +617,10 @@ Q = 65 - 33 = 32
           </p>
 
           <p>
-            For Q = 32, this gives an error probability of about 0.00063 (roughly 1 in
-            1,600). Most Illumina short-read data you’ll see for genome assembly will have
-            scores in the mid-20s to high-30s across most of the read.
+            For Q = 56, this gives an error probability of about 0.0000025(roughly 1 in
+            500,000). Most Illumina short-read data nowadays has fairly high read quality,
+            but this is not the case for older sequencing platforms and can also differ for
+            historic or environmental datasets.
           </p>
         </section>
 
@@ -642,8 +642,7 @@ Q = 65 - 33 = 32
           </p>
 
           <div class="code-block-green">
-fastqc dpse-chr2-reads/illumina/pse-chr2_1.fastq.gz \
-       dpse-chr2-reads/illumina/pse-chr2_2.fastq.gz \
+fastqc read_files/illumina/SRR31758803-chr1_1.fastq.gz \
        -o fastqc-output/
           </div>
 
@@ -660,12 +659,8 @@ fastqc dpse-chr2-reads/illumina/pse-chr2_1.fastq.gz \
                 <td>Run the FastQC program.</td>
               </tr>
               <tr>
-                <td><code>dpse-chr2-reads/..._1.fastq.gz</code></td>
+                <td><code>read_files/illumina/SRR31758803-chr1_1.fastq.gz</code></td>
                 <td>The first (R1) read file in our example paired-end library.</td>
-              </tr>
-              <tr>
-                <td><code>dpse-chr2-reads/..._2.fastq.gz</code></td>
-                <td>The second (R2) read file in the same library.</td>
               </tr>
               <tr>
                 <td><code>-o fastqc-output/</code></td>
