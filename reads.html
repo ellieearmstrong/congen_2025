@@ -409,7 +409,7 @@
           </p>
 
           <div class="code-block-green">
-less -S dmel-3R-reference/Drosophila_melanogaster.BDGP6.28.dna.chromosome.3R.fa
+less -S T_deckeni_reference/GCA_009769605.1_bBucAby1.pri_genomic_chr1.fna
           </div>
 
           <table>
@@ -436,7 +436,7 @@ less -S dmel-3R-reference/Drosophila_melanogaster.BDGP6.28.dna.chromosome.3R.fa
                 </td>
               </tr>
               <tr>
-                <td><code>dmel-3R-reference/...</code></td>
+                <td><code>T_deckeni_reference/...</code></td>
                 <td>
                   Path to the reference FASTA file we’re viewing. In your own projects this
                   would be a hornbill reference assembly or chromosome.
@@ -448,9 +448,10 @@ less -S dmel-3R-reference/Drosophila_melanogaster.BDGP6.28.dna.chromosome.3R.fa
           <p>Near the top of the file you should see something like:</p>
 
           <div class="code-block">
-&gt;3R dna:chromosome chromosome:BDGP6.28:3R:1:32079331:1 REF
-ACGGGACCGAGTATAGTACCAGTACGCGACCAGTACGGGAGCAGTACGGAACCAATACGG
-GTCCAGTACGGGTCCAGTACGGGTCCAGTACGGGTCCAGTACGGGACCAGTACGGGACCG
+&gt;CM020024.1 Bucorvus abyssinicus isolate bBucAby1 chromosome 1
+ACAGCAAGATGGGGAAATCCctaaaggaagaagaatgaggAGCCCTGCAGGGCCTGGGCTGAGTA
+ACAATATGATCACAGAGCAGGACaagagcaaaagagagagaaaaagaggagcagaaggtgggggggg
+
           </div>
 
           <p>
@@ -487,7 +488,7 @@ GTCCAGTACGGGTCCAGTACGGGTCCAGTACGGGTCCAGTACGGGACCAGTACGGGACCG
           </p>
 
           <div class="code-block-green">
-zless -S dpse-chr2-reads/illumina/pse-chr2_1.fastq.gz
+zless -S read_files/illumina/SRR31758803-chr1_1.fastq.gz
           </div>
 
           <table>
@@ -510,7 +511,7 @@ zless -S dpse-chr2-reads/illumina/pse-chr2_1.fastq.gz
                 <td>Turn off line wrapping within <code>zless</code>.</td>
               </tr>
               <tr>
-                <td><code>dpse-chr2-reads/illumina/pse-chr2_1.fastq.gz</code></td>
+                <td><code>read_files/illumina/SRR31758803-chr1_1.fastq.gz</code></td>
                 <td>
                   Path to the first read file in our example dataset. Replace with your own
                   hornbill read file when working with your data.
@@ -522,14 +523,15 @@ zless -S dpse-chr2-reads/illumina/pse-chr2_1.fastq.gz
           <p>You should see something like:</p>
 
           <div class="code-block">
-@SRR11230564.32890235/1
-TGATAATAAAACAACTTATTGCCCCCCTCTGGCAATACACTCTCCCGGTGTGGGGGGCCCTGACATGTAAAACGCAAATAAGAAGAATCCAGGGACAGCAGAACAAAATAATCAGAAATGCACTACTAGATCGGAAGAGCACACGTCTGAA
+@SRR31758803.1 LH00652:98:22K7NFLT4:6:1101:2222:1070/1
+GNATCTGAAGAGAAGTGCAATAATGTCACTTATGTATCAGTTTAATTACTGGAGC
 +
-AAFFFJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
-@SRR11230564.32288433/1
-ATTGTGTGTATGTTGTATTTTTCCCTAAGCACTTCATTTCTTGTGTAGCGTCCAGCTAGTAGTGCATTTCTGATTATTTTGTTCTGCTGTCCCTGGATTCTTCTTATTTGCGTTTTACATGTCAGGGCCCCCCACACCGGGAGATCGGAAG
+I#-IIIIIIIIIII9IIIIIIIIIIIIIIIIIIIIIII9IIIIIIIIIIIIIII-
+@SRR31758803.2 LH00652:98:22K7NFLT4:6:1101:5134:1070/1
+ANTGATTTTAAAAAGCAGTCCAATGACACCAATATCTACGGATGCTTGTAGAACA
 +
-AAFFFJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJFJJJJJJJJJJJJJJ&lt;JJJJJAJJJJJJFJF
+9#IIIIIIIIIIIII9IIIIIIIIIIIIII9IIIIIIIIIIIIIIIIIIIIIIII
+
           </div>
 
           <p>
