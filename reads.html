@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ConGen2025 Assembly Workshop – Reads</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --accent: #2563eb;
+      --nav-bg: rgba(17, 24, 39, 0.95);
+      --card-bg: rgba(249, 250, 251, 0.96);
+      --text-main: #111827;
+      --text-muted: #4b5563;
+      --border-subtle: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      color: var(--text-main);
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+        url("https://cdn.pixabay.com/photo/2019/11/26/18/05/montana-4652867_1280.jpg")
+          no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top navbar */
+    .navbar-shell {
+      padding: 0.75rem 1rem 0;
+    }
+
+    .navbar {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      background: var(--nav-bg);
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+      color: #e5e7eb;
+      position: relative;
+      z-index: 10;
+      flex-wrap: wrap;
+    }
+
+    .nav-link,
+    .nav-dropdown > a {
+      color: #e5e7eb;
+      text-decoration: none;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      white-space: nowrap;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .nav-link:hover,
+    .nav-dropdown > a:hover {
+      background: rgba(31, 41, 55, 0.9);
+    }
+
+    .nav-link.active,
+    .nav-dropdown > a.active {
+      background: #f9fafb;
+      color: #111827;
+      font-weight: 600;
+    }
+
+    /* Dropdown under Workshop */
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .dropdown-caret {
+      font-size: 0.75rem;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin-top: 0; /* no hover gap */
+      background: #f9fafb;
+      border-radius: 14px;
+      border: 1px solid #e5e7eb;
+      min-width: 170px;
+      padding: 0.25rem 0;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.4);
+      display: none;
+      z-index: 20;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 0.45rem 0.9rem;
+      font-size: 0.9rem;
+      color: #374151;
+      text-decoration: none;
+    }
+
+    .dropdown-menu a:hover {
+      background: #e5e7eb;
+    }
+
+    .nav-dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    /* Page shell */
+    .page {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      padding: 1rem;
+      padding-bottom: 2.5rem;
+    }
+
+    .page-inner {
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    .card {
+      margin-top: 1.25rem;
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 1.75rem 2rem 2rem;
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
+      border: 1px solid #e5e7eb;
+    }
+
+    @media (max-width: 720px) {
+      .card {
+        padding: 1.4rem 1.3rem 1.6rem;
+      }
+    }
+
+    .page-header h1 {
+      margin: 0 0 0.5rem;
+      font-size: clamp(1.8rem, 3vw, 2.2rem);
+    }
+
+    .page-header p {
+      margin: 0.25rem 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Page contents */
+    .page-contents {
+      margin: 1.5rem 0 1.25rem;
+      background: #f3f4f6;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      padding: 0.85rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    .page-contents-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #6b7280;
+      margin-bottom: 0.3rem;
+    }
+
+    .page-contents ul {
+      list-style: none;
+      margin: 0;
+      padding-left: 0;
+    }
+
+    .page-contents li {
+      margin: 0.1rem 0;
+    }
+
+    .page-contents a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .page-contents a:hover {
+      text-decoration: underline;
+    }
+
+    /* Sections */
+    .section {
+      margin-top: 1.5rem;
+    }
+
+    .section h2 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .section h3 {
+      margin-top: 1rem;
+      margin-bottom: 0.4rem;
+      font-size: 1.05rem;
+    }
+
+    .section p {
+      margin: 0.35rem 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    ul,
+    ol {
+      margin-top: 0.25rem;
+      margin-bottom: 0.75rem;
+      padding-left: 1.2rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Tips and code blocks */
+    .tip {
+      margin-top: 0.9rem;
+      padding: 0.8rem 0.9rem;
+      border-radius: 10px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      font-size: 0.9rem;
+      color: #1e3a8a;
+    }
+
+    .tip-title {
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+      margin-bottom: 0.35rem;
+      color: #1d4ed8;
+    }
+
+    .code-block-wrapper {
+      text-align: center;
+      margin: 1.25rem 0;
+    }
+
+    .code-block-green {
+      background: #dcfce7;
+      border: 1px solid #86efac;
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      display: inline-block;
+      max-width: 100%;
+      font-family: ui-monospace, Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 1.0rem;
+      color: #065f46;
+      white-space: pre-wrap;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .code-block {
+      background: #111827;
+      border-radius: 10px;
+      padding: 0.6rem 0.9rem;
+      margin: 0.7rem 0;
+      font-family: ui-monospace, Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 0.9rem;
+      color: #f9fafb;
+      white-space: pre-wrap;
+    }
+
+    .code-block-red {
+      background: #fee2e2;
+      border: 1px solid #fca5a5;
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin: 1.25rem auto;
+      display: block;
+      width: fit-content;
+      max-width: 100%;
+      font-family: ui-monospace, Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 1rem;
+      color: #991b1b;
+      text-align: center;
+      white-space: pre-wrap;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Figures */
+    figure {
+      margin: 1rem 0;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      overflow: hidden;
+      background: white;
+    }
+
+    figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    figcaption {
+      padding: 0.5rem 0.8rem 0.7rem;
+      font-size: 0.85rem;
+      color: #4b5563;
+      background: #f9fafb;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0 1rem;
+      font-size: 0.9rem;
+    }
+
+    th,
+    td {
+      border: 1px solid #e5e7eb;
+      padding: 0.4rem 0.55rem;
+      text-align: left;
+    }
+
+    th {
+      background: #f3f4f6;
+      font-weight: 600;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <div class="navbar-shell">
+    <nav class="navbar">
+      <a href="intro.html" class="nav-link">Intro</a>
+
+      <div class="nav-dropdown">
+        <a href="workshop.html" class="active">
+          Workshop <span class="dropdown-caret">▾</span>
+        </a>
+        <div class="dropdown-menu">
+          <a href="workshop.html#start">Start</a>
+          <a href="reads.html">Reads</a>
+          <a href="assembly.html">Assembly</a>
+        </div>
+      </div>
+
+      <a href="terminology.html" class="nav-link">Terminology</a>
+      <a href="programs.html" class="nav-link">Programs</a>
+      <a href="links.html" class="nav-link">Links</a>
+    </nav>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="page">
+    <div class="page-inner">
+      <section class="card">
+        <header class="page-header">
+          <h1>Sequences &amp; reads</h1>
+          <p>
+            In this section we’ll review how sequence data are stored on disk, how to interpret
+            read quality, and how to get a first look at our hornbill reads using
+            <code>FastQC</code>.
+          </p>
+        </header>
+
+        <!-- Page contents -->
+        <section class="page-contents">
+          <div class="page-contents-title">Page contents</div>
+          <ul>
+            <li><a href="#fasta-format">FASTA format</a></li>
+            <li><a href="#fastq-format">FASTQ format</a></li>
+            <li><a href="#quality-scores">Phred quality scores</a></li>
+            <li><a href="#fastqc">Assessing reads with FastQC</a></li>
+          </ul>
+        </section>
+
+        <!-- FASTA format -->
+        <section class="section" id="fasta-format">
+          <h2>FASTA format</h2>
+
+          <p>
+            One of the simplest and most common ways to store biological sequence data is the
+            <strong>FASTA</strong> format. We’ll start by looking at one reference sequence in
+            FASTA format. In the assembly directory you copied earlier, there is a reference
+            chromosome file that we can inspect with:
+          </p>
+
+          <div class="code-block-green">
+less -S dmel-3R-reference/Drosophila_melanogaster.BDGP6.28.dna.chromosome.3R.fa
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Command line parameter</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>less</code></td>
+                <td>
+                  A text viewer for the terminal. Use the arrow keys to scroll line-by-line,
+                  <code>space</code> / <code>b</code> to move a page at a time, and
+                  <code>q</code> to quit.
+                </td>
+              </tr>
+              <tr>
+                <td><code>-S</code></td>
+                <td>
+                  Disables line wrapping in <code>less</code>, so long lines extend off the
+                  right side and you can scroll horizontally.
+                </td>
+              </tr>
+              <tr>
+                <td><code>dmel-3R-reference/...</code></td>
+                <td>
+                  Path to the reference FASTA file we’re viewing. In your own projects this
+                  would be a hornbill reference assembly or chromosome.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>Near the top of the file you should see something like:</p>
+
+          <div class="code-block">
+&gt;3R dna:chromosome chromosome:BDGP6.28:3R:1:32079331:1 REF
+ACGGGACCGAGTATAGTACCAGTACGCGACCAGTACGGGAGCAGTACGGAACCAATACGG
+GTCCAGTACGGGTCCAGTACGGGTCCAGTACGGGTCCAGTACGGGACCAGTACGGGACCG
+          </div>
+
+          <p>
+            In FASTA files, any line beginning with <code>&gt;</code> is a
+            <strong>header</strong>. The header can encode an identifier, chromosome name,
+            coordinates, or any other metadata the file creator thought was useful. All of
+            the sequence lines that follow the header belong to that entry until the next
+            header appears.
+          </p>
+
+          <p>
+            The sequence itself is just plain text. It may be wrapped across multiple lines,
+            but conceptually it is one continuous string of bases associated with the header
+            above it. A single FASTA file can contain one sequence (e.g., a chromosome) or
+            many sequences (e.g., all contigs in an assembly, all genes in a reference).
+          </p>
+        </section>
+
+        <!-- FASTQ format -->
+        <section class="section" id="fastq-format">
+          <h2>FASTQ format</h2>
+
+          <p>
+            While FASTA works well for reference sequences, <strong>reads</strong> from a
+            sequencer need to store more information: not just the bases themselves, but also
+            a per-base estimate of how confident the machine was in each call. This
+            combination of sequence plus quality is stored in <strong>FASTQ</strong> format.
+          </p>
+
+          <p>
+            Let’s look at a few of our short-read files in FASTQ format. In the example
+            dataset this is an Illumina paired-end library; for our hornbill project, the
+            reads will have similar structure even if the filenames differ:
+          </p>
+
+          <div class="code-block-green">
+zless -S dpse-chr2-reads/illumina/pse-chr2_1.fastq.gz
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Command line parameter</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>zless</code></td>
+                <td>
+                  Like <code>less</code>, but can open compressed files (<code>.gz</code>)
+                  transparently.
+                </td>
+              </tr>
+              <tr>
+                <td><code>-S</code></td>
+                <td>Turn off line wrapping within <code>zless</code>.</td>
+              </tr>
+              <tr>
+                <td><code>dpse-chr2-reads/illumina/pse-chr2_1.fastq.gz</code></td>
+                <td>
+                  Path to the first read file in our example dataset. Replace with your own
+                  hornbill read file when working with your data.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>You should see something like:</p>
+
+          <div class="code-block">
+@SRR11230564.32890235/1
+TGATAATAAAACAACTTATTGCCCCCCTCTGGCAATACACTCTCCCGGTGTGGGGGGCCCTGACATGTAAAACGCAAATAAGAAGAATCCAGGGACAGCAGAACAAAATAATCAGAAATGCACTACTAGATCGGAAGAGCACACGTCTGAA
++
+AAFFFJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
+@SRR11230564.32288433/1
+ATTGTGTGTATGTTGTATTTTTCCCTAAGCACTTCATTTCTTGTGTAGCGTCCAGCTAGTAGTGCATTTCTGATTATTTTGTTCTGCTGTCCCTGGATTCTTCTTATTTGCGTTTTACATGTCAGGGCCCCCCACACCGGGAGATCGGAAG
++
+AAFFFJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJFJJJJJJJJJJJJJJ&lt;JJJJJAJJJJJJFJF
+          </div>
+
+          <p>
+            Each read record in FASTQ always follows the same four-line pattern:
+          </p>
+
+          <ol>
+            <li>
+              A header line beginning with <code>@</code>, which can include an ID and other
+              metadata (instrument, run, lane, whether the read is R1 or R2, etc.).
+            </li>
+            <li>
+              One or more lines containing the sequence of bases associated with that
+              header.
+            </li>
+            <li>
+              A line starting with <code>+</code>, sometimes repeating the header, sometimes
+              left as just <code>+</code>. This is a separator between sequence and quality.
+            </li>
+            <li>
+              One or more lines of ASCII characters encoding per-base quality scores for
+              the sequence above. The sequence and quality strings must be the same length.
+            </li>
+          </ol>
+
+          <p>
+            In the snippet above, there are two complete read records (two header lines
+            starting with <code>@</code>). We’ll dig into what those quality characters
+            mean next.
+          </p>
+        </section>
+
+        <!-- Phred quality scores -->
+        <section class="section" id="quality-scores">
+          <h2>Phred quality scores</h2>
+
+          <p>
+            Modern sequencers don’t just call bases; they also estimate how likely each call
+            is to be wrong, based on signal intensities and other run metrics. These error
+            probabilities are converted into <strong>Phred quality scores</strong> using:
+          </p>
+
+          <p>
+            <em>Q = -10 log<sub>10</sub> P(error)</em>
+          </p>
+
+          <p>
+            Higher scores mean lower error probabilities. For example, a Phred score of 20
+            corresponds to a 1 in 100 chance the base is wrong, Q30 is 1 in 1000, Q40 is 1
+            in 10,000, and so on.
+          </p>
+
+          <p>
+            To store these scores compactly in FASTQ, they are turned into ASCII characters.
+            Briefly, we add 33 to the Phred score, then use that value as an index into the
+            ASCII table. The character at that position is what you see in the quality
+            string.
+          </p>
+
+          <figure>
+            <img src="img/ascii-table.png" alt="ASCII table with decimal codes and characters." />
+            <figcaption>
+              Figure 2.1 – ASCII table. FASTQ quality characters are built by taking the Phred
+              score, adding 33, and using that as the ASCII code.
+            </figcaption>
+          </figure>
+
+          <p>
+            As a quick example, the first quality character in the first read above is
+            <code>A</code>. In the ASCII table, <code>A</code> has decimal code 65. The
+            corresponding Phred score is:
+          </p>
+
+          <div class="code-block">
+Q = 65 - 33 = 32
+          </div>
+
+          <p>
+            We can convert back to an error probability by rearranging the equation:
+          </p>
+
+          <p>
+            <em>P(error) = 10<sup>-Q/10</sup></em>
+          </p>
+
+          <p>
+            For Q = 32, this gives an error probability of about 0.00063 (roughly 1 in
+            1,600). Most Illumina short-read data you’ll see for genome assembly will have
+            scores in the mid-20s to high-30s across most of the read.
+          </p>
+        </section>
+
+        <!-- Assessing reads with FastQC -->
+        <section class="section" id="fastqc">
+          <h2>Assessing read quality with FastQC</h2>
+
+          <p>
+            One of the first things you should do after receiving the hornbill sequence data
+            is a quick quality check: how many reads do we have, how long are they, and how
+            good are the base calls? Rather than writing our own scripts, we can use the
+            widely-used program <code>fastqc</code>.
+          </p>
+
+          <p>
+            <code>fastqc</code> takes FASTQ files as input and generates an HTML report with
+            summary statistics and a series of diagnostic plots. Let’s run it on the paired
+            Illumina reads in our example dataset:
+          </p>
+
+          <div class="code-block-green">
+fastqc dpse-chr2-reads/illumina/pse-chr2_1.fastq.gz \
+       dpse-chr2-reads/illumina/pse-chr2_2.fastq.gz \
+       -o fastqc-output/
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Command line parameter</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>fastqc</code></td>
+                <td>Run the FastQC program.</td>
+              </tr>
+              <tr>
+                <td><code>dpse-chr2-reads/..._1.fastq.gz</code></td>
+                <td>The first (R1) read file in our example paired-end library.</td>
+              </tr>
+              <tr>
+                <td><code>dpse-chr2-reads/..._2.fastq.gz</code></td>
+                <td>The second (R2) read file in the same library.</td>
+              </tr>
+              <tr>
+                <td><code>-o fastqc-output/</code></td>
+                <td>
+                  Output directory where the HTML reports (and compressed data) will be
+                  written.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>
+            This should complete in under a minute for the example data. FastQC doesn’t
+            write its results as plain text to the terminal; instead, it creates HTML files
+            that we’ll open in a browser.
+          </p>
+
+          <p>
+            In RStudio Server, use the file browser pane on the right to navigate to the
+            <code>fastqc-output/</code> directory you specified. You should see one HTML and
+            one ZIP file per input FASTQ. We’ll focus on the <code>.html</code> reports.
+          </p>
+
+          <figure>
+            <img src="img/fastqc-screenshot.png" alt="Screenshot of RStudio interface showing FastQC HTML output files in the file browser." />
+            <figcaption>
+              Figure 2.2 – Viewing FastQC HTML output files in the RStudio Server file
+              browser.
+            </figcaption>
+          </figure>
+
+          <p>
+            Click on the <code>_fastqc.html</code> file for the first read file, then choose
+            “View in Web Browser.” If your browser blocks pop-ups the first time, allow
+            pop-ups for this site and try again.
+          </p>
+
+          <p>
+            Once opened, the report will show a list of modules on the left and a sequence
+            of plots and tables on the right. The first summary table includes basics like
+            number of reads, read length range, and %GC:
+          </p>
+
+          <figure>
+            <img src="img/fastqc-1.png" alt="FastQC basic statistics table." />
+            <figcaption>
+              Figure 2.3 – Basic summary statistics produced by FastQC for the first read
+              file.
+            </figcaption>
+          </figure>
+
+          <p>
+            In our example, FastQC reports hundreds of thousands of reads with an expected
+            length distribution (most around 150 bp) and no reads flagged as globally poor
+            quality. That’s exactly what we’d hope to see for good hornbill data as well.
+          </p>
+
+          <p>
+            A particularly useful plot is the distribution of Phred quality scores across
+            positions in the read:
+          </p>
+
+          <figure>
+            <img src="img/fastqc-2.png" alt="Example FastQC per-base quality plot for good reads." />
+            <figcaption>
+              Figure 2.4 – Per-base sequence quality for the example reads. Quality is very
+              high at the start of reads with a modest decline toward the end.
+            </figcaption>
+          </figure>
+
+          <p>
+            Here, the median quality (the red line) hovers near Q40 for most positions,
+            with a gentle drop at the tail. This kind of pattern is typical for Illumina
+            data and is more than adequate for most genome assembly tasks.
+          </p>
+
+          <p>
+            For comparison, FastQC’s documentation shows an example of much lower-quality
+            data, where quality decays quickly and many positions fall into the “warning” or
+            “fail” bands:
+          </p>
+
+          <figure>
+            <img src="img/fastqc-3.png" alt="Example FastQC per-base quality plot for poor reads." />
+            <figcaption>
+              Figure 2.5 – Example of poor per-base read quality from the FastQC
+              documentation. Many positions have low scores and would merit trimming or
+              filtering.
+            </figcaption>
+          </figure>
+
+          <p>
+            In addition to quality scores, FastQC also flags overrepresented sequences,
+            which often correspond to adapters or other technical artifacts. For hornbill
+            genome assembly, we don’t want those adapter sequences to end up in our final
+            contigs. Fortunately, many assemblers and read mappers automatically trim
+            adapters, and we can also run dedicated trimming tools if needed.
+          </p>
+
+          <p>
+            Common pre-processing steps you might consider are:
+          </p>
+
+          <ol>
+            <li>Removing adapter sequences.</li>
+            <li>Trimming low-quality bases from read ends.</li>
+            <li>Filtering obvious contaminants.</li>
+            <li>Marking or removing duplicate reads.</li>
+          </ol>
+
+          <p>
+            In these workshop exercises, we’ll mainly rely on the mapping and assembly
+            software to handle low-quality positions and adapter trimming, and we’ll
+            explicitly mark duplicate reads later in the mapping section. For now, the key
+            takeaway is how to quickly sanity-check your hornbill reads with FastQC and
+            recognize what “good” data look like.
+          </p>
+        </section>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
