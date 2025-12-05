@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -13,31 +13,22 @@
       --text-muted: #4b5563;
       --border-subtle: #e5e7eb;
     }
-
-    * {
-      box-sizing: border-box;
-    }
-
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--text-main);
       background:
-        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-        url("https://cdn.pixabay.com/photo/2019/11/26/18/05/montana-4652867_1280.jpg")
-          no-repeat center center fixed;
+        linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+        url("https://cdn.pixabay.com/photo/2019/11/26/18/05/montana-4652867_1280.jpg") no-repeat center center fixed;
       background-size: cover;
       display: flex;
       flex-direction: column;
     }
 
-    /* Top navbar */
-    .navbar-shell {
-      padding: 0.75rem 1rem 0;
-    }
-
+    /* NAVIGATION */
+    .navbar-shell { padding: 0.75rem 1rem 0; }
     .navbar {
       max-width: 1000px;
       margin: 0 auto;
@@ -47,857 +38,401 @@
       display: flex;
       justify-content: center;
       gap: 0.75rem;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
-      color: #e5e7eb;
+      border: 1px solid rgba(55,65,81,0.9);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+      color: #e5e7eb; flex-wrap: wrap;
       position: relative;
       z-index: 10;
-      flex-wrap: wrap;
     }
-
-    .nav-link,
-    .nav-dropdown > a {
-      color: #e5e7eb;
-      text-decoration: none;
+    .nav-link, .nav-dropdown > a {
+      color: #e5e7eb; text-decoration: none;
       padding: 0.35rem 0.9rem;
       border-radius: 999px;
       font-size: 0.9rem;
       display: inline-flex;
       align-items: center;
       gap: 0.3rem;
+      transition: background 0.15s;
       white-space: nowrap;
-      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .nav-link:hover, .nav-dropdown > a:hover { background: rgba(31,41,55,0.9); }
+    .nav-link.active, .nav-dropdown > a.active {
+      background: #f9fafb; color: #111827; font-weight: 600;
     }
 
-    .nav-link:hover,
-    .nav-dropdown > a:hover {
-      background: rgba(31, 41, 55, 0.9);
-    }
-
-    .nav-link.active,
-    .nav-dropdown > a.active {
-      background: #f9fafb;
-      color: #111827;
-      font-weight: 600;
-    }
-
-    /* Dropdown under Workshop */
-    .nav-dropdown {
-      position: relative;
-    }
-
-    .dropdown-caret {
-      font-size: 0.75rem;
-    }
-
+    /* DROPDOWN */
+    .nav-dropdown { position: relative; }
+    .dropdown-caret { font-size: 0.75rem; }
     .dropdown-menu {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      margin-top: 0; /* no hover gap */
-      background: #f9fafb;
-      border-radius: 14px;
-      border: 1px solid #e5e7eb;
-      min-width: 170px;
-      padding: 0.25rem 0;
-      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.4);
-      display: none;
-      z-index: 20;
+      position: absolute; top: 100%; left: 0; margin-top: 0;
+      background: #f9fafb; border-radius: 14px; border: 1px solid #e5e7eb;
+      min-width: 170px; padding: 0.25rem 0;
+      display: none; box-shadow: 0 18px 50px rgba(0,0,0,0.4); z-index: 20;
     }
-
     .dropdown-menu a {
-      display: block;
-      padding: 0.45rem 0.9rem;
-      font-size: 0.9rem;
-      color: #374151;
-      text-decoration: none;
+      display: block; padding: 0.45rem 0.9rem;
+      font-size: 0.9rem; color: #374151; text-decoration: none;
     }
+    .dropdown-menu a:hover { background: #e5e7eb; }
+    .nav-dropdown:hover .dropdown-menu { display: block; }
 
-    .dropdown-menu a:hover {
-      background: #e5e7eb;
-    }
-
-    .nav-dropdown:hover .dropdown-menu {
-      display: block;
-    }
-
-    /* Page shell */
+    /* PAGE SHELL */
     .page {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      padding: 1rem;
-      padding-bottom: 2.5rem;
+      flex: 1; display: flex; justify-content: center;
+      padding: 1rem; padding-bottom: 2.5rem;
     }
-
-    .page-inner {
-      width: 100%;
-      max-width: 1000px;
-    }
-
+    .page-inner { width: 100%; max-width: 1000px; }
     .card {
-      margin-top: 1.25rem;
-      background: var(--card-bg);
-      border-radius: 18px;
-      padding: 1.75rem 2rem 2rem;
-      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
+      margin-top: 1.25rem; background: var(--card-bg);
+      border-radius: 18px; padding: 1.75rem 2rem 2rem;
       border: 1px solid #e5e7eb;
-    }
-
-    @media (max-width: 720px) {
-      .card {
-        padding: 1.4rem 1.3rem 1.6rem;
-      }
+      box-shadow: 0 22px 50px rgba(0,0,0,0.45);
     }
 
     .page-header h1 {
-      margin: 0 0 0.5rem;
-      font-size: clamp(1.8rem, 3vw, 2.2rem);
+      margin: 0 0 0.5rem; font-size: clamp(1.8rem, 3vw, 2.2rem);
     }
+    .page-header p { margin: 0.25rem 0; color: var(--text-muted); }
 
-    .page-header p {
-      margin: 0.25rem 0;
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-
-    /* Page contents */
+    /* CONTENTS BOX */
     .page-contents {
       margin: 1.5rem 0 1.25rem;
-      background: #f3f4f6;
-      border-radius: 12px;
+      background: #f3f4f6; border-radius: 12px;
       border: 1px solid #e5e7eb;
-      padding: 0.85rem 1rem;
-      font-size: 0.9rem;
+      padding: 0.85rem 1rem; font-size: 0.9rem;
     }
-
     .page-contents-title {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #6b7280;
-      margin-bottom: 0.3rem;
+      font-size: 0.85rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #6b7280;
     }
+    .page-contents ul { list-style: none; padding: 0; margin: 0; }
 
-    .page-contents ul {
-      list-style: none;
-      margin: 0;
-      padding-left: 0;
-    }
+    /* SECTION HEADINGS */
+    .section { margin-top: 1.5rem; }
+    .section h2 { margin-top: 0; font-size: 1.2rem; }
+    .section p, ul, ol { color: var(--text-muted); font-size: 0.95rem; }
 
-    .page-contents li {
-      margin: 0.1rem 0;
-    }
-
-    .page-contents a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .page-contents a:hover {
-      text-decoration: underline;
-    }
-
-    /* Sections */
-    .section {
-      margin-top: 1.5rem;
-    }
-
-    .section h2 {
-      margin-top: 0;
-      margin-bottom: 0.5rem;
-      font-size: 1.2rem;
-    }
-
-    .section h3 {
-      margin-top: 1rem;
-      margin-bottom: 0.4rem;
-      font-size: 1.05rem;
-    }
-
-    .section p {
-      margin: 0.35rem 0;
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-
-    ul,
-    ol {
-      margin-top: 0.25rem;
-      margin-bottom: 0.75rem;
-      padding-left: 1.2rem;
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-
-    /* Tips and code blocks */
-    .tip {
-      margin-top: 0.9rem;
-      padding: 0.8rem 0.9rem;
-      border-radius: 10px;
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      font-size: 0.9rem;
-      color: #1e3a8a;
-    }
-
-    .tip-title {
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-size: 0.78rem;
-      margin-bottom: 0.35rem;
-      color: #1d4ed8;
-    }
-
-    .code-block-wrapper {
-      text-align: center;
-      margin: 1.25rem 0;
-    }
-
+    /* CODE BLOCKS */
     .code-block-green {
-      background: #dcfce7;
-      border: 1px solid #86efac;
-      border-radius: 12px;
-      padding: 1rem 1.5rem;
-      display: inline-block;
-      max-width: 100%;
-      font-family: ui-monospace, Menlo, Monaco, Consolas, "Courier New", monospace;
-      font-size: 1.0rem;
-      color: #065f46;
-      white-space: pre-wrap;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+      background: #dcfce7; border: 1px solid #86efac;
+      border-radius: 12px; padding: 1rem 1.5rem;
+      display: inline-block; font-family: monospace;
+      white-space: pre-wrap; color: #065f46;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
     }
+    .code-block { background: #111827; color: #f9fafb;
+      border-radius: 10px; padding: 0.6rem 0.9rem;
+      margin: 0.7rem 0; font-family: monospace; }
 
-    .code-block {
-      background: #111827;
-      border-radius: 10px;
-      padding: 0.6rem 0.9rem;
-      margin: 0.7rem 0;
-      font-family: ui-monospace, Menlo, Monaco, Consolas, "Courier New", monospace;
-      font-size: 0.9rem;
-      color: #f9fafb;
-      white-space: pre-wrap;
-    }
-
-    .code-block-red {
-      background: #fee2e2;
-      border: 1px solid #fca5a5;
-      border-radius: 12px;
-      padding: 1rem 1.25rem;
-      margin: 1.25rem auto;
-      display: block;
-      width: fit-content;
-      max-width: 100%;
-      font-family: ui-monospace, Menlo, Monaco, Consolas, "Courier New", monospace;
-      font-size: 1rem;
-      color: #991b1b;
-      text-align: center;
-      white-space: pre-wrap;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
-    }
-
-    /* Figures */
-    figure {
-      margin: 1rem 0;
-      border-radius: 12px;
-      border: 1px solid #e5e7eb;
-      overflow: hidden;
-      background: white;
-    }
-
-    figure img {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    figcaption {
-      padding: 0.5rem 0.8rem 0.7rem;
-      font-size: 0.85rem;
-      color: #4b5563;
-      background: #f9fafb;
-    }
-
-    /* Tables */
+    /* TABLES */
     table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 0.75rem 0 1rem;
-      font-size: 0.9rem;
+      width: 100%; border-collapse: collapse;
+      margin: 0.75rem 0 1rem; font-size: 0.9rem;
     }
-
-    th,
-    td {
+    th, td {
       border: 1px solid #e5e7eb;
-      padding: 0.4rem 0.55rem;
-      text-align: left;
+      padding: 0.4rem 0.55rem; text-align: left;
     }
+    th { background: #f3f4f6; font-weight: 600; }
 
-    th {
-      background: #f3f4f6;
-      font-weight: 600;
+    /* FIGURES */
+    figure {
+      margin: 1rem 0; border-radius: 12px;
+      border: 1px solid #e5e7eb; overflow: hidden; background: white;
     }
-
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
+    figure img { width: 100%; display: block; }
+    figcaption { padding: 0.5rem 0.8rem; background: #f9fafb; font-size: 0.85rem; }
   </style>
 </head>
+
 <body>
 
-  <!-- NAVBAR -->
-  <div class="navbar-shell">
-    <nav class="navbar">
-      <a href="intro.html" class="nav-link">Intro</a>
+<!-- NAVBAR -->
+<div class="navbar-shell">
+  <nav class="navbar">
+    <a href="intro.html" class="nav-link">Intro</a>
 
-      <div class="nav-dropdown">
-        <a href="workshop.html" class="active">
-          Workshop <span class="dropdown-caret">▾</span>
-        </a>
-        <div class="dropdown-menu">
-          <a href="workshop.html#start">Start</a>
-          <a href="reads.html">Reads</a>
-          <a href="assembly.html">Assembly</a>
-        </div>
+    <div class="nav-dropdown">
+      <a href="workshop.html" class="active">
+        Workshop <span class="dropdown-caret">▾</span>
+      </a>
+      <div class="dropdown-menu">
+        <a href="workshop.html#start">Start</a>
+        <a href="reads.html">Reads</a>
+        <a href="assembly.html">Assembly</a>
       </div>
+    </div>
 
-      <a href="terminology.html" class="nav-link">Terminology</a>
-      <a href="programs.html" class="nav-link">Programs</a>
-      <a href="links.html" class="nav-link">Links</a>
-    </nav>
-  </div>
+    <a href="terminology.html" class="nav-link">Terminology</a>
+    <a href="programs.html" class="nav-link">Programs</a>
+    <a href="links.html" class="nav-link">Links</a>
+  </nav>
+</div>
 
-  <!-- MAIN CONTENT -->
-  <main class="page">
-    <div class="page-inner">
-      <section class="card">
-        <header class="page-header">
-          <h1>Genome assembly</h1>
-          <p>
-            In this section we’ll walk through assembling genomes from short and long reads,
-            using an example dataset and thinking about how the same principles apply to our
-            hornbill data.
-          </p>
-        </header>
+<!-- MAIN CONTENT -->
+<main class="page">
+  <div class="page-inner">
+    <section class="card">
 
-        <!-- Page contents -->
-        <section class="page-contents" id="index">
-          <div class="page-contents-title">Page contents</div>
-          <ul>
-            <li><a href="#intro">Introduction</a></li>
-            <li><a href="#spades">Short-read assembly with SPAdes</a></li>
-            <li><a href="#flye">Long-read assembly with Flye</a></li>
-            <li><a href="#hifiasm">Long-read assembly with Hifiasm</a></li>
-            <li><a href="#assembly-quality">Assembly quality</a></li>
-            <li><a href="#compleasm">Assembly completeness with compleasm</a></li>
-            <li><a href="#hic">Interpreting Hi-C data</a></li>
-            <li><a href="#further-analyses">Further analyses</a></li>
-          </ul>
-        </section>
+      <!-- HEADER -->
+      <header class="page-header">
+        <h1>Genome assembly</h1>
+        <p>This module walks through genome assembly using short and long reads, and introduces methods for evaluating assembly quality and completeness.</p>
+      </header>
 
-        <!-- Intro -->
-        <section class="section" id="intro">
-          <h2>Introduction</h2>
+      <!-- CONTENTS -->
+      <section class="page-contents" id="index">
+        <div class="page-contents-title">Page contents</div>
+        <ul>
+          <li><a href="#intro">Introduction</a></li>
+          <li><a href="#spades">Short-read assembly with SPAdes</a></li>
+          <li><a href="#assessing">Assessing assembly quality</a></li>
+          <li><a href="#flye">Long-read assembly with Flye</a></li>
+          <li><a href="#hifiasm">Long-read assembly with Hifiasm</a></li>
+          <li><a href="#assembly-quality">Assembly quality</a></li>
+          <li><a href="#compleasm">Assembly completeness with compleasm</a></li>
+          <li><a href="#hic">Interpreting Hi-C data</a></li>
+          <li><a href="#further">Further analyses</a></li>
+        </ul>
+      </section>
 
-          <p>
-            A <strong>genome assembly</strong> is our attempt to reconstruct an organism’s
-            chromosomes from many short (or long) sequencing reads. We typically don’t get
-            chromosomes out of the machine; we get millions of snippets that overlap in
-            complicated ways, and assembly algorithms try to piece them back together into
-            contigs and scaffolds.
-          </p>
+      <!-- INTRO -->
+      <section class="section" id="intro">
+        <h2>Introduction</h2>
 
-          <p>
-            There are several conceptual frameworks for thinking about assembly: overlap
-            graphs, de Bruijn graphs, and string graphs. In practice, many modern assemblers
-            for short reads use some variant of a de Bruijn graph, where we break reads into
-            smaller k-mers and build a graph of how those k-mers connect. Long-read
-            assemblers often work more directly with overlaps between full reads.
-          </p>
+        <p>
+          A genome assembly attempts to reconstruct an organism’s chromosomes from many short or long sequencing reads.
+          Short-read assemblers typically rely on <strong>de Bruijn graphs</strong>, while long-read assemblers use
+          <strong>overlap-based</strong> approaches. Both models aim to resolve repeats, heterozygosity, and coverage variation.
+        </p>
 
-          <figure>
-            <img src="debruijn" alt="Cartoon of a de Bruijn graph used in genome assembly." />
-            <figcaption>
-              Figure 3.1 – Cartoon representation of an assembly graph, where nodes represent
-              k-mers and edges represent overlaps. Repeats and low-coverage regions create
-              characteristic patterns in the graph.
-            </figcaption>
-          </figure>
+        <figure>
+          <img src="img/assembly-graph.png" alt="Cartoon of an assembly graph." />
+          <figcaption>Figure 4.1 – Example assembly graph structure.</figcaption>
+        </figure>
 
-          <p>
-            In this module we’ll start with a short-read assembly using <code>SPAdes</code>,
-            then look at long-read assemblies with <code>Flye</code> and <code>Hifiasm</code>.
-            We’ll also discuss how to evaluate the resulting assemblies, including contiguity,
-            completeness, and how Hi-C data can help us scaffold contigs up to chromosome
-            scale.
-          </p>
-        </section>
+        <p>
+          In this module, we begin with a short-read assembly using SPAdes, then move to long-read approaches with Flye and Hifiasm,
+          before finishing with completeness assessment and Hi-C–based scaffolding concepts.
+        </p>
+      </section>
 
-        <!-- Short read assembly with SPAdes -->
-        <section class="section" id="spades">
-          <h2>Short-read assembly with SPAdes</h2>
+      <!-- SPADES -->
+      <section class="section" id="spades">
+        <h2>Short-read assembly with SPAdes</h2>
 
-          <p>
-            For our short-read example we’ll use the Illumina reads from the
-            <code>dpse-chr2-reads</code> directory you copied earlier. In a real 
-            project, these would be your own paired-end sequencing libraries.
-          </p>
+        <p>We’ll assemble example Illumina reads using SPAdes:</p>
 
-          <p>
-            We’ll run <code>SPAdes</code> on a subset of reads so that the assembly completes
-            quickly in the workshop setting. SPAdes can take many different options; here
-            we’ll focus on the essentials:
-          </p>
-
-          <div class="code-block-green">
+<div class="code-block-green">
 spades.py \
   -1 dpse-chr2-reads/illumina/pse-chr2_1.fastq.gz \
   -2 dpse-chr2-reads/illumina/pse-chr2_2.fastq.gz \
   -o spades-output \
   -t 4 \
   -m 8
-          </div>
+</div>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Command line parameter</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>spades.py</code></td>
-                <td>The SPAdes genome assembler.</td>
-              </tr>
-              <tr>
-                <td><code>-1</code></td>
-                <td>FASTQ file with first reads in paired-end library (R1).</td>
-              </tr>
-              <tr>
-                <td><code>-2</code></td>
-                <td>FASTQ file with second reads in paired-end library (R2).</td>
-              </tr>
-              <tr>
-                <td><code>-o spades-output</code></td>
-                <td>
-                  Output directory where SPAdes will write logs, graphs, and contig FASTA
-                  files.
-                </td>
-              </tr>
-              <tr>
-                <td><code>-t 4</code></td>
-                <td>Use 4 threads (CPUs). Adjust up or down based on resources.</td>
-              </tr>
-              <tr>
-                <td><code>-m 8</code></td>
-                <td>Maximum RAM (in GB) SPAdes should use. Increase for larger datasets.</td>
-              </tr>
-            </tbody>
-          </table>
+        <table>
+          <thead><tr><th>Parameter</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>-1</code>, <code>-2</code></td><td>Paired-end FASTQ files.</td></tr>
+            <tr><td><code>-o</code></td><td>Output directory.</td></tr>
+            <tr><td><code>-t</code></td><td>Threads.</td></tr>
+            <tr><td><code>-m</code></td><td>Max memory (GB).</td></tr>
+          </tbody>
+        </table>
 
-          <p>
-            SPAdes will write quite a bit of progress information to the screen and to log
-            files in the output directory. Once it finishes, look inside
-            <code>spades-output/</code>:
-          </p>
+        <p>SPAdes writes contigs, scaffolds, graphs, and logs into <code>spades-output/</code>.</p>
 
-          <div class="code-block-green">
-ls spades-output
-          </div>
+        <figure>
+          <img src="img/spades-graph.png" alt="Example SPAdes assembly graph." />
+          <figcaption>Figure 4.2 – Example SPAdes graph (placeholder).</figcaption>
+        </figure>
+      </section>
 
-          <p>You should see files such as:</p>
+      <!-- ASSESSING ASSEMBLY QUALITY -->
+      <section class="section" id="assessing">
+        <h2>Assessing assembly quality</h2>
 
-          <ul>
-            <li><code>contigs.fasta</code> – assembled contigs.</li>
-            <li><code>scaffolds.fasta</code> – scaffolds with gaps bridged where possible.</li>
-            <li><code>spades.log</code> – SPAdes log file.</li>
-            <li><code>assembly_graph.fastg</code> – a representation of the assembly graph.</li>
-          </ul>
+        <p>
+          After assembling reads into contigs or scaffolds, we want to assess basic quality metrics:
+        </p>
 
-          <figure>
-            <img src="img/spades-graph.png" alt="Example SPAdes assembly graph visualization." />
-            <figcaption>
-              Figure 3.2 – Example SPAdes assembly graph (visualized with an external tool).
-              Branches and bubbles often correspond to repeats, heterozygosity, or structural
-              variation.
-            </figcaption>
-          </figure>
+        <ul>
+          <li><strong>Contiguity</strong> — N50, total size, number of contigs.</li>
+          <li><strong>Completeness</strong> — are expected genes present? (See compleasm below.)</li>
+          <li><strong>Accuracy</strong> — do reads map cleanly back to the assembly?</li>
+        </ul>
 
-          <p>
-            The exact number and size of contigs you get will depend on how much data you
-            use, the complexity of the genome, repeat content, and heterozygosity. For many
-            vertebrate genomes using only short reads, assemblies will be quite fragmented.
-            Long reads and Hi-C will help later.
-          </p>
-        </section>
+        <h3>Interpreting SPAdes output</h3>
 
-        <!-- Long read assembly with Flye -->
-        <section class="section" id="flye">
-          <h2>Long-read assembly with Flye</h2>
+        <p>
+          SPAdes generates both contigs and scaffolds:
+        </p>
 
-          <p>
-            Short-read assemblers like SPAdes struggle to resolve long repeats, which are
-            abundant in most vertebrate genomes. Long-read technologies (e.g. Oxford
-            Nanopore, PacBio CLR) produce reads that can span many repeats, and assemblers
-            such as <code>Flye</code> are designed specifically for these data.
-          </p>
+        <ul>
+          <li><code>contigs.fasta</code> — strict contigs with no gaps.</li>
+          <li><code>scaffolds.fasta</code> — contigs joined with <code>N</code>-gaps where read-pair evidence supports links.</li>
+        </ul>
 
-          <p>
-            In a hornbill project, you might have a long-read dataset in FASTQ format. A
-            basic Flye command for Nanopore data could look like:
-          </p>
+        <p>
+          The number and size distribution of these contigs is a first clue about assembly quality. A fragmented short-read assembly is expected for large
+          vertebrate genomes; long-read data dramatically improves this (see Flye and Hifiasm sections).
+        </p>
 
-          <div class="code-block-green">
+        <h3>Mapping reads back to the assembly</h3>
+
+        <p>
+          One of the most common ways to check assembly accuracy is to map the original reads back to the assembly.
+          Here we use <code>bwa</code> (for short reads), followed by <code>samtools</code>:
+        </p>
+
+<div class="code-block-green">
+bwa index spades-output/contigs.fasta
+
+bwa mem -t 4 spades-output/contigs.fasta \
+  dpse-chr2-reads/illumina/pse-chr2_1.fastq.gz \
+  dpse-chr2-reads/illumina/pse-chr2_2.fastq.gz \
+  | samtools sort -o mapped_sorted.bam
+</div>
+
+        <p>Generate alignment statistics:</p>
+
+<div class="code-block-green">
+samtools flagstat mapped_sorted.bam
+samtools stats mapped_sorted.bam > mapping_stats.txt
+</div>
+
+        <p>
+          High mapping rates and low mismatch frequencies suggest the assembly is largely correct.
+          Very low mapping rates can indicate contamination, misassemblies, or major missing regions.
+        </p>
+      </section>
+
+      <!-- FLYE -->
+      <section class="section" id="flye">
+        <h2>Long-read assembly with Flye</h2>
+
+        <p>
+          Flye is designed for noisy long reads (Nanopore, PacBio CLR) and constructs repeat graphs directly from overlaps.
+        </p>
+
+<div class="code-block-green">
 flye \
   --nano-raw hornbill_nanopore_reads.fastq.gz \
   --genome-size 1.4g \
   --out-dir flye-output \
   --threads 8
-          </div>
+</div>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Command line parameter</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>flye</code></td>
-                <td>Flye long-read assembler.</td>
-              </tr>
-              <tr>
-                <td><code>--nano-raw</code></td>
-                <td>
-                  Input long reads from Oxford Nanopore (raw). Flye also supports
-                  <code>--nano-hq</code>, <code>--pacbio-raw</code>, and others.
-                </td>
-              </tr>
-              <tr>
-                <td><code>hornbill_nanopore_reads.fastq.gz</code></td>
-                <td>Long-read FASTQ file for your hornbill sample.</td>
-              </tr>
-              <tr>
-                <td><code>--genome-size 1.4g</code></td>
-                <td>
-                  Approximate genome size (here 1.4 Gb as an example). This helps Flye tune
-                  coverage expectations.
-                </td>
-              </tr>
-              <tr>
-                <td><code>--out-dir flye-output</code></td>
-                <td>Output directory for the assembly and logs.</td>
-              </tr>
-              <tr>
-                <td><code>--threads 8</code></td>
-                <td>Number of CPU threads to use.</td>
-              </tr>
-            </tbody>
-          </table>
+        <p>
+          Flye produces <code>assembly.fasta</code>, logs, and graph files inside <code>flye-output/</code>.
+        </p>
+      </section>
 
-          <p>
-            Flye will iterate through several stages: constructing an initial repeat graph,
-            resolving repeats where possible, and polishing the assembly with the input
-            reads. The primary assembly FASTA is typically written as something like
-            <code>assembly.fasta</code> inside <code>flye-output/</code>.
-          </p>
-        </section>
+      <!-- HIFIASM -->
+      <section class="section" id="hifiasm">
+        <h2>Long-read assembly with Hifiasm</h2>
 
-        <!-- Long read assembly with Hifiasm -->
-        <section class="section" id="hifiasm">
-          <h2>Long-read assembly with Hifiasm</h2>
+        <p>
+          Hifiasm is optimized for highly accurate PacBio HiFi reads and produces phased assemblies when possible.
+        </p>
 
-          <p>
-            For PacBio HiFi (high-accuracy) reads, <code>Hifiasm</code> is a widely used
-            assembler that can produce very contiguous and often phased assemblies. HiFi
-            reads have much lower error rates than traditional long reads, which simplifies
-            the assembly graph and can yield near-chromosome-scale contigs even without
-            Hi-C.
-          </p>
-
-          <p>
-            A basic Hifiasm command for a diploid hornbill sample might look like:
-          </p>
-
-          <div class="code-block-green">
+<div class="code-block-green">
 hifiasm \
   -o hornbill_hifiasm \
   -t 16 \
   hornbill_hifi_reads.fastq.gz
-          </div>
+</div>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Command line parameter</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>hifiasm</code></td>
-                <td>Hifiasm assembler for PacBio HiFi reads.</td>
-              </tr>
-              <tr>
-                <td><code>-o hornbill_hifiasm</code></td>
-                <td>
-                  Output prefix; Hifiasm will create several GFA/FASTA files using this
-                  prefix.
-                </td>
-              </tr>
-              <tr>
-                <td><code>-t 16</code></td>
-                <td>Number of CPU threads.</td>
-              </tr>
-              <tr>
-                <td><code>hornbill_hifi_reads.fastq.gz</code></td>
-                <td>HiFi read file for the hornbill sample.</td>
-              </tr>
-            </tbody>
-          </table>
+        <ul>
+          <li><code>.p_ctg.gfa</code> — primary contigs</li>
+          <li><code>.a_ctg.gfa</code> — alternate contigs</li>
+        </ul>
 
-          <p>
-            Hifiasm typically produces multiple outputs, including primary and alternate
-            contig sets. Common file types include:
-          </p>
+      </section>
 
-          <ul>
-            <li><code>hornbill_hifiasm.p_ctg.gfa</code> – primary contig graph.</li>
-            <li><code>hornbill_hifiasm.a_ctg.gfa</code> – alternate contig graph.</li>
-            <li>FASTA conversions of those graphs (depending on post-processing).</li>
-          </ul>
+      <!-- ASSEMBLY QUALITY SUMMARY -->
+      <section class="section" id="assembly-quality">
+        <h2>Assembly quality</h2>
 
-          <p>
-            For downstream analyses (mapping, annotation, completeness), we usually select
-            a single primary assembly FASTA. When working with very inbred or highly
-            bottlenecked populations, Hifiasm outputs can also provide insight into
-            heterozygosity and structural variation.
-          </p>
-        </section>
+        <p>
+          Assembly quality has three key components:
+        </p>
 
-        <!-- Assembly quality -->
-        <section class="section" id="assembly-quality">
-          <h2>Assembly quality</h2>
+        <ul>
+          <li><strong>Contiguity</strong> (N50, L50, total size)</li>
+          <li><strong>Accuracy</strong> (read mapping back to the assembly)</li>
+          <li><strong>Completeness</strong> (see compleasm below)</li>
+        </ul>
 
-          <p>
-            Once we have one or more candidate assemblies (from SPAdes, Flye, Hifiasm, or
-            other tools), we need to evaluate their quality. There are several dimensions
-            to this:
-          </p>
+        <p>
+          Long-read assemblies typically show huge gains in contiguity compared to short-read assemblies.
+        </p>
+      </section>
 
-          <ul>
-            <li>
-              <strong>Contiguity</strong>: how many contigs/scaffolds are there and how long
-              are they? Metrics like N50 and L50 summarize this.
-            </li>
-            <li>
-              <strong>Size</strong>: does the total assembled size roughly match the expected
-              genome size for our species?
-            </li>
-            <li>
-              <strong>Accuracy</strong>: how many mismatches/indels would we expect when we
-              map reads back to the assembly?
-            </li>
-            <li>
-              <strong>Structural correctness</strong>: are large-scale rearrangements,
-              collapses, or expansions present?
-            </li>
-          </ul>
+      <!-- COMPLEASM -->
+      <section class="section" id="compleasm">
+        <h2>Assembly completeness with compleasm</h2>
 
-          <p>
-            Some of these questions can be addressed by simple summary statistics. For
-            example, we can compute the total size and N50 of our SPAdes contigs using small
-            scripts or dedicated tools. Many labs maintain their own helper scripts for
-            assembly summaries, and several packages exist in Python and R to help with this.
-          </p>
+        <p>
+          Compleasm evaluates completeness using BUSCO lineage datasets.
+          For birds, use <code>aves_odb10</code> or <code>aves_odb12</code>.
+        </p>
 
-          <p>
-            In this workshop, we’ll focus more on completeness (below) and on how long-read
-            and Hi-C data can be used to scaffold and validate assemblies, but it’s good to
-            keep these basic metrics in mind whenever you compare candidate assemblies.
-          </p>
-        </section>
-
-        <!-- Assembly completeness with compleasm -->
-        <section class="section" id="compleasm">
-          <h2>Assembly completeness with compleasm</h2>
-
-          <p>
-            Beyond contiguity, we want to know how <strong>complete</strong> our assembly is:
-            are most genes present and intact? One common approach is to search the assembly
-            for a curated set of conserved single-copy orthologs and ask what fraction are
-            found and complete.
-          </p>
-
-          <p>
-            <code>compleasm</code> is a fast completeness assessment tool that uses BUSCO
-            lineage datasets under the hood. For a bird genome, we might use the
-            <code>aves_odb10</code> or <code>aves_odb12</code> lineage, for example.
-          </p>
-
-          <p>A basic compleasm command might look like:</p>
-
-          <div class="code-block-green">
+<div class="code-block-green">
 compleasm run \
   -a hornbill_assembly.fasta \
   -o compleasm-output \
   -l aves_odb10 \
   -t 8
-          </div>
+</div>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Command line parameter</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>compleasm run</code></td>
-                <td>Run compleasm completeness assessment.</td>
-              </tr>
-              <tr>
-                <td><code>-a hornbill_assembly.fasta</code></td>
-                <td>Input assembly FASTA file to evaluate.</td>
-              </tr>
-              <tr>
-                <td><code>-o compleasm-output</code></td>
-                <td>Output directory for completeness reports.</td>
-              </tr>
-              <tr>
-                <td><code>-l aves_odb10</code></td>
-                <td>
-                  BUSCO lineage dataset to use (here birds). Adjust to your taxonomic group.
-                </td>
-              </tr>
-              <tr>
-                <td><code>-t 8</code></td>
-                <td>Number of CPU threads.</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <p>
-            compleasm will summarize the fraction of expected genes that are:
-          </p>
-
-          <ul>
-            <li><strong>Complete single-copy</strong></li>
-            <li><strong>Complete duplicated</strong></li>
-            <li><strong>Fragmented</strong></li>
-            <li><strong>Missing</strong></li>
-          </ul>
-
-          <figure>
-            <img src="img/compleasm-summary.png" alt="Example compleasm completeness summary barplot." />
-            <figcaption>
-              Figure 3.3 – Example completeness summary showing proportions of complete,
-              duplicated, fragmented, and missing genes.
-            </figcaption>
-          </figure>
-
-          <p>
-            For a high-quality hornbill assembly, we’d hope to see a high percentage of
-            complete genes, with relatively few missing or fragmented. Assemblies created
-            from limited or noisy data may show substantial missing/fragmented fractions,
-            which can guide additional sequencing or assembly improvement.
-          </p>
-        </section>
-
-        <!-- Interpreting Hi-C data -->
-        <section class="section" id="hic">
-          <h2>Interpreting Hi-C data</h2>
-
-          <p>
-            To move from contigs to chromosome-scale scaffolds, many modern assemblies
-            incorporate <strong>Hi-C</strong> data. Hi-C captures physical proximity between
-            DNA fragments in 3D space, which, when appropriately processed, can be used to
-            order and orient contigs along chromosomes.
-          </p>
-
-          <p>
-            A Hi-C contact map is typically visualized as a heatmap where each axis
-            represents genomic position and intensity indicates the frequency of contacts
-            between pairs of bins:
-          </p>
-
-          <figure>
-            <img src="img/hic-contact-map.png" alt="Example Hi-C contact map for a chromosome-scale assembly." />
-            <figcaption>
-              Figure 3.4 – Example Hi-C contact map. Along a well-assembled chromosome,
-              contact frequency is highest near the diagonal; off-diagonal blocks can indicate
-              misjoins, translocations, or other structural variation.
-            </figcaption>
-          </figure>
-
-          <p>
-            In a correctly assembled chromosome, we expect a strong diagonal (nearby
-            positions contact each other more often) with relatively few large-scale
-            interruptions. Strong off-diagonal blocks can indicate misassemblies or large
-            structural rearrangements. Many pipelines (e.g. 3D-DNA, SALSA, HiRise) use Hi-C
-            contacts to scaffold contigs and suggest places where the assembly graph should
-            be split or joined.
-          </p>
-
-          <p>
-            For hornbill or other non-model species, Hi-C is often what turns contig-level
-            assemblies from long-read data into chromosome-scale references that are most
-            useful for population genetics, linkage, and comparative genomics.
-          </p>
-        </section>
-
-        <!-- Further analyses -->
-        <section class="section" id="further-analyses">
-          <h2>Further analyses</h2>
-
-          <p>
-            Once you have a reasonably contiguous and complete genome assembly, a whole
-            ecosystem of downstream analyses becomes possible. A non-exhaustive list
-            includes:
-          </p>
-
-          <ul>
-            <li>
-              <strong>Annotation</strong> – predicting gene models and other features using
-              transcriptomic data and homology-based tools.
-            </li>
-            <li>
-              <strong>Variant calling</strong> – mapping population resequencing data back
-              to the reference to study diversity, inbreeding, and selection.
-            </li>
-            <li>
-              <strong>Comparative genomics</strong> – aligning assemblies from related
-              species to identify synteny, rearrangements, and lineage-specific changes.
-            </li>
-            <li>
-              <strong>Demographic inference</strong> – using the distribution of variants
-              across the genome to reconstruct population history.
-            </li>
-            <li>
-              <strong>Conservation applications</strong> – identifying ROH, mutational load,
-              structural variants, and other features that inform management decisions.
-            </li>
-          </ul>
-
-          <p>
-            Throughout the rest of the workshop, and in your own projects, you can treat the
-            assembly as the foundation on which all of these downstream analyses are built.
-            The more carefully we think about assembly choices now, the more robust our
-            inferences about hornbill (and other species) will be later.
-          </p>
-        </section>
+        <figure>
+          <img src="img/compleasm-summary.png" alt="Completeness summary plot." />
+          <figcaption>Example completeness summary (placeholder).</figcaption>
+        </figure>
 
       </section>
-    </div>
-  </main>
+
+      <!-- HI-C -->
+      <section class="section" id="hic">
+        <h2>Interpreting Hi-C data</h2>
+
+        <p>
+          Hi-C contact maps reveal long-range interactions along chromosomes and are used to scaffold contigs into chromosome-scale assemblies.
+        </p>
+
+        <figure>
+          <img src="img/hic-contact-map.png" alt="Hi-C contact map." />
+          <figcaption>Example Hi-C contact map (placeholder).</figcaption>
+        </figure>
+
+        <p>
+          A strong diagonal indicates well-assembled chromosomes. Off-diagonal blocks may indicate misjoins or rearrangements.
+        </p>
+      </section>
+
+      <!-- FURTHER ANALYSES -->
+      <section class="section" id="further">
+        <h2>Further analyses</h2>
+
+        <ul>
+          <li>Genome annotation</li>
+          <li>Variant calling</li>
+          <li>Comparative genomics & synteny</li>
+          <li>Demographic inference</li>
+          <li>Conservation applications (ROH, mutational load, SVs)</li>
+        </ul>
+
+        <p>
+          With a complete, accurate assembly, all downstream analyses become more powerful and interpretable.
+        </p>
+      </section>
+
+    </section>
+  </div>
+</main>
+
 </body>
 </html>
