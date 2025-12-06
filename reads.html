@@ -380,8 +380,6 @@
         <header class="page-header">
           <h1>Sequences &amp; reads</h1>
           <p>
-            In this section we’ll review how sequence data are stored on disk, how to interpret
-            read quality, and how to get a first look at our hornbill reads using
             <code>FastQC</code>.
           </p>
         </header>
@@ -438,14 +436,13 @@ less -S T_deckeni_reference/GCA_009769605.1_bBucAby1.pri_genomic_chr2.fna
               <tr>
                 <td><code>T_deckeni_reference/...</code></td>
                 <td>
-                  Path to the reference FASTA file we’re viewing. In your own projects this
-                  would be a hornbill reference assembly or chromosome.
+                  Path to the reference FASTA file we’re viewing. 
                 </td>
               </tr>
             </tbody>
           </table>
 
-          <p>Near the top of the file you should see something like:</p>
+          <p>At the top of the file you should see something like:</p>
 
           <div class="code-block">
 &gt;CM020025.1 Bucorvus abyssinicus isolate bBucAby1 chromosome 2
@@ -482,12 +479,11 @@ AACATAGGTGATGAACATCACCTCGCAGAGCAGCCGGGAcccggggaaaaaaaacccagctgggg
 
           <p>
             Let’s look at a few of our short-read files in FASTQ format. In the example
-            dataset this is an Illumina paired-end library; for our hornbill project, the
-            reads will have similar structure even if the filenames differ:
+            dataset this is an Illumina paired-end library from a hornbill which is publicly available:
           </p>
 
           <div class="code-block-green">
-zless -S read_files/illumina/SRR31758803-chr2_1.fastq.gz
+zless -S T_deckeni_reads/SRR31758803-chr2_1.fastq.gz
           </div>
 
           <table>
@@ -510,10 +506,9 @@ zless -S read_files/illumina/SRR31758803-chr2_1.fastq.gz
                 <td>Turn off line wrapping within <code>zless</code>.</td>
               </tr>
               <tr>
-                <td><code>read_files/illumina/SRR31758803-chr1_1.fastq.gz</code></td>
+                <td><code>T_deckeni_reads/SRR31758803-chr1_1.fastq.gz</code></td>
                 <td>
-                  Path to the first read file in our example dataset. Replace with your own
-                  hornbill read file when working with your data.
+                  Path to the first read file in our example dataset. 
                 </td>
               </tr>
             </tbody>
@@ -522,14 +517,14 @@ zless -S read_files/illumina/SRR31758803-chr2_1.fastq.gz
           <p>You should see something like:</p>
 
           <div class="code-block">
-@SRR31758803.1 LH00652:98:22K7NFLT4:6:1101:2222:1070/1
-GNATCTGAAGAGAAGTGCAATAATGTCACTTATGTATCAGTTTAATTACTGGAGC
+@SRR31758803.5365285
+GGATTTTTTTTTTTTTTCCCCCCAGCTGGGGTTTTTTTTCCCCGGGTCTCGGCCG
 +
-I#-IIIIIIIIIII9IIIIIIIIIIIIIIIIIIIIIII9IIIIIIIIIIIIIII-
-@SRR31758803.2 LH00652:98:22K7NFLT4:6:1101:5134:1070/1
-ANTGATTTTAAAAAGCAGTCCAATGACACCAATATCTACGGATGCTTGTAGAACA
+9IIIIIIII-9IIIIIIIIII--I99999I-9IIIIIIIII--IIIII9II9II-
+@SRR31758803.2408168
+CCTGCCTGACAAAACCCCACCCCAAGCACAACCTGCACTCAAACACAGGTGATGA
 +
-9#IIIIIIIIIIIII9IIIIIIIIIIIIII9IIIIIIIIIIIIIIIIIIIIIIII
+9II9IIIIIIIIIIIIIIIIIIII9IIIIIIIIIIIIIIIIIIIIIIIIIIIIII
           </div>
 
           <p>
@@ -546,8 +541,7 @@ ANTGATTTTAAAAAGCAGTCCAATGACACCAATATCTACGGATGCTTGTAGAACA
               header.
             </li>
             <li>
-              A line starting with <code>+</code>, sometimes repeating the header, sometimes
-              left as just <code>+</code>. This is a separator between sequence and quality.
+              A line starting with <code>+</code>. This is a separator between sequence and quality.
             </li>
             <li>
               One or more lines of ASCII characters encoding per-base quality scores for
@@ -599,12 +593,12 @@ ANTGATTTTAAAAAGCAGTCCAATGACACCAATATCTACGGATGCTTGTAGAACA
 
           <p>
             As a quick example, the first quality character in the first read above is
-            <code>I</code>. In the ASCII table, <code>A</code> has decimal code 65. The
+            <code>9</code>. In the ASCII table, <code>A</code> has decimal code 73. The
             corresponding Phred score is:
           </p>
 
           <div class="code-block">
-                                              Q = 89 - 33 = 56
+                                         Q = 73 - 33 = 40
           </div>
 
           <p>
@@ -616,8 +610,8 @@ ANTGATTTTAAAAAGCAGTCCAATGACACCAATATCTACGGATGCTTGTAGAACA
           </p>
 
           <p>
-            For Q = 56, this gives an error probability of about 0.0000025 (roughly 1 in
-            500,000). Most Illumina short-read data nowadays has fairly high read quality,
+            For Q = 40, this gives an error probability of about 0.0001 (roughly 1 in
+            10,000). Most Illumina short-read data nowadays has fairly high read quality,
             but this is not the case for older sequencing platforms and can also differ for
             historic or environmental datasets.
           </p>
@@ -628,10 +622,10 @@ ANTGATTTTAAAAAGCAGTCCAATGACACCAATATCTACGGATGCTTGTAGAACA
           <h2>Assessing read quality with FastQC</h2>
 
           <p>
-            One of the first things you should do after receiving the hornbill sequence data
-            is a quick quality check: how many reads do we have, how long are they, and how
-            good are the base calls? Rather than writing our own scripts, we can use the
-            widely-used program <code>fastqc</code>.
+            One of the first things you should do after receiving sequence data
+            is a quick quality check: how many reads do we have, how long are they, 
+            and how good are the base calls? To do this, we can use the widely-used
+            program <code>fastqc</code>.
           </p>
 
           <p>
@@ -641,7 +635,7 @@ ANTGATTTTAAAAAGCAGTCCAATGACACCAATATCTACGGATGCTTGTAGAACA
           </p>
 
           <div class="code-block-green">
-fastqc read_files/illumina/SRR31758803-chr1_1.fastq.gz \
+fastqc read_files/illumina/SRR31758803-chr2_1.fastq.gz \
        -o fastqc-output/
           </div>
 
@@ -658,7 +652,7 @@ fastqc read_files/illumina/SRR31758803-chr1_1.fastq.gz \
                 <td>Run the FastQC program.</td>
               </tr>
               <tr>
-                <td><code>read_files/illumina/SRR31758803-chr1_1.fastq.gz</code></td>
+                <td><code>read_files/illumina/SRR31758803-chr2_1.fastq.gz</code></td>
                 <td>The first (R1) read file in our example paired-end library.</td>
               </tr>
               <tr>
@@ -698,7 +692,7 @@ fastqc read_files/illumina/SRR31758803-chr1_1.fastq.gz \
           </p>
 
           <p>
-            Once opened, the report will show a list of modules on the left and a sequence
+            Once opened, the report will show a summary of the results on the left and a sequence
             of plots and tables on the right. The first summary table includes basics like
             number of reads, read length range, and %GC:
           </p>
@@ -712,7 +706,7 @@ fastqc read_files/illumina/SRR31758803-chr1_1.fastq.gz \
 
           <p>
             In our example, FastQC reports hundreds of thousands of reads with an expected
-            length distribution (most around 150 bp) and no reads flagged as globally poor
+            length distribution (in this case, 150 bp) and no reads flagged as globally poor
             quality. That’s exactly what we’d hope to see for good hornbill data as well.
           </p>
 
