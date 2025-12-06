@@ -749,7 +749,9 @@ fastqc read_files/illumina/SRR31758803-chr2_1.fastq.gz \
             which often correspond to adapters or other technical artifacts. For hornbill
             genome assembly, we don’t want those adapter sequences to end up in our final
             contigs. Fortunately, many assemblers and read mappers automatically trim
-            adapters, and we can also run dedicated trimming tools if needed.
+            adapters, and we can also run dedicated trimming tools if needed. If you need 
+            to run FastQC on many files, the program <a href="https://github.com/MultiQC/MultiQC" target="_blank">
+            MultiQC</a> can be used to aggregate and view summaries of many read files at once.
           </p>
 
           <p>
