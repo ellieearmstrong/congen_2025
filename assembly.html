@@ -224,8 +224,8 @@
 
 <div class="code-block-green">
 spades.py \
-  -1 dpse-chr2-reads/illumina/pse-chr2_1.fastq.gz \
-  -2 dpse-chr2-reads/illumina/pse-chr2_2.fastq.gz \
+  -1 T_deckeni_reads/illumina/SRR31758803-chr2_1.fastq.gz \
+  -2 T_deckeni_reads/illumina/SRR31758803-chr2_2.fastq.gz \
   -o assemblies/spades-illumina-chr2-k77/ \
   -k 77 \
   -t 4 \
@@ -263,7 +263,7 @@ spades.py \
 
 <div class="code-block-green">
 flye \
-  --pacbio-hifi Tdeckeni_pacbio_reads.fastq.gz \
+  --pacbio-hifi pacbio_Tdeckeni_chr2_subsample.fastq.gz  \
   --genome-size 0.08 \
   --out-dir pacbio-output \
   --threads 4
@@ -286,7 +286,7 @@ flye \
 hifiasm \
   -o hornbill_hifiasm \
   -t 16 \
-  hornbill_hifi_reads.fastq.gz
+  pacbio_Tdeckeni_chr2_subsample.fastq.gz 
 </div>
 
         <ul>
