@@ -259,15 +259,15 @@ spades.py \
         <h2>Long-read assembly with Flye</h2>
 
         <p>
-          Flye is designed for noisy long reads (Nanopore, PacBio CLR) and constructs repeat graphs directly from overlaps.
+          <a href="https://github.com/mikolmogorov/Flye" target="_blank">Flye</a> is designed for noisy long reads (Nanopore, PacBio CLR) and constructs repeat graphs directly using a modified de bruijn approach.
         </p>
 
 <div class="code-block-green">
 flye \
-  --nano-raw hornbill_nanopore_reads.fastq.gz \
-  --genome-size 1.4g \
-  --out-dir flye-output \
-  --threads 8
+  --pacbio-hifi Tdeckeni_pacbio_reads.fastq.gz \
+  --genome-size 0.08 \
+  --out-dir pacbio-output \
+  --threads 4
 </div>
 
         <p>
