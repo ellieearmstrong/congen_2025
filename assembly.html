@@ -259,13 +259,14 @@ spades.py \
 
         <p>
           <a href="https://github.com/mikolmogorov/Flye" target="_blank">Flye</a> is designed for noisy long reads (Nanopore, PacBio CLR) and constructs repeat graphs directly using a modified de bruijn approach.
+          We will NOT run this command because this step is very memory intensive and takes some time, but here is an example command for you to review.
         </p>
 
-<div class="code-block-green">
+<div class="code-block-red">
 flye \
   --pacbio-hifi pacbio_Tdeckeni_chr2_subsample.fastq.gz  \
   --genome-size 0.08 \
-  --out-dir pacbio-output \
+  --out-dir assemblies/flye-pacbio \
   --threads 4
 </div>
 
