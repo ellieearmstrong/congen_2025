@@ -207,13 +207,13 @@
         </p>
 
         <figure>
-          <img src="img/assembly-graph.png" alt="Cartoon of an assembly graph." />
-          <figcaption>Figure 4.1 – Example assembly graph structure.</figcaption>
+          <img src="Fig3.1" alt="Cartoon of an assembly graph." />
+          <figcaption>Figure 3.1 – Cartoon of assembly process.</figcaption>
         </figure>
 
         <p>
           In this module, we begin with a short-read assembly using SPAdes, then move to long-read approaches with Flye and Hifiasm,
-          before finishing with completeness assessment and Hi-C–based scaffolding concepts.
+          before finishing with completeness assessment.
         </p>
       </section>
 
@@ -245,68 +245,9 @@ spades.py \
         <p>SPAdes writes contigs, scaffolds, graphs, and logs into <code>spades-output/</code>.</p>
 
         <figure>
-          <img src="img/spades-graph.png" alt="Example SPAdes assembly graph." />
-          <figcaption>Figure 4.2 – Example SPAdes graph (placeholder).</figcaption>
+          <img src="Fig3.2" alt="Example SPAdes assembly graph." />
+          <figcaption>Figure 3.2 – Example SPAdes graph (placeholder).</figcaption>
         </figure>
-      </section>
-
-      <!-- ASSESSING ASSEMBLY QUALITY -->
-      <section class="section" id="assessing">
-        <h2>Assessing assembly quality</h2>
-
-        <p>
-          After assembling reads into contigs or scaffolds, we want to assess basic quality metrics:
-        </p>
-
-        <ul>
-          <li><strong>Contiguity</strong> — N50, total size, number of contigs.</li>
-          <li><strong>Completeness</strong> — are expected genes present? (See compleasm below.)</li>
-          <li><strong>Accuracy</strong> — do reads map cleanly back to the assembly?</li>
-        </ul>
-
-        <h3>Interpreting SPAdes output</h3>
-
-        <p>
-          SPAdes generates both contigs and scaffolds:
-        </p>
-
-        <ul>
-          <li><code>contigs.fasta</code> — strict contigs with no gaps.</li>
-          <li><code>scaffolds.fasta</code> — contigs joined with <code>N</code>-gaps where read-pair evidence supports links.</li>
-        </ul>
-
-        <p>
-          The number and size distribution of these contigs is a first clue about assembly quality. A fragmented short-read assembly is expected for large
-          vertebrate genomes; long-read data dramatically improves this (see Flye and Hifiasm sections).
-        </p>
-
-        <h3>Mapping reads back to the assembly</h3>
-
-        <p>
-          One of the most common ways to check assembly accuracy is to map the original reads back to the assembly.
-          Here we use <code>bwa</code> (for short reads), followed by <code>samtools</code>:
-        </p>
-
-<div class="code-block-green">
-bwa index spades-output/contigs.fasta
-
-bwa mem -t 4 spades-output/contigs.fasta \
-  dpse-chr2-reads/illumina/pse-chr2_1.fastq.gz \
-  dpse-chr2-reads/illumina/pse-chr2_2.fastq.gz \
-  | samtools sort -o mapped_sorted.bam
-</div>
-
-        <p>Generate alignment statistics:</p>
-
-<div class="code-block-green">
-samtools flagstat mapped_sorted.bam
-samtools stats mapped_sorted.bam > mapping_stats.txt
-</div>
-
-        <p>
-          High mapping rates and low mismatch frequencies suggest the assembly is largely correct.
-          Very low mapping rates can indicate contamination, misassemblies, or major missing regions.
-        </p>
       </section>
 
       <!-- FLYE -->
