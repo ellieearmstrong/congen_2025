@@ -227,7 +227,8 @@
 spades.py \
   -1 dpse-chr2-reads/illumina/pse-chr2_1.fastq.gz \
   -2 dpse-chr2-reads/illumina/pse-chr2_2.fastq.gz \
-  -o spades-output \
+  -o assemblies/spades-illumina-chr2-k77/ \
+  -k 77 \
   -t 4 \
   -m 8
 </div>
@@ -237,16 +238,18 @@ spades.py \
           <tbody>
             <tr><td><code>-1</code>, <code>-2</code></td><td>Paired-end FASTQ files.</td></tr>
             <tr><td><code>-o</code></td><td>Output directory.</td></tr>
+            <tr><td><code>-k</code></td><td>k-mer size.</td></tr>
             <tr><td><code>-t</code></td><td>Threads.</td></tr>
             <tr><td><code>-m</code></td><td>Max memory (GB).</td></tr>
+            <tr><td><code>--isolate</code></td><td>Improves assembly quality and runtime in high-cov data.</td></tr>
           </tbody>
         </table>
 
-        <p>SPAdes writes contigs, scaffolds, graphs, and logs into <code>spades-output/</code>.</p>
+        <p>SPAdes writes contigs, scaffolds, graphs, and logs into <code>assemblies/spades-illumina-chr2-k77</code>.</p>
 
         <figure>
           <img src="Fig3.2.png" alt="Example SPAdes assembly graph." />
-          <figcaption>Figure 3.2 – Example SPAdes graph (placeholder).</figcaption>
+          <figcaption>Figure 3.2 – Figure 2 from Pevzner 2001 showing how repeats are compacted in a de Bruijn graph.</figcaption>
         </figure>
       </section>
 
