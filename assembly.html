@@ -513,29 +513,170 @@ compleasm run \
 
         <figure>
           <img src="Fig3.4.png" alt="Compleasm output for two <em>T. deckeni</em> genomes." />
-          <figcaption>Fig.3.4: Compleasm output for two <em>T. deckeni</em> genomes.</figcaption>
+          <figcaption>Fig.3.4: Compleasm output for two <em>T. deckeni</em> genomes made with different assemblers.</figcaption>
         </figure>
 <p>What we can see here is that, despite the short read assembly being much more fragmented, we still recover 98% of the universal copy orthologs, identical to the long read alignment. 
-  Depending on the questions you are asking, short read assemblies may be sufficient.</p>
+  Depending on the questions you are asking, short read assemblies may be sufficient, but a good general rule is for your contig N50 to be substantially greater than the average
+  length of a gene.</p>
       </section>
 
       <!-- HI-C -->
       <section class="section" id="hic">
-        <h2>Interpreting Hi-C data</h2>
+  <h2>Interpreting Hi-C data</h2>
 
-        <p>
-          Hi-C contact maps reveal long-range interactions along chromosomes and are used to scaffold contigs into chromosome-scale assemblies.
-        </p>
+  <p>
+    Hi-C is an incredibly powerful tool for building chromosome-scale assemblies. 
+    Hi-C contact maps reflect how often regions of the genome are physically close 
+    to one another in the nucleus, providing long-range linkage information that 
+    can order and orient contigs into scaffolds. 
+  </p>
 
-        <figure>
-          <img src="img/hic-contact-map.png" alt="Hi-C contact map." />
-          <figcaption>Example Hi-C contact map (placeholder).</figcaption>
-        </figure>
+  <p>
+    In a well-assembled chromosome, contacts appear as a strong diagonal — nearby 
+    sequence tends to have high interaction frequency. Deviations from this pattern 
+    often reveal structural errors, such as misjoins, inversions, or local 
+    fragmentation.
+  </p>
 
-        <p>
-          A strong diagonal indicates well-assembled chromosomes. Off-diagonal blocks may indicate misjoins or rearrangements.
-        </p>
-      </section>
+  <figure>
+    <img src="cis_trans_hic.jpg"
+         alt="Hi-C contact map example (placeholder)">
+    <figcaption>
+      Fig. 3.7:Example Hi-C contact map showing smooth, uninterrupted diagonal structure 
+      indicative of a well-scaffolded chromosome and cis and trans interactions along the chromosomes.
+    </figcaption>
+  </figure>
+
+  <h3>Interpreting patterns in Hi-C contact maps</h3>
+
+  <p>
+    When visualizing Hi-C data, several characteristic patterns can help diagnose 
+    assembly issues:
+  </p>
+
+  <ul>
+    <li><strong>Continuous diagonal</strong> – suggests proper ordering and orientation.</li>
+    <li><strong>Sharp breaks in the diagonal</strong> – often indicate scaffold gaps or misjoins.</li>
+    <li><strong>Mirror-image or X-shaped patterns</strong> – characteristic of inversions.</li>
+    <li><strong>Off-diagonal blocks</strong> – may indicate translocations or duplicated segments.</li>
+  </ul>
+
+  <h3>Example: Inversion</h3>
+
+  <p>
+    A genomic inversion creates a characteristic “X” or bow-tie pattern in the 
+    Hi-C contact map. This occurs because the inverted region contacts the 
+    surrounding sequence in the opposite orientation.
+  </p>
+
+  <figure>
+    <img src="inversion_mosquito_example_Lukyanchikova2025.jpg"
+         alt="Hi-C inversion pattern example (placeholder)">
+    <figcaption>
+      Fig. 3.6: Hi-C signature of a genomic inversion, showing mirrored contact patterns 
+      relative to the main diagonal (placeholder).
+    </figcaption>
+  </figure>
+
+  <h3>Example: Misjoin</h3>
+
+  <p>
+    A misjoin happens when two unrelated contigs are incorrectly joined. In Hi-C, 
+    this appears as a sudden loss of contact support or a sharp discontinuity 
+    in the diagonal. Correcting misjoins is essential for producing 
+    chromosome-scale scaffolds.
+  </p>
+
+  <figure>
+    <img src="Fig.3.7.png"
+         alt="Hi-C misjoin pattern example (placeholder)">
+    <figcaption>
+      Abrupt break in Hi-C contact support characteristic of a misjoin 
+      (placeholder).
+    </figcaption>
+  </figure>
+
+  <h3>Tools for Hi-C scaffolding and visualization</h3>
+
+  <p>
+    Several widely used tools assist with Hi-C–based scaffolding and curation:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Tool</th>
+        <th>Use</th>
+        <th>Link</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>YaHS</strong></td>
+        <td>
+          Modern, fast Hi-C scaffolder that performs extremely well on 
+          vertebrate assemblies; recommended for automated scaffolding.
+        </td>
+        <td><a href="https://github.com/c-zhou/yahs" target="_blank">GitHub</a></td>
+      </tr>
+      <tr>
+        <td><strong>Juicebox / Juicebox Assembly Tools</strong></td>
+        <td>
+          Visualization and manual editing of Hi-C contact maps; standard for 
+          manual curation.
+        </td>
+        <td><a href="https://github.com/aidenlab/Juicebox" target="_blank">GitHub</a></td>
+      </tr>
+      <tr>
+        <td><strong>3D-DNA</strong></td>
+        <td>
+          Automated Hi-C scaffolding pipeline integrating misjoin detection, 
+          fragmentation, and reassembly.
+        </td>
+        <td><a href="https://github.com/aidenlab/3d-dna" target="_blank">GitHub</a></td>
+      </tr>
+      <tr>
+        <td><strong>hicExplorer / hicPlotMatrix</strong></td>
+        <td>Python-based tools for generating publication-quality Hi-C plots.</td>
+        <td><a href="https://hicexplorer.readthedocs.io" target="_blank">Docs</a></td>
+      </tr>
+      <tr>
+        <td><strong>cooler + HiGlass</strong></td>
+        <td>
+          Efficient Hi-C storage and interactive web-based visualization.
+        </td>
+        <td><a href="https://higlass.io" target="_blank">Website</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Manual inspection and curation</h3>
+
+  <p>
+    Although automated Hi-C scaffolding (e.g., with YaHS or 3D-DNA) can produce 
+    chromosome-level assemblies, <strong>manual curation remains essential</strong>. 
+    Most vertebrate genome projects require at least some amount of hand-editing 
+    to correct:
+  </p>
+
+  <ul>
+    <li>inversions missed by automated tools,</li>
+    <li>misjoins or incomplete breaks,</li>
+    <li>duplicated or collapsed regions,</li>
+    <li>incorrect orientation of small contigs,</li>
+    <li>chromosome-level rearrangements.</li>
+  </ul>
+
+  <p>
+    Hi-C scaffolding is as much an <strong>interpretive</strong> process as a 
+    computational one — a combination of algorithmic inference and human expertise 
+    to ensure accuracy.
+  </p>
+        
+    </p>
+  </div>
+</section>
+
 
       <!-- FURTHER ANALYSES -->
       <section class="section" id="further">
