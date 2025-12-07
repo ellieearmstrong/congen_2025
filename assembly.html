@@ -394,7 +394,7 @@ Here are some important statistics to consider when assessing a fragmented assem
     </figcaption>
   </figure>
  <p>
-  <strong>L90</strong>strong> is similar, but using number of scaffolds instead of scaffold length.
+  <strong>L90</strong> is similar, but using number of scaffolds instead of scaffold length.
  </p>
  <p>
 These statistics are relatively easy to calculate, but there are also tools that can summarize 
@@ -477,17 +477,22 @@ the following table:</p>
 <p>
   <table>
     <thead>
-      <tr><th>Statistic</th><th>Hifiasm-<em>B. abyssinicus</em></th><th>Hifiasm-T. deckeni</th><th>Flye-T. deckeni</th><th>Spades-T. deckeni</th></tr>
+      <tr><th>Statistic</th><th>Hifiasm-<em>B. abyssinicus</em></th><th>Hifiasm-<em>T. deckeni</em></th><th>Flye-<em>T. deckeni</em></th><th>Spades-<em>T. deckeni</em></th></tr>
     </thead>
     <tbody>
       <tr><td><code>Length</code></td><td>1,132,597,561</td><td>1,030,508,849</td><td>1,868,126,942</td><td>1,097,012,933</td></tr>
       <tr><td><code>Number of scaffolds</code></td><td>112</td><td>81</td><td>9,479</td><td>14,244</td></tr>
       <tr><td><code>Scaffold N50</code></td><td>40,274,051</td><td>48,768,445</td><td>731,074</td><td>39,430,287</td></tr>
       <tr><td><code>Scaffold L50</code></td><td>9</td><td>8</td><td>506</td><td>9</td></tr>
+      <tr><td><code>Contig N50</code></td><td>12,740,142</td><td>45,455,973</td><td>731,074</td><td>31,311</td></tr>
       <tr><td><code>% N </code></td><td>0.71</td><td>0.00</td><td>0.00</td><td>2.17</td></tr>
     </tbody>
   </table>
 </p>
+Clearly the long read assemblies with the long read assembler (Flye) have higher N50s and fewer scaffolds than the SPAdes assemblies. 
+Note that this doesn't mean SPAdes is "worse" than Flye, it just means that for this type of data Flye is producing more contiguous 
+assemblies. Also note that none of these assemblies alone produce scaffolds approaching the SRA assembly for D. pseudoobscura (PacBio/Canu), 
+which has only 70 scaffolds, most assigned to one of the 6 chromosomes.
 </section>
 
       <!-- COMPLEASM -->
