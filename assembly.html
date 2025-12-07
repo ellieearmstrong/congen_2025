@@ -138,19 +138,10 @@
     }
     .code-block-blue {
       background: #add7f7;
-      border: 1px solid #61aee8;
-      border-radius: 12px;
-      padding: 1rem 1.25rem;
-      margin: 1.25rem auto;
-      display: block;
-      width: fit-content;
-      max-width: 100%;
-      font-family: ui-monospace, Menlo, Monaco, Consolas, "Courier New", monospace;
-      font-size: 1rem;
-      color: #0a0a0a;
-      text-align: center;
-      white-space: pre-wrap;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+      border-radius: 12px; padding: 1rem 1.5rem;
+      display: inline-block; font-family: monospace;
+      white-space: pre-wrap; color: #065f46;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
     }
     .code-block { background: #111827; color: #f9fafb;
       border-radius: 10px; padding: 0.6rem 0.9rem;
@@ -421,8 +412,8 @@ folder. Let's run the <strong>assemblathon</strong> script on one of them:
 </p>
 
 <div class="code-block-green">perl /usr/bin/assemblathon_stats.pl /
-expected-outputs/assemblies/hifiasm-pacbio-chr2.bp.hap1.p_ctg.fa > /
-quality-control/hifiasm-pacbio-chr2.bp.hap1.p_ctg-assemblathon.txt
+expected-outputs/assemblies/Tdeckeni_hap2_yahs.out_scaffolds_final.fa > /
+quality-control/Tdeckeni_hap2_yahs.out_scaffolds_final-assemblathon.txt
 </div>
 <table>
     <thead>
@@ -431,24 +422,47 @@ quality-control/hifiasm-pacbio-chr2.bp.hap1.p_ctg-assemblathon.txt
     <tbody>
       <tr><td><code>perl</code></td><td>Invoke perl to run a script.</td></tr>
       <tr><td><code>/usr/bin/assemblathon_stats.pl</code></td><td>The path to the perl script to run.</td></tr>
-      <tr><td><code>expected-outputs/assemblies/hifiasm-pacbio-chr2.bp.hap1.p_ctg.fa</code></td><td>The input FASTA file containing a genome assembly.</td></tr>
+      <tr><td><code>expected-outputs/assemblies/Tdeckeni_hap2_yahs.out_scaffolds_final.fa</code></td><td>The input FASTA file containing a genome assembly.</td></tr>
       <tr><td><code>></code></td><td>This redirects the output from the command specified before it into the file specified after it.</td></tr>
-      <tr><td><code>quality-control/hifiasm-pacbio-chr2.bp.hap1.p_ctg-assemblathon.txt</code></td><td>The desired output file.</td></tr>
+      <tr><td><code>quality-control/Tdeckeni_hap2_yahs.out_scaffolds_final-assemblathon.txt</code></td><td>The desired output file.</td></tr>
     </tbody>
   </table>
 <p>
-This should produce the file <strong>quality-control/hifiasm-pacbio-chr2.bp.hap1.p_ctg-assemblathon.txt</strong> which contains several statistics about the assembly
+This should produce the file <strong>quality-control/Tdeckeni_hap2_yahs.out_scaffolds_final-assemblathon.txt</strong> which contains several statistics about the assembly
 </p>
 <p>
 Let's take a look at this file:
 </p>
 
-<div class="code-block-green">less -S quality-control/hifiasm-pacbio-chr2/hifiasm-pacbio-chr2.bp.hap1.p_ctg-assemblathon.txt
+<div class="code-block-green">less -S quality-control/Tdeckeni_hap2_yahs.out_scaffolds_final-assemblathon.txt
 </div>
 
 <p>This should display a nice table of statistics</p>
 
 <div class="code-block-blue">
+---------------- Information for assembly 'expected_outputs/assemblies/Tdeckeni_hap2_yahs.out_scaffo
+
+
+                                         Number of scaffolds         81
+                                     Total size of scaffolds 1030508849
+                                            Longest scaffold  130958238
+                                           Shortest scaffold       5000
+                                 Number of scaffolds > 1K nt         81 100.0%
+                                Number of scaffolds > 10K nt         80  98.8%
+                               Number of scaffolds > 100K nt         52  64.2%
+                                 Number of scaffolds > 1M nt         36  44.4%
+                                Number of scaffolds > 10M nt         28  34.6%
+                                          Mean scaffold size   12722331
+                                        Median scaffold size     356156
+                                         N50 scaffold length   48768445
+                                          L50 scaffold count          8
+                                                 scaffold %A      27.68
+                                                 scaffold %C      22.28
+                                                 scaffold %G      22.35
+                                                 scaffold %T      27.69
+                                                 scaffold %N       0.00
+                                         scaffold %non-ACGTN       0.00
+                             Number of scaffold non-ACGTN nt          0
   
 </div>
 <p>
