@@ -393,17 +393,18 @@ Here are some important statistics to consider when assessing a fragmented assem
 These statistics are relatively easy to calculate, but there are also tools that can summarize 
 these and more for a given assembly. <a href="https://doi.org/10.1186/2047-217X-2-10" target="_blank"> Assemblathon
 </a> was a competition to assess genome assemblers in 2013. They have helpfully made available some of the 
-scripts they use to quantify final genome assemblies in their <a href="https://github.com/ucdavis-bioinformatics/assemblathon2-analysis" target="_blank"> Github repository
-</a>. We will use one of their scripts to gather some basic 
+scripts they use to quantify final genome assemblies in their 
+<a href="https://github.com/ucdavis-bioinformatics/assemblathon2-analysis" target="_blank">Github repository</a>. We will use one of their scripts to gather some basic 
 statistics about our genome assemblies.
 </p>
+  
 <p>
 Instead of using the assembly we just produced, which is only of a single chromosome, 
-we've provided several <em>T. deckeni</em> genomes to compare in the expected-outputs/assemblies/ 
-folder. Let's run the assemblathon script on one of them:
+we've provided several <em>T. deckeni</em> genomes to compare in the <strong>expected-outputs/assemblies/</strong>
+folder. Let's run the <strong>assemblathon</strong> script on one of them:
 </p>
-<div class="code-block-green">
-perl /usr/bin/assemblathon_stats.pl expected-outputs/assemblies/hifiasm-pacbio-chr2.bp.hap1.p_ctg.fa > /
+<div class="code-block-green"> perl /usr/bin/assemblathon_stats.pl /
+expected-outputs/assemblies/hifiasm-pacbio-chr2.bp.hap1.p_ctg.fa > /
 quality-control/hifiasm-pacbio-chr2.bp.hap1.p_ctg-assemblathon.txt
 </div>
 </section>
