@@ -408,7 +408,8 @@ statistics about our genome assemblies.
 <p>
 Instead of using the assembly we just produced, which is only of a single chromosome, 
 we've provided several <em>T. deckeni</em> genomes to compare in the <strong>expected-outputs/assemblies/</strong>
-folder. Let's run the <strong>assemblathon</strong> script on one of them:
+folder, including the scaffolded and unscaffolded version of our genome. Let's run the 
+<strong>assemblathon</strong> script on one of them:
 </p>
 
 <div class="code-block-green">perl /usr/bin/assemblathon_stats.pl /
@@ -467,16 +468,26 @@ Let's take a look at this file:
 </div>
 <p>
 We know that <em>T. deckeni</em> has a genome size of roughly 1.2Gb that should be distributed across approximately 40 chromosomes. 
-So the assembly size of XXX is about right, but we've only been able to resolve XX scaffolds. No where near the 40 chromosomes we
-would ideally want. Such a fragmented assembly could make annotation difficult with genes likely being split between scaffolds, 
-and analysis of structural variation impossible.</p>
+So the assembly size of 1,030,508,849 is about right and 50% of the assembly is in only 8 scaffolds. </p>
 
-<p>What about some other assemblies? We've provided several more assemblies of <em>T. deckeni</em> in the <strong>expected-outputs/assemblies/</strong> 
-folder, including a SPAdes assembly with long reads (PacBio + Nanopore), a Flye assembly with just PacBio reads and a Flye assembly 
-with just Nanopore reads. The assemblathon output files are there as well, but the statistics we've talked about are summarized in 
-the following table, as well as the latest published D. pseudoobscura genome on the SRA:</p>
+<p>What about some other assemblies?  We've provided several more assemblies of <em>T. deckeni</em> in the <strong>expected-outputs/assemblies/</strong> 
+folder, including the SPAdes assembly. The assemblathon output files are in <strong>expected-outputs/quality-control/</strong>, but the statistics we've talked about are summarized in 
+the following table:</p>
 
-
+<p>
+  <table>
+    <thead>
+      <tr><th>Statistic</th><th>Hifiasm-B. abyssinicus</th><th>Hifiasm-T. deckeni</th><th>Flye-T. deckeni</th><th>Spades-T. deckeni</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>Length</code></td><td>Invoke perl to run a script.</td></tr>
+      <tr><td><code>Number of scaffolds</code></td><td>The path to the perl script to run.</td></tr>
+      <tr><td><code>Scaffold N50</code></td><td>The input FASTA file containing a genome assembly.</td></tr>
+      <tr><td><code>Scaffold L90</code></td><td>This redirects the output from the command specified before it into the file specified after it.</td></tr>
+      <tr><td><code>% N </code></td><td>The desired output file.</td></tr>
+    </tbody>
+  </table>
+</p>
 </section>
 
       <!-- COMPLEASM -->
