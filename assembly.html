@@ -315,22 +315,159 @@ hifiasm \
 
       <!-- ASSEMBLY QUALITY SUMMARY -->
       <section class="section" id="assembly-quality">
-        <h2>Assembly quality</h2>
+  <h2>Assessing assembly quality</h2>
 
-        <p>
-          Assembly quality has three key components:
-        </p>
+  <p>
+    Genome assembly evaluation has become a discipline in its own right,
+    and large benchmarking efforts such as the 
+    <strong>Assemblathon</strong> competitions have highlighted the complexities
+    involved in judging assembly quality. These projects demonstrated that no
+    single metric alone is sufficient to evaluate an assembly. Instead, we look at 
+    several complementary aspects:
+  </p>
 
-        <ul>
-          <li><strong>Contiguity</strong> (N50, L50, total size)</li>
-          <li><strong>Accuracy</strong> (read mapping back to the assembly)</li>
-          <li><strong>Completeness</strong> (see compleasm below)</li>
-        </ul>
+  <ul>
+    <li><strong>Contiguity</strong> – How continuous is the assembly (N50, total length)?</li>
+    <li><strong>Accuracy</strong> – How well do reads map back to the assembly?</li>
+    <li><strong>Completeness</strong> – How much of the expected genome is actually present?</li>
+  </ul>
 
-        <p>
-          Long-read assemblies typically show huge gains in contiguity compared to short-read assemblies.
-        </p>
-      </section>
+  <p>
+    In the Assemblathon projects, a wide range of approaches were tested,
+    and the results clearly showed that assemblies vary widely in their
+    strengths and weaknesses. A highly contiguous assembly is not necessarily
+    the most accurate or complete, and vice versa.
+  </p>
+
+  <figure>
+    <img src="img/assemblathon-concepts.png" alt="Assemblathon benchmarking concepts (placeholder).">
+    <figcaption>
+      Assemblathon-style breakdown of assembly evaluation categories.
+      (Placeholder figure.)
+    </figcaption>
+  </figure>
+
+  <h3>Assembly contiguity</h3>
+
+  <p>
+    Measures such as the <strong>N50</strong> are widely used to quantify contiguity.
+    The N50 is the length at which 50% of the genome is contained in contigs or
+    scaffolds of that size or larger. Although widely cited, contiguity alone does not
+    guarantee biological accuracy. Assemblathon benchmarks demonstrated that
+    assemblies with similar N50 values may differ dramatically in correctness.
+  </p>
+
+  <div class="code-block-green">
+seqkit stats assembly.fasta
+  </div>
+
+  <figure>
+    <img src="img/n50-example.png" alt="Example N50 plot (placeholder)">
+    <figcaption>
+      Example N50-style summary for different assemblies. (Placeholder.)
+    </figcaption>
+  </figure>
+
+  <h3>Mapped read support</h3>
+
+  <p>
+    One of the most informative assessments is to map the original reads back to
+    the assembly. Regions with low coverage or very high coverage can indicate 
+    misassemblies, collapsed repeats, or contamination. Assemblathon analyses
+    highlighted that read-mapping patterns often reveal misjoins not captured
+    by contiguity statistics.
+  </p>
+
+  <div class="code-block-green">
+bwa mem -t 8 assembly.fasta reads_R1.fq.gz reads_R2.fq.gz \
+  | samtools sort -o mapped.sorted.bam
+
+samtools flagstat mapped.sorted.bam
+samtools stats mapped.sorted.bam > mapping_stats.txt
+  </div>
+
+  <figure>
+    <img src="img/coverage-profile.png" alt="Mapped read coverage profile (placeholder)">
+    <figcaption>
+      Example read-depth profile across an assembly. (Placeholder.)
+    </figcaption>
+  </figure>
+
+  <h3>Error types identified in Assemblathon evaluations</h3>
+
+  <p>
+    Benchmarking exercises revealed that assembly errors fall into several
+    recurrent categories:
+  </p>
+
+  <ul>
+    <li><strong>Misjoins</strong> – Contigs incorrectly joined together.</li>
+    <li><strong>Collapsed repeats</strong> – Multiple copies represented as one.</li>
+    <li><strong>Expansions</strong> – Repeat regions over-represented.</li>
+    <li><strong>Missing content</strong> – Biological sequence not recovered.</li>
+  </ul>
+
+  <figure>
+    <img src="img/error-types.png" alt="Common assembly error types (placeholder)">
+    <figcaption>
+      Common error categories observed in Assemblathon analyses. (Placeholder.)
+    </figcaption>
+  </figure>
+
+  <h3>Paired-end and long-read support</h3>
+
+  <p>
+    Evidence from paired-end or long-read alignments is extremely useful for
+    identifying misassemblies. Large deviations in insert size or unexpected 
+    mapping orientations were diagnostic signals used extensively during
+    Assemblathon scoring.
+  </p>
+
+  <div class="code-block-green">
+samtools view mapped.sorted.bam | head
+  </div>
+
+  <figure>
+    <img src="img/mate-support.png" alt="Example mate-pair support diagram (placeholder)">
+    <figcaption>
+      Example of paired read support across assembly joins (placeholder).
+    </figcaption>
+  </figure>
+
+  <h3>Insert: Assembly quality considerations</h3>
+
+  <p>
+    Assemblathon organizers emphasized that genome assembly is a balance of:
+  </p>
+
+  <ul>
+    <li>sequence accuracy,</li>
+    <li>repeat resolution,</li>
+    <li>structural correctness,</li>
+    <li>and completeness.</li>
+  </ul>
+
+  <p>
+    No single metric captures all these dimensions. High-quality assemblies
+    typically excel across many metrics simultaneously.
+  </p>
+
+  <h3>Annotation quality with BUSCO (transition to next section)</h3>
+
+  <p>
+    Beyond contiguity and mapping support, we also assess gene completeness
+    using tools such as <strong>BUSCO</strong> (or, in this course, 
+    <strong>compleasm</strong>). These methods evaluate the presence of
+    evolutionarily conserved single-copy orthologs and were a key component
+    of Assemblathon-style benchmarking.
+  </p>
+
+  <figure>
+    <img src="img/busco-summary.png" alt="BUSCO completeness barplot (placeholder)">
+    <figcaption>Example BUSCO completeness summary (placeholder).</figcaption>
+  </figure>
+</section>
+
 
       <!-- COMPLEASM -->
       <section class="section" id="compleasm">
