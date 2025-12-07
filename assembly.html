@@ -312,12 +312,6 @@ hifiasm \
   -t 16 \
   T_deckeni_reads/pacbio/pacbio_Tdeckeni_chr2_subsample.fastq.gz 
 </div>
-
-        <ul>
-          <li><code>.p_ctg.gfa</code> — primary contigs</li>
-          <li><code>.a_ctg.gfa</code> — alternate contigs</li>
-        </ul>
-
       </section>
 
       <!-- ASSEMBLY QUALITY SUMMARY -->
@@ -390,7 +384,7 @@ Here are some important statistics to consider when assessing a fragmented assem
   <figure>
     <img src="Fig3.3.png" alt="N50 figure from Assemblathon (placeholder)">
     <figcaption>
-      Figure 3.2: Scaffold N50. Source: Molecular Ecologist
+      Figure 3.3: Scaffold N50. Source: Molecular Ecologist
     </figcaption>
   </figure>
  <p>
@@ -399,8 +393,8 @@ Here are some important statistics to consider when assessing a fragmented assem
  <p>
 These statistics are relatively easy to calculate, but there are also tools that can summarize 
 these and more for a given assembly. <a href="https://doi.org/10.1186/2047-217X-2-10" target="_blank"> Assemblathon
-</a> was a competition to assess genome assemblers in 2013. They have helpfully made available some of the 
-scripts they use to quantify final genome assemblies in their 
+</a> was a competition to assess genome assemblers in 2013 (yes, I know, this is a bit archaic now). However, they have 
+helpfully made available some of the scripts they use to quantify final genome assemblies in their 
 <a href="https://github.com/ucdavis-bioinformatics/assemblathon2-analysis" target="_blank">Github repository</a>. We will use one of their scripts to gather some basic 
 statistics about our genome assemblies.
 </p>
@@ -489,10 +483,8 @@ the following table:</p>
     </tbody>
   </table>
 </p>
-Clearly the long read assemblies with the long read assembler (Flye) have higher N50s and fewer scaffolds than the SPAdes assemblies. 
-Note that this doesn't mean SPAdes is "worse" than Flye, it just means that for this type of data Flye is producing more contiguous 
-assemblies. Also note that none of these assemblies alone produce scaffolds approaching the SRA assembly for D. pseudoobscura (PacBio/Canu), 
-which has only 70 scaffolds, most assigned to one of the 6 chromosomes.
+Clearly the long read assemblies with the long read assemblers (Hifiasm and Flye) have higher Contig N50s and fewer contigs and scaffolds than the SPAdes assemblies. 
+Note that this doesn't mean SPAdes is "worse" than the long read assemblies, it is optimized for a different kind of data.
 </section>
 
       <!-- COMPLEASM -->
@@ -500,23 +492,31 @@ which has only 70 scaffolds, most assigned to one of the 6 chromosomes.
         <h2>Assembly completeness with compleasm</h2>
 
         <p>
-          Compleasm evaluates completeness using BUSCO lineage datasets.
-          For birds, use <code>aves_odb10</code> or <code>aves_odb12</code>.
+          Compleasm evaluates completeness using BUSCO lineage datasets. BUSCO, short for Benchmarking sets of Universal Single-Copy Orthologs, 
+          can help to assess the completeness of your genome with respect to gene content. It does so by comparing gene sequences of well-annotated 
+          species closely related to your species of interest to determine the number of Complete, Duplicated, Fragmented, and Missing genes present 
+          in an assembly among a set of universal orthologs.
+        </p>
+        <p>
+          For birds, we can use the Aves database, but the vertebrate database would also be suitable. BUSCO/Compleasm 
+          has a variety of lineages suitable to various organisms. 
         </p>
 
 <div class="code-block-red">
 compleasm run \
-  -a expected-outputs/assemblies/hifiasm-pacbio-chr2.bp.hap1.p_ctg.fa \
-  -o quality-control/hifiasm-pacbio-chr2.bp.hap1.p_ctg-compleasm \
+  -a expected-outputs/assemblies/Tdeckeni_hap2_yahs.out_scaffolds_final.fa  \
+  -L mb_downloads \
   -l aves \
-  -t 8
+  -o quality-control/Tdeckeni_hap2_yahs.out_scaffolds_final_aves \
+  -t 4
 </div>
 
         <figure>
-          <img src="img/compleasm-summary.png" alt="Completeness summary plot." />
+          <img src="Fig3.4.png" alt="Compleasm output for two <em>T. deckeni</em> genomes." />
           <figcaption>Example completeness summary (placeholder).</figcaption>
         </figure>
-
+<p>What we can see here is that, despite the short read assembly being much more fragmented, we still recover 98% of the universal copy orthologs, identical to the long read alignment. 
+  Depending on the questions you are asking, short read assemblies may be sufficient.</p>
       </section>
 
       <!-- HI-C -->
