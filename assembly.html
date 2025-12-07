@@ -136,6 +136,22 @@
       white-space: pre-wrap;
       box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
     }
+    .code-block-blue {
+      background: #add7f7;
+      border: 1px solid #61aee8;
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin: 1.25rem auto;
+      display: block;
+      width: fit-content;
+      max-width: 100%;
+      font-family: ui-monospace, Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 1rem;
+      color: #0a0a0a;
+      text-align: center;
+      white-space: pre-wrap;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    }
     .code-block { background: #111827; color: #f9fafb;
       border-radius: 10px; padding: 0.6rem 0.9rem;
       margin: 0.7rem 0; font-family: monospace; }
@@ -408,7 +424,18 @@ folder. Let's run the <strong>assemblathon</strong> script on one of them:
 expected-outputs/assemblies/hifiasm-pacbio-chr2.bp.hap1.p_ctg.fa > /
 quality-control/hifiasm-pacbio-chr2.bp.hap1.p_ctg-assemblathon.txt
 </div>
-
+<table>
+    <thead>
+      <tr><th>Command line parameter</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>perl</code></td><td>Invoke perl to run a script.</td></tr>
+      <tr><td><code>/usr/bin/assemblathon_stats.pl</code></td><td>The path to the perl script to run.</td></tr>
+      <tr><td><code>expected-outputs/assemblies/hifiasm-pacbio-chr2.bp.hap1.p_ctg.fa</code></td><td>The input FASTA file containing a genome assembly.</td></tr>
+      <tr><td><code>></code></td><td>This redirects the output from the command specified before it into the file specified after it.</td></tr>
+      <tr><td><code>quality-control/hifiasm-pacbio-chr2.bp.hap1.p_ctg-assemblathon.txt</code></td><td>The desired output file.</td></tr>
+    </tbody>
+  </table>
 <p>
 This should produce the file <strong>quality-control/hifiasm-pacbio-chr2.bp.hap1.p_ctg-assemblathon.txt</strong> which contains several statistics about the assembly
 </p>
@@ -416,7 +443,7 @@ This should produce the file <strong>quality-control/hifiasm-pacbio-chr2.bp.hap1
 Let's take a look at this file:
 </p>
 
-<div class="code-block-green">less -S quality-control/hifiasm-pacbio-chr2.bp.hap1.p_ctg-assemblathon.txt
+<div class="code-block-green">less -S quality-control/hifiasm-pacbio-chr2/hifiasm-pacbio-chr2.bp.hap1.p_ctg-assemblathon.txt
 </div>
 
 <p>This should display a nice table of statistics</p>
@@ -443,11 +470,11 @@ the following table, as well as the latest published D. pseudoobscura genome on 
           For birds, use <code>aves_odb10</code> or <code>aves_odb12</code>.
         </p>
 
-<div class="code-block-green">
+<div class="code-block-red">
 compleasm run \
-  -a hornbill_assembly.fasta \
-  -o compleasm-output \
-  -l aves_odb10 \
+  -a expected-outputs/assemblies/hifiasm-pacbio-chr2.bp.hap1.p_ctg.fa \
+  -o quality-control/hifiasm-pacbio-chr2.bp.hap1.p_ctg-compleasm \
+  -l aves \
   -t 8
 </div>
 
