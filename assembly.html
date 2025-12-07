@@ -287,7 +287,7 @@ flye \
 </div>
 
         <p>
-          Flye produces <code>assembly.fasta</code>, logs, and graph files inside <code>flye-pacbio/</code>.
+          Flye produces <code>assembly.fasta</code>, logs, and graph files inside <code>flye-pacbio-chr2/</code>.
         </p>
       </section>
 
@@ -299,11 +299,11 @@ flye \
           Hifiasm is optimized for highly accurate PacBio HiFi reads and produces phased assemblies when possible.
         </p>
 
-<div class="code-block-green">
+<div class="code-block-red">
 hifiasm \
-  -o hornbill_hifiasm \
+  -o assemblies/hifiasm-pacbio-chr2  \
   -t 16 \
-  pacbio_Tdeckeni_chr2_subsample.fastq.gz 
+  T_deckeni_reads/pacbio/pacbio_Tdeckeni_chr2_subsample.fastq.gz 
 </div>
 
         <ul>
