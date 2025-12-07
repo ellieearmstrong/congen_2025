@@ -315,17 +315,15 @@ hifiasm \
 
       <!-- ASSEMBLY QUALITY SUMMARY -->
 <section class="section" id="assembly-quality">
-  <h2>Assessing assembly quality</h2>
+  <h2>Assembly quality with N50</h2>
 
   <p>
-    When evaluating genome assemblies, we often begin with a set of standard
-    statistics that summarize contiguity, size, and scaffold distribution.
-    These metrics were widely used and benchmarked during the
-    <strong>Assemblathon</strong> competitions, which highlighted both the
-    usefulness and limitations of these summary measures.
+    One of the most common ways to summarize the quality of a genome assembly is
+    through metrics that describe contiguity—the lengths and distribution of the
+    assembled contigs or scaffolds. The table below summarizes the standard
+    statistics used in most assembly evaluations, including during the
+    <strong>Assemblathon</strong> competitions.
   </p>
-
-  <h3>Common assembly quality statistics</h3>
 
   <table>
     <thead>
@@ -337,87 +335,73 @@ hifiasm \
     <tbody>
       <tr>
         <td><strong>Total assembly size</strong></td>
-        <td>The total number of bases across all contigs or scaffolds.</td>
+        <td>Total number of bases in the assembly (sum of all contigs/scaffolds).</td>
       </tr>
       <tr>
-        <td><strong>Number of contigs / scaffolds</strong></td>
-        <td>Counts of discrete assembled sequences; fewer typically indicates a more contiguous assembly.</td>
+        <td><strong>Number of scaffolds / contigs</strong></td>
+        <td>
+          Total count of assembled sequences. Fewer scaffolds typically indicate
+          higher contiguity.
+        </td>
       </tr>
       <tr>
         <td><strong>N50</strong></td>
         <td>
-          The contig or scaffold length at which 50% of the assembly is
-          contained in sequences of this length or longer.
+          The scaffold length at which 50% of the assembly is contained in
+          scaffolds of this length or longer.
         </td>
       </tr>
       <tr>
         <td><strong>L50</strong></td>
         <td>
-          The number of contigs or scaffolds whose combined length reaches 50%
-          of the total assembly; lower values indicate higher contiguity.
+          The number of scaffolds contributing to half of the genome size. Lower
+          values reflect better contiguity.
         </td>
       </tr>
       <tr>
         <td><strong>NG50</strong></td>
         <td>
-          Similar to N50 but based on an expected genome size rather than the
-          assembled size.
+          Same as N50 but based on an <em>expected</em> genome size. Useful when
+          assemblies differ greatly in total length.
         </td>
       </tr>
       <tr>
-        <td><strong>Largest contig / scaffold</strong></td>
-        <td>The length of the longest assembled sequence.</td>
-      </tr>
-      <tr>
-        <td><strong>N90, L90</strong></td>
-        <td>
-          Like N50 and L50, but for 90% of the genome; emphasizes fragmentation
-          in smaller contigs.
-        </td>
+        <td><strong>Largest scaffold</strong></td>
+        <td>Length of the largest assembled scaffold.</td>
       </tr>
     </tbody>
   </table>
 
   <p>
-    These metrics give a high-level sense of contiguity and fragmentation, but
-    they do not directly measure biological correctness or completeness. This
-    was a key lesson from the Assemblathon competitions.
-  </p>
-
-  <h3>The Assemblathon perspective</h3>
-
-  <p>
-    The <strong>Assemblathon</strong> genome assembly competitions brought
-    together dozens of assembly methods and highlighted an important insight:
-    <strong>no single statistic captures overall assembly quality</strong>.
-  </p>
-
-  <p>
-    Assemblathon organizers demonstrated that assemblies with similar N50
-    values could differ substantially in correctness, structural accuracy,
-    repeat resolution, and completeness. Conversely, assemblies with lower
-    N50 values were sometimes more accurate or biologically faithful.
+    These metrics give an overview of assembly structure but do not necessarily
+    indicate that an assembly is biologically accurate. This was a major lesson
+    from the <strong>Assemblathon</strong> challenges.
   </p>
 
   <div class="card" style="background:#f9fafb; border:1px solid #e5e7eb; margin-top:1rem;">
-    <h3 style="margin-top:0;">Assemblathon key takeaways</h3>
-    <ul>
-      <li>N50 alone is not sufficient to judge assembly quality.</li>
-      <li>Contiguity and correctness are not always correlated.</li>
-      <li>Different assemblers have different strengths (repeat resolution, accuracy, haplotype handling).</li>
-      <li>Multiple metrics must be combined for a reliable assessment.</li>
-    </ul>
+    <h3 style="margin-top:0;">Assemblathon insights</h3>
+    <p>
+      During the Assemblathon competitions, it became clear that assemblies with
+      the highest N50 values were not always the best overall assemblies. Some
+      highly contiguous assemblies contained structural errors or misassemblies
+      that reduced their biological usefulness, while other assemblies with lower
+      N50 values were more accurate.
+    </p>
+
+    <p>
+      The key takeaway is that <strong>N50 alone cannot be used to judge assembly
+      quality</strong>. A long scaffold might be the result of correct assembly—
+      or it might be an incorrect join.
+    </p>
   </div>
 
   <figure>
-    <img src="img/assemblathon-summary.png" alt="Assemblathon summary figure placeholder">
+    <img src="img/assemblathon-n50-example.png" alt="N50 figure from Assemblathon (placeholder)">
     <figcaption>
-      Summary of considerations from the Assemblathon genome assembly challenge (placeholder).
+      Illustration of N50 concept and Assemblathon evaluation considerations (placeholder).
     </figcaption>
   </figure>
-
 </section>
-
 
       <!-- COMPLEASM -->
       <section class="section" id="compleasm">
