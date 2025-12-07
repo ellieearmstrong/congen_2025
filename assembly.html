@@ -318,11 +318,12 @@ hifiasm \
   <h2>Assembly quality with N50</h2>
 
   <p>
-    One of the most common ways to summarize the quality of a genome assembly is
-    through metrics that describe contiguity—the lengths and distribution of the
-    assembled contigs or scaffolds. The table below summarizes the standard
-    statistics used in most assembly evaluations, including during the
-    <strong>Assemblathon</strong> competitions.
+    One of the main goals for a genome assembly program is to produce assembly scaffolds 
+    approaching chromosome length. This is difficult because repeats can often form 
+    unresolvable portions of the underlying assembly graph that prevent the extension of a 
+    sequence. This means genome assemblies can be highly fragmented.
+
+Here are some important statistics to consider when assessing a fragmented assembly:
   </p>
 
   <table>
@@ -352,10 +353,10 @@ hifiasm \
         </td>
       </tr>
       <tr>
-        <td><strong>L50</strong></td>
+        <td><strong>L90</strong></td>
         <td>
-          The number of scaffolds contributing to half of the genome size. Lower
-          values reflect better contiguity.
+          The number of scaffolds that make up 90% of the assembly. Ideally 
+          close to the number of chromosomes in the sequenced organism.
         </td>
       </tr>
       <tr>
@@ -366,41 +367,37 @@ hifiasm \
         </td>
       </tr>
       <tr>
-        <td><strong>Largest scaffold</strong></td>
-        <td>Length of the largest assembled scaffold.</td>
+        <td><strong>Number of Ns</strong></td>
+        <td>Bases that can't be confidently called, especially near contig 
+          junctions within scaffolds, are represented by Ns in the FASTA assembly 
+          file. Counting the total number of Ns can give you an idea of how well 
+          contigs were joined together into scaffolds.</td>
       </tr>
     </tbody>
   </table>
+  N50 can be a little tricky to understand, luckily the Molecular Ecologist blog has a simple
+  explainer post, that has the following figure:
 
-  <p>
-    These metrics give an overview of assembly structure but do not necessarily
-    indicate that an assembly is biologically accurate. This was a major lesson
-    from the <strong>Assemblathon</strong> challenges.
-  </p>
-
-  <div class="card" style="background:#f9fafb; border:1px solid #e5e7eb; margin-top:1rem;">
-    <h3 style="margin-top:0;">Assemblathon insights</h3>
-    <p>
-      During the Assemblathon competitions, it became clear that assemblies with
-      the highest N50 values were not always the best overall assemblies. Some
-      highly contiguous assemblies contained structural errors or misassemblies
-      that reduced their biological usefulness, while other assemblies with lower
-      N50 values were more accurate.
-    </p>
-
-    <p>
-      The key takeaway is that <strong>N50 alone cannot be used to judge assembly
-      quality</strong>. A long scaffold might be the result of correct assembly—
-      or it might be an incorrect join.
-    </p>
-  </div>
 
   <figure>
-    <img src="img/assemblathon-n50-example.png" alt="N50 figure from Assemblathon (placeholder)">
+    <img src="Fig3.3.png" alt="N50 figure from Assemblathon (placeholder)">
     <figcaption>
-      Illustration of N50 concept and Assemblathon evaluation considerations (placeholder).
+      Figure 3.2: Scaffold N50. Source: Molecular Ecologist
     </figcaption>
   </figure>
+
+  L90 is similar, but using number of scaffolds instead of scaffold length.
+
+These statistics are relatively easy to calculate, but there are also tools that can summarize 
+these and more for a given assembly. <a href="https://doi.org/10.1186/2047-217X-2-10" target="_blank"> Assemblathon
+</a> was a competition to assess genome assemblers in 2013. They have helpfully made available some of the 
+scripts they use to quantify final genome assemblies in their <a href="https://github.com/ucdavis-bioinformatics/assemblathon2-analysis" target="_blank"> ithub repository
+</a>. We will use one of their scripts to gather some basic 
+statistics about our genome assemblies.
+
+Instead of using the assembly we just produced, which is only of a single chromosome, 
+we've provided several T. deckeni genomes to compare in the expected-outputs/assemblies/ 
+folder. Let's run the assemblathon script on one of them:
 </section>
 
       <!-- COMPLEASM -->
