@@ -1,66 +1,296 @@
----
-title: Assembly – ConGen 2025 Assembly Workshop
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ConGen2025 Assembly Workshop – Assembly</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --accent: #2563eb;
+      --nav-bg: rgba(17, 24, 39, 0.95);
+      --card-bg: rgba(249, 250, 251, 0.96);
+      --text-main: #111827;
+      --text-muted: #4b5563;
+      --border-subtle: #e5e7eb;
+    }
 
-<main class="page">
-  <div class="page-inner">
+    * { box-sizing: border-box; }
 
-    <section class="card">
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text-main);
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+        url("https://cdn.pixabay.com/photo/2019/11/26/18/05/montana-4652867_1280.jpg")
+        no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+    }
 
-      <header class="page-header">
-        <h1>Genome Assembly</h1>
-        <p>This module walks through short- and long-read assembly approaches and introduces methods for evaluating assembly quality and completeness.</p>
-      </header>
+    /* NAVBAR */
+    .navbar-shell { padding: 0.75rem 1rem 0; }
+    .navbar {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      background: var(--nav-bg);
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+      color: #e5e7eb;
+      position: relative;
+      z-index: 10;
+      flex-wrap: wrap;
+    }
 
-      <!-- ========================
-           PAGE CONTENTS
-      ========================= -->
-      <section class="page-contents" id="index">
-        <div class="page-contents-title">Page contents</div>
-        <ul>
-          <li><a href="#intro">Introduction</a></li>
-          <li><a href="#spades">Short-read assembly with SPAdes</a></li>
-          <li><a href="#flye">Long-read assembly with Flye</a></li>
-          <li><a href="#hifiasm">Long-read assembly with Hifiasm</a></li>
-          <li><a href="#assembly-quality">Assembly quality with N50</a></li>
-          <li><a href="#compleasm">Assembly completeness with compleasm</a></li>
-          <li><a href="#hic">Interpreting Hi-C data</a></li>
-          <li><a href="#further">Further analyses</a></li>
-        </ul>
-      </section>
+    .nav-link,
+    .nav-dropdown > a {
+      color: #e5e7eb;
+      text-decoration: none;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      white-space: nowrap;
+      transition: background 0.15s ease;
+    }
 
-      <!-- ========================
-           INTRODUCTION
-      ========================= -->
-      <section class="section" id="intro">
-        <h2>Introduction</h2>
+    .nav-link:hover, .nav-dropdown > a:hover {
+      background: rgba(31, 41, 55, 0.9);
+    }
 
-        <p>
-          A genome assembly attempts to reconstruct an organism’s chromosomes using short or long sequencing reads.
-          Short-read assemblers typically use <strong>de Bruijn graphs</strong>, while long-read assemblers rely on
-          <strong>overlap-based</strong> methods. Both approaches must contend with repeats, heterozygosity, and uneven coverage.
-        </p>
+    .nav-link.active, .nav-dropdown > a.active {
+      background: #f9fafb;
+      color: #111827;
+      font-weight: 600;
+    }
 
-        <figure>
-          <img src="Fig3.1.png" alt="Cartoon of a genome assembly graph." />
-          <figcaption>Figure 3.1 – Cartoon of an assembly process.</figcaption>
-        </figure>
+    /* DROPDOWN */
+    .nav-dropdown { position: relative; }
+    .dropdown-caret { font-size: 0.75rem; }
+    .dropdown-menu {
+      position: absolute;
+      top: 100%; left: 0;
+      background: #f9fafb;
+      border-radius: 14px;
+      border: 1px solid #e5e7eb;
+      min-width: 170px;
+      padding: 0.25rem 0;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.4);
+      display: none;
+      z-index: 20;
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.45rem 0.9rem;
+      font-size: 0.9rem;
+      color: #374151;
+      text-decoration: none;
+    }
+    .dropdown-menu a:hover { background: #e5e7eb; }
+    .nav-dropdown:hover .dropdown-menu { display: block; }
 
-        <p>
-          In this module, we begin with a short-read assembly using SPAdes, then explore long-read assembly with Flye and Hifiasm,
-          followed by assessing quality and completeness.
-        </p>
-      </section>
+    /* PAGE SHELL */
+    .page {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      padding: 1rem;
+      padding-bottom: 2.5rem;
+    }
 
-      <!-- ========================
-           SPADES
-      ========================= -->
-      <section class="section" id="spades">
-        <h2>Short-read assembly with SPAdes</h2>
+    .page-inner { width: 100%; max-width: 1000px; }
 
-        <p>We will assemble example Illumina reads using SPAdes:</p>
+    .card {
+      margin-top: 1.25rem;
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 1.75rem 2rem 2rem;
+      box-shadow: 0 22px 50px rgba(0,0,0,0.45);
+      border: 1px solid #e5e7eb;
+    }
 
-        <div class="code-block-green">
+    .page-header h1 {
+      margin: 0 0 0.5rem;
+      font-size: clamp(1.8rem, 3vw, 2.2rem);
+    }
+
+    .page-header p {
+      margin: 0.25rem 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* CONTENTS BOX */
+    .page-contents {
+      margin: 1.5rem 0 1.25rem;
+      background: #f3f4f6;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      padding: 0.85rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    .page-contents-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #6b7280;
+      margin-bottom: 0.3rem;
+    }
+
+    .section { margin-top: 1.5rem; }
+    .section h2 { margin-top: 0; margin-bottom: 0.5rem; font-size: 1.2rem; }
+    .section h3 { margin-top: 1rem; margin-bottom: 0.4rem; font-size: 1.05rem; }
+    .section p { margin: 0.35rem 0; color: var(--text-muted); }
+
+    /* CODE BLOCKS */
+    .code-block-green {
+      background: #dcfce7;
+      border: 1px solid #86efac;
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      display: inline-block;
+      font-family: monospace;
+      white-space: pre-wrap;
+      color: #065f46;
+      margin: 1rem 0;
+    }
+
+    .code-block-red {
+      background: #fee2e2;
+      border: 1px solid #fca5a5;
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin: 1.25rem auto;
+      display: block;
+      width: fit-content;
+      max-width: 100%;
+      font-family: monospace;
+      color: #991b1b;
+      white-space: pre-wrap;
+    }
+
+    .code-block-blue {
+      background: #add7f7;
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      display: inline-block;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+
+    /* TABLES */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0 1rem;
+      font-size: 0.9rem;
+    }
+    th, td {
+      border: 1px solid #e5e7eb;
+      padding: 0.4rem 0.55rem;
+      text-align: left;
+    }
+    th { background: #f3f4f6; font-weight: 600; }
+
+    /* FIGURES */
+    figure {
+      margin: 1rem 0;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      overflow: hidden;
+      background: white;
+    }
+
+    figure img { width: 100%; display: block; }
+    figcaption { padding: 0.5rem 0.8rem; background: #f9fafb; font-size: 0.85rem; }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <div class="navbar-shell">
+    <nav class="navbar">
+      <a href="intro.html" class="nav-link">Intro</a>
+
+      <div class="nav-dropdown">
+        <a href="workshop.html" class="active">
+          Workshop <span class="dropdown-caret">▾</span>
+        </a>
+        <div class="dropdown-menu">
+          <a href="workshop.html#start">Start</a>
+          <a href="reads.html">Reads</a>
+          <a href="assembly.html" class="active">Assembly</a>
+        </div>
+      </div>
+
+      <a href="terminology.html" class="nav-link">Terminology</a>
+      <a href="programs.html" class="nav-link">Programs</a>
+      <a href="links.html" class="nav-link">Links</a>
+    </nav>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="page">
+    <div class="page-inner">
+      <section class="card">
+
+        <!-- HEADER -->
+        <header class="page-header">
+          <h1>Genome assembly</h1>
+          <p>This module walks through genome assembly using short and long reads, followed by quality and completeness assessment.</p>
+        </header>
+
+        <!-- PAGE CONTENTS -->
+        <section class="page-contents">
+          <div class="page-contents-title">Page contents</div>
+          <ul>
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#spades">Short-read assembly with SPAdes</a></li>
+            <li><a href="#flye">Long-read assembly with Flye</a></li>
+            <li><a href="#hifiasm">Long-read assembly with Hifiasm</a></li>
+            <li><a href="#assembly-quality">Assembly quality with N50</a></li>
+            <li><a href="#compleasm">Assembly completeness with compleasm</a></li>
+            <li><a href="#hic">Interpreting Hi-C data</a></li>
+            <li><a href="#further">Further analyses</a></li>
+          </ul>
+        </section>
+
+        <!-- INTRO -->
+        <section class="section" id="intro">
+          <h2>Introduction</h2>
+
+          <p>
+            A genome assembly reconstructs chromosomes from sequencing reads. Short-read assemblers often use <strong>de Bruijn graphs</strong>, while long-read assemblers rely on <strong>overlap-based</strong> approaches. Both aim to resolve repeats, heterozygosity, and complex genomic structure.
+          </p>
+
+          <figure>
+            <img src="Fig3.1.png" alt="Cartoon of assembly graph" />
+            <figcaption>Figure 3.1 – Cartoon of the assembly process.</figcaption>
+          </figure>
+
+          <p>
+            In this module we examine SPAdes (short reads), Flye (long reads), and Hifiasm (long accurate reads), then evaluate assembly contiguity and completeness.
+          </p>
+        </section>
+
+        <!-- SPADES -->
+        <section class="section" id="spades">
+          <h2>Short-read assembly with SPAdes</h2>
+
+          <p>We’ll assemble Illumina paired-end reads using SPAdes:</p>
+
+          <div class="code-block-green">
 spades.py \
   -1 T_deckeni_reads/illumina/SRR31758803-chr2_1.fastq.gz \
   -2 T_deckeni_reads/illumina/SRR31758803-chr2_2.fastq.gz \
@@ -69,203 +299,203 @@ spades.py \
   -t 4 \
   -m 8 \
   --isolate
-        </div>
+          </div>
 
-        <table>
-          <thead><tr><th>Parameter</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td><code>-1</code>, <code>-2</code></td><td>Paired-end FASTQ files.</td></tr>
-            <tr><td><code>-o</code></td><td>Output directory.</td></tr>
-            <tr><td><code>-k</code></td><td>k-mer size.</td></tr>
-            <tr><td><code>-t</code></td><td>Threads.</td></tr>
-            <tr><td><code>-m</code></td><td>Max memory (GB).</td></tr>
-            <tr><td><code>--isolate</code></td><td>Recommended for cleaner assemblies in high-coverage datasets.</td></tr>
-          </tbody>
-        </table>
+          <table>
+            <thead><tr><th>Parameter</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td><code>-1</code>, <code>-2</code></td><td>Paired-end FASTQ files.</td></tr>
+              <tr><td><code>-o</code></td><td>Output directory.</td></tr>
+              <tr><td><code>-k</code></td><td>k-mer size.</td></tr>
+              <tr><td><code>-t</code></td><td>Threads.</td></tr>
+              <tr><td><code>-m</code></td><td>Max memory (GB).</td></tr>
+              <tr><td><code>--isolate</code></td><td>Improves assembly on high-coverage datasets.</td></tr>
+            </tbody>
+          </table>
 
-        <figure>
-          <img src="Fig3.2.png" alt="Example SPAdes assembly graph." />
-          <figcaption>Figure 3.2 – Illustration of repeat compaction in a de Bruijn graph.</figcaption>
-        </figure>
-      </section>
+          <figure>
+            <img src="Fig3.2.png" alt="SPAdes assembly graph" />
+            <figcaption>Figure 3.2 – de Bruijn graph compaction the assembler performs.</figcaption>
+          </figure>
+        </section>
 
-      <!-- ========================
-           FLYE
-      ========================= -->
-      <section class="section" id="flye">
-        <h2>Long-read assembly with Flye</h2>
+        <!-- FLYE -->
+        <section class="section" id="flye">
+          <h2>Long-read assembly with Flye</h2>
 
-        <p>
-          <a href="https://github.com/mikolmogorov/Flye" target="_blank">Flye</a> is designed for noisy long reads such as Nanopore or PacBio CLR.
-          It constructs repeat graphs directly and is robust to residual error.
-          This command is shown for reference only:
-        </p>
+          <p>
+            <a href="https://github.com/mikolmogorov/Flye" target="_blank">Flye</a> is built for noisy long reads such as Nanopore and CLR data. It constructs repeat graphs directly and handles complex long-read error profiles well.
+          </p>
 
-        <div class="code-block-red">
+          <div class="code-block-red">
 flye \
   --pacbio-hifi T_deckeni_reads/pacbio/pacbio_Tdeckeni_chr2_subsample.fastq.gz \
   --genome-size 0.08 \
   --out-dir assemblies/flye-pacbio-chr2 \
   --threads 4
-        </div>
+          </div>
 
-      </section>
+          <p>Flye outputs <code>assembly.fasta</code>, graph files, and log files.</p>
+        </section>
 
-      <!-- ========================
-           HIFIASM
-      ========================= -->
-      <section class="section" id="hifiasm">
-        <h2>Long-read assembly with Hifiasm</h2>
+        <!-- HIFIASM -->
+        <section class="section" id="hifiasm">
+          <h2>Long-read assembly with Hifiasm</h2>
 
-        <p>Hifiasm is optimized for PacBio HiFi reads and can generate phased assemblies.</p>
+          <p>
+            Hifiasm is optimized for PacBio HiFi reads and often produces phased haplotypes.
+          </p>
 
-        <div class="code-block-red">
+          <div class="code-block-red">
 hifiasm \
   -o assemblies/hifiasm-pacbio-chr2 \
   -t 16 \
   T_deckeni_reads/pacbio/pacbio_Tdeckeni_chr2_subsample.fastq.gz
-        </div>
-      </section>
+          </div>
+        </section>
 
-      <!-- ========================
-           ASSEMBLY QUALITY (N50)
-      ========================= -->
-      <section class="section" id="assembly-quality">
-        <h2>Assembly quality with N50</h2>
+        <!-- ASSEMBLY QUALITY -->
+        <section class="section" id="assembly-quality">
+          <h2>Assembly quality with N50</h2>
 
-        <p>
-          Genome assemblies vary widely in contiguity depending on repeats, heterozygosity, and sequencing strategy.
-          Several metrics help summarize assembly quality:
-        </p>
+          <p>
+            Genome assemblies vary in contiguity due to repeats, heterozygosity, and structural complexity. Several metrics summarize contiguity:
+          </p>
 
-        <table>
-          <thead><tr><th>Statistic</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td>Total assembly size</td><td>Total number of bases (sum of all contigs/scaffolds).</td></tr>
-            <tr><td>Number of scaffolds</td><td>Fewer scaffolds typically indicate higher contiguity.</td></tr>
-            <tr><td>N50</td><td>Length at which 50% of assembly is contained in scaffolds of this size or larger.</td></tr>
-            <tr><td>L90</td><td>Number of scaffolds making up 90% of assembly.</td></tr>
-            <tr><td>NG50</td><td>N50 relative to expected genome size.</td></tr>
-            <tr><td>Number of Ns</td><td>Gaps or unresolved regions.</td></tr>
-          </tbody>
-        </table>
+          <table>
+            <thead><tr><th>Statistic</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>Total assembly size</td><td>Sum of all bases in all contigs/scaffolds.</td></tr>
+              <tr><td>Number of contigs/scaffolds</td><td>Lower counts indicate greater contiguity.</td></tr>
+              <tr><td>N50</td><td>Length at which half of the assembly is in contigs/scaffolds ≥ this size.</td></tr>
+              <tr><td>L90</td><td>Number of contigs/scaffolds required to cover 90% of assembly.</td></tr>
+              <tr><td>NG50</td><td>N50 computed relative to expected genome size.</td></tr>
+              <tr><td>Number of Ns</td><td>Bases inserted to span joins between contigs.</td></tr>
+            </tbody>
+          </table>
 
-        <figure>
-          <img src="Fig3.3.png" alt="N50 explanation figure." />
-          <figcaption>Figure 3.3 – Visual explanation of N50.</figcaption>
-        </figure>
+          <p>
+            The following N50 diagram from Molecular Ecologist illustrates the concept:
+          </p>
 
-        <p>
-          We will use the <strong>Assemblathon</strong> script to compute these metrics.
-          Example:
-        </p>
+          <figure>
+            <img src="Fig3.3.png" alt="N50 figure" />
+            <figcaption>Figure 3.3 – Scaffold N50 concept.</figcaption>
+          </figure>
 
-        <div class="code-block-green">
+          <p>
+            Assemblathon (2013) provides useful scripts for summarizing genome assembly statistics.
+          </p>
+
+          <div class="code-block-green">
 perl /usr/bin/assemblathon_stats.pl \
   expected-outputs/assemblies/Tdeckeni_hap2_yahs.out_scaffolds_final.fa \
   > quality-control/Tdeckeni_hap2_yahs.out_scaffolds_final-assemblathon.txt
-        </div>
+          </div>
 
-        <p>This produces a summary table of statistics in the output file.</p>
+          <p>Then view the output:</p>
 
-        <div class="code-block-blue">
-[N50 statistics table output truncated for brevity — your real output will appear here]
-        </div>
+          <div class="code-block-green">
+less -S quality-control/Tdeckeni_hap2_yahs.out_scaffolds_final-assemblathon.txt
+          </div>
 
-      </section>
+          <div class="code-block-blue">
+[Assemblathon summary output appears here…]
+          </div>
 
-      <!-- ========================
-           COMPLEASM
-      ========================= -->
-      <section class="section" id="compleasm">
-        <h2>Assembly completeness with compleasm</h2>
+        </section>
 
-        <p>
-          Compleasm evaluates the completeness of an assembly using BUSCO-like lineage datasets.
-          For birds we use the <strong>aves</strong> lineage.
-        </p>
+        <!-- COMPLEASM -->
+        <section class="section" id="compleasm">
+          <h2>Assembly completeness with compleasm</h2>
 
-        <div class="code-block-red">
+          <p>
+            Compleasm (based on BUSCO) evaluates genome completeness using universal single-copy orthologs.
+            For birds, the <strong>aves</strong> lineage is appropriate.
+          </p>
+
+          <div class="code-block-red">
 compleasm run \
   -a expected-outputs/assemblies/Tdeckeni_hap2_yahs.out_scaffolds_final.fa \
   -L mb_downloads \
   -l aves \
   -o quality-control/Tdeckeni_hap2_yahs.out_scaffolds_final_aves \
   -t 4
-        </div>
+          </div>
 
-        <figure>
-          <img src="Fig3.4.png" alt="Compleasm comparison output." />
-          <figcaption>Figure 3.4 – Compleasm results for two <em>T. deckeni</em> assemblies.</figcaption>
-        </figure>
+          <figure>
+            <img src="Fig3.4.png" alt="Compleasm results" />
+            <figcaption>Fig. 3.4 – Compleasm comparison of <em>T. deckeni</em> assemblies.</figcaption>
+          </figure>
+        </section>
+
+        <!-- HI-C -->
+        <section class="section" id="hic">
+          <h2>Interpreting Hi-C data</h2>
+
+          <p>
+            Hi-C provides chromosome-scale linkage by measuring physical proximity between genomic loci.
+            Properly scaffolded chromosomes show a strong diagonal line on the contact map.
+          </p>
+
+          <figure>
+            <img src="cis_trans_hic.jpg" alt="Hi-C contact map" />
+            <figcaption>Fig. 3.7 – Example Hi-C contact matrix.</figcaption>
+          </figure>
+
+          <h3>Assembly issues visible in Hi-C</h3>
+          <ul>
+            <li><strong>Breaks</strong> → discontinuities in diagonal</li>
+            <li><strong>Inversions</strong> → mirrored X-shaped signatures</li>
+            <li><strong>Misjoins</strong> → abrupt loss of contact support</li>
+          </ul>
+
+          <h3>Example: Inversion</h3>
+          <figure>
+            <img src="inversion_mosquito_example_Lukyanchikova2025.jpg" alt="Hi-C inversion" />
+            <figcaption>Fig. 3.6 – Hi-C signature of an inversion.</figcaption>
+          </figure>
+
+          <h3>Example: Misjoin</h3>
+          <figure>
+            <img src="Fig3.7.png" alt="Hi-C misjoin" />
+            <figcaption>Abrupt loss of contact support reveals a misjoin.</figcaption>
+          </figure>
+
+          <h3>Tools for Hi-C scaffolding</h3>
+          <table>
+            <thead><tr><th>Tool</th><th>Purpose</th><th>Link</th></tr></thead>
+            <tbody>
+              <tr><td>YaHS</td><td>Fast, accurate Hi-C scaffolding</td><td><a href="https://github.com/c-zhou/yahs">GitHub</a></td></tr>
+              <tr><td>Juicebox</td><td>Manual Hi-C visualization/editing</td><td><a href="https://github.com/aidenlab/Juicebox">GitHub</a></td></tr>
+              <tr><td>3D-DNA</td><td>Automated scaffolding + misjoin correction</td><td><a href="https://github.com/aidenlab/3d-dna">GitHub</a></td></tr>
+              <tr><td>hicExplorer</td><td>Hi-C plotting toolkit</td><td><a href="https://hicexplorer.readthedocs.io">Docs</a></td></tr>
+              <tr><td>HiGlass/Cooler</td><td>Interactive web visualization</td><td><a href="https://higlass.io">Website</a></td></tr>
+            </tbody>
+          </table>
+
+        </section>
+
+        <!-- FURTHER ANALYSES -->
+        <section class="section" id="further">
+          <h2>Further analyses</h2>
+          <ul>
+            <li>Genome annotation</li>
+            <li>Variant calling</li>
+            <li>Comparative genomics & synteny</li>
+            <li>Demographic inference</li>
+            <li>Conservation genomics (ROH, SVs, mutational load)</li>
+          </ul>
+
+          <p>
+            A high-quality genome assembly forms the foundation for all downstream evolutionary,
+            functional, and conservation analyses.
+          </p>
+        </section>
+
       </section>
+    </div>
+  </main>
 
-      <!-- ========================
-           HI-C SECTION
-      ========================= -->
-      <section class="section" id="hic">
-        <h2>Interpreting Hi-C data</h2>
-
-        <p>
-          Hi-C provides long-range linkage information that enables chromosome-scale scaffolding.
-          Strong diagonal patterns indicate correct ordering, while disruptions can reveal inversions or misjoins.
-        </p>
-
-        <figure>
-          <img src="cis_trans_hic.jpg" alt="Hi-C matrix." />
-          <figcaption>Figure — Example Hi-C contact map.</figcaption>
-        </figure>
-
-        <h3>Examples</h3>
-        <p><strong>Inversions</strong> produce bow-tie or mirrored X-patterns in the Hi-C map.</p>
-
-        <figure>
-          <img src="inversion_mosquito_example_Lukyanchikova2025.jpg" alt="Inversion Hi-C example." />
-          <figcaption>Hi-C signature of an inversion.</figcaption>
-        </figure>
-
-        <p><strong>Misjoins</strong> appear as abrupt breaks in the diagonal.</p>
-
-        <figure>
-          <img src="Fig3.7.png" alt="Misjoin example." />
-          <figcaption>Example misjoin in Hi-C contact data.</figcaption>
-        </figure>
-
-        <h3>Tools</h3>
-
-        <table>
-          <thead><tr><th>Tool</th><th>Purpose</th><th>Link</th></tr></thead>
-          <tbody>
-            <tr><td>YaHS</td><td>Modern Hi-C scaffolding</td><td><a href="https://github.com/c-zhou/yahs" target="_blank">GitHub</a></td></tr>
-            <tr><td>Juicebox</td><td>Visualization & manual curation</td><td><a href="https://github.com/aidenlab/Juicebox" target="_blank">GitHub</a></td></tr>
-            <tr><td>3D-DNA</td><td>Automated Hi-C scaffolding</td><td><a href="https://github.com/aidenlab/3d-dna" target="_blank">GitHub</a></td></tr>
-            <tr><td>hicExplorer</td><td>Hi-C plotting tools</td><td><a href="https://hicexplorer.readthedocs.io" target="_blank">Docs</a></td></tr>
-          </tbody>
-        </table>
-
-        <p>
-          Manual curation remains essential in nearly all vertebrate genome projects.
-        </p>
-      </section>
-
-      <!-- ========================
-           FURTHER ANALYSES
-      ========================= -->
-      <section class="section" id="further">
-        <h2>Further analyses</h2>
-
-        <ul>
-          <li>Genome annotation</li>
-          <li>Variant calling</li>
-          <li>Comparative genomics & synteny</li>
-          <li>Demographic inference</li>
-          <li>Conservation-focused analyses (ROH, mutational load, SVs)</li>
-        </ul>
-
-        <p>A high-quality assembly unlocks powerful downstream analyses across evolution, ecology, and conservation genomics.</p>
-      </section>
-
-    </section>
-
-  </div>
-</main>
+</body>
+</html>
