@@ -349,7 +349,7 @@ flye \
           <div class="code-block-red">
 hifiasm \
   -o assemblies/hifiasm-pacbio-chr2 \
-  -t 16 \
+  -t 4 \
   T_deckeni_reads/pacbio/pacbio_Tdeckeni_chr2_subsample.fastq.gz
           </div>
         </section>
@@ -400,7 +400,33 @@ less -S quality-control/Tdeckeni_hap2_yahs.out_scaffolds_final-assemblathon.txt
           </div>
 
           <div class="code-block-blue">
-[Assemblathon summary output appears here…]
+---------------- Information for assembly 'expected_outputs/assemblies/Tdeckeni_hap2_y
+
+
+                                         Number of scaffolds         81
+                                     Total size of scaffolds 1030508849
+                                            Longest scaffold  130958238
+                                           Shortest scaffold       5000
+                                 Number of scaffolds > 1K nt         81 100.0%
+                                Number of scaffolds > 10K nt         80  98.8%
+                               Number of scaffolds > 100K nt         52  64.2%
+                                 Number of scaffolds > 1M nt         36  44.4%
+                                Number of scaffolds > 10M nt         28  34.6%
+                                          Mean scaffold size   12722331
+                                        Median scaffold size     356156
+                                         N50 scaffold length   48768445
+                                          L50 scaffold count          8
+                                                 scaffold %A      27.68
+                                                 scaffold %C      22.28
+                                                 scaffold %G      22.35
+                                                 scaffold %T      27.69
+                                                 scaffold %N       0.00
+                                         scaffold %non-ACGTN       0.00
+                             Number of scaffold non-ACGTN nt          0
+
+                Percentage of assembly in scaffolded contigs      51.9%
+              Percentage of assembly in unscaffolded contigs      48.1%
+                      Average number of contigs per scaffold        1.6
           </div>
 
         </section>
@@ -459,7 +485,7 @@ compleasm run \
           <h3>Example: Misjoin</h3>
           <figure>
             <img src="Fig3.7.png" alt="Hi-C misjoin" />
-            <figcaption>Abrupt loss of contact support reveals a misjoin.</figcaption>
+            <figcaption>Fig. 3.7: Loss of contact support can reveal misjoins.</figcaption>
           </figure>
 
           <h3>Tools for Hi-C scaffolding</h3>
