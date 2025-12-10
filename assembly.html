@@ -426,7 +426,39 @@ less -S quality-control/Tdeckeni_hap2_yahs.out_scaffolds_final-assemblathon.txt
               Percentage of assembly in unscaffolded contigs      48.1%
                       Average number of contigs per scaffold        1.6
           </div>
+<p>
+We've provided several more assemblies of <em>T. deckeni</em> in the 
+<strong>expected-outputs/assemblies/</strong> 
+folder, including the SPAdes assembly. The assemblathon output files are in 
+<strong>expected-outputs/quality-control/</strong>, but the statistics we've talked about are summarized in 
+the following table:
+</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Statistic</th>
+      <th>Hifiasm-<em>B. abyssinicus</em></th>
+      <th>Hifiasm-<em>T. deckeni</em></th>
+      <th>Flye-<em>T. deckeni</em></th>
+      <th>Spades-<em>T. deckeni</em></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><code>Length</code></td><td>1,132,597,561</td><td>1,030,508,849</td><td>1,868,126,942</td><td>1,097,012,933</td></tr>
+    <tr><td><code>Number of scaffolds</code></td><td>112</td><td>81</td><td>9,479</td><td>14,244</td></tr>
+    <tr><td><code>Scaffold N50</code></td><td>40,274,051</td><td>48,768,445</td><td>731,074</td><td>39,430,287</td></tr>
+    <tr><td><code>Scaffold L50</code></td><td>9</td><td>8</td><td>506</td><td>9</td></tr>
+    <tr><td><code>Contig N50</code></td><td>12,740,142</td><td>45,455,973</td><td>731,074</td><td>31,311</td></tr>
+    <tr><td><code>% N</code></td><td>0.71</td><td>0.00</td><td>0.00</td><td>2.17</td></tr>
+  </tbody>
+</table>
+
+<p>
+Clearly the long-read assemblies with the long-read assemblers (Hifiasm and Flye) have
+higher contig N50s and fewer contigs and scaffolds than the SPAdes assemblies.
+Note that this doesn't mean SPAdes is "worse" — it is optimized for short-read data.
+</p>
         </section>
 
         <!-- COMPLEASM -->
